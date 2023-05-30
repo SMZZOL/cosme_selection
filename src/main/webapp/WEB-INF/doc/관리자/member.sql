@@ -81,7 +81,7 @@ ORDER BY grade ASC, id ASC;
 1) user1@gmail.com 사원 정보 보기
 SELECT userno, id, passwd, mname, mdate, grade
 FROM member
-WHERE userno = 4;
+WHERE userno = 3;
 
 SELECT userno, id, passwd, mname, mdate, grade
 FROM member
