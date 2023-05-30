@@ -405,8 +405,8 @@
                                     <constraint>
                                       <height>-1</height>
                                       <width>-1</width>
-                                      <x>793</x>
-                                      <y>457</y>
+                                      <x>804</x>
+                                      <y>459</y>
                                     </constraint>
                                     <sourceConnections>
                                       <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -527,9 +527,9 @@
                                           </columns>
                                           <indices/>
                                           <backgroundColor>
-                                            <red>128</red>
-                                            <green>128</green>
-                                            <blue>255</blue>
+                                            <red>204</red>
+                                            <green>247</green>
+                                            <blue>179</blue>
                                           </backgroundColor>
                                           <sql></sql>
                                         </source>
@@ -631,8 +631,8 @@
                                     <constraint>
                                       <height>-1</height>
                                       <width>-1</width>
-                                      <x>539</x>
-                                      <y>466</y>
+                                      <x>540</x>
+                                      <y>453</y>
                                     </constraint>
                                     <sourceConnections>
                                       <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -717,8 +717,8 @@
                                                       <constraint>
                                                         <height>-1</height>
                                                         <width>-1</width>
-                                                        <x>581</x>
-                                                        <y>711</y>
+                                                        <x>580</x>
+                                                        <y>705</y>
                                                       </constraint>
                                                       <sourceConnections>
                                                         <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -763,6 +763,17 @@
                                                           <defaultValue></defaultValue>
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
+                                                          <columnName>n_title</columnName>
+                                                          <logicalName>공지 제목</logicalName>
+                                                          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+                                                          <size>50</size>
+                                                          <notNull>true</notNull>
+                                                          <primaryKey>false</primaryKey>
+                                                          <description></description>
+                                                          <autoIncrement>false</autoIncrement>
+                                                          <defaultValue></defaultValue>
+                                                        </net.java.amateras.db.visual.model.ColumnModel>
+                                                        <net.java.amateras.db.visual.model.ColumnModel>
                                                           <columnName>n_content</columnName>
                                                           <logicalName>공지 내용</logicalName>
                                                           <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
@@ -774,10 +785,15 @@
                                                           <defaultValue></defaultValue>
                                                         </net.java.amateras.db.visual.model.ColumnModel>
                                                         <net.java.amateras.db.visual.model.ColumnModel>
-                                                          <columnName>n_title</columnName>
-                                                          <logicalName>공지 제목</logicalName>
-                                                          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
-                                                          <size>50</size>
+                                                          <columnName>rdate</columnName>
+                                                          <logicalName>등록일</logicalName>
+                                                          <columnType class="net.java.amateras.db.dialect.ColumnType">
+                                                            <name>DATE</name>
+                                                            <logicalName>Date</logicalName>
+                                                            <supportSize>false</supportSize>
+                                                            <type>91</type>
+                                                          </columnType>
+                                                          <size>10</size>
                                                           <notNull>true</notNull>
                                                           <primaryKey>false</primaryKey>
                                                           <description></description>
@@ -944,7 +960,11 @@
                                             </net.java.amateras.db.visual.model.ColumnModel>
                                           </columns>
                                           <indices/>
-                                          <backgroundColor reference="../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/backgroundColor"/>
+                                          <backgroundColor>
+                                            <red>204</red>
+                                            <green>247</green>
+                                            <blue>179</blue>
+                                          </backgroundColor>
                                           <sql></sql>
                                         </source>
                                         <target class="net.java.amateras.db.visual.model.TableModel" reference="../../.."/>
@@ -1004,11 +1024,7 @@
                                       </net.java.amateras.db.visual.model.ColumnModel>
                                     </columns>
                                     <indices/>
-                                    <backgroundColor>
-                                      <red>128</red>
-                                      <green>128</green>
-                                      <blue>255</blue>
-                                    </backgroundColor>
+                                    <backgroundColor reference="../../../net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/backgroundColor"/>
                                     <sql></sql>
                                   </source>
                                   <target class="net.java.amateras.db.visual.model.TableModel" reference="../../.."/>
@@ -1537,7 +1553,7 @@
       <sourceConnections/>
       <targetConnections/>
       <content>김예은&#xd;
-보라색</content>
+연두색</content>
     </net.java.amateras.db.visual.model.NoteModel>
     <net.java.amateras.db.visual.model.NoteModel>
       <listeners serialization="custom">
@@ -1558,7 +1574,7 @@
       <sourceConnections/>
       <targetConnections/>
       <content>송해빈&#xd;
-연두색</content>
+보라색</content>
     </net.java.amateras.db.visual.model.NoteModel>
     <net.java.amateras.db.visual.model.TableModel reference="../net.java.amateras.db.visual.model.TableModel/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source"/>
     <net.java.amateras.db.visual.model.TableModel reference="../net.java.amateras.db.visual.model.TableModel/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel[3]/source/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source"/>
