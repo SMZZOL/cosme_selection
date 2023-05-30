@@ -109,7 +109,7 @@ public class MemberCont {
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
-    if (this.adminProc.isAdmin(session) == true) {
+    if (this.MasterProc.isMaster(session) == true) {
       ArrayList<MemberVO> list = this.memberProc.list();
       mav.addObject("list", list);
 
