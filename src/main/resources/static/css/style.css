@@ -663,8 +663,25 @@ button,input,optgroup,select,textarea{
   overflow: hidden;
 }
 
+.dropdown_right{
+  float:right;
+  overflow:hidden;
+}
+
 /* Dropdown button */
 .dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 20px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+.dropdown_right .dropbtn2 {
   font-size: 16px;
   border: none;
   outline: none;
