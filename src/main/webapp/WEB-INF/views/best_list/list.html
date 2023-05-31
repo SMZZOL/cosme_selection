@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>화장품 추천</title>
+</head>
+<body>
+  <h1>화장품 추천 리스트</h1>
+
+  <ul id="best_list">
+    <li>Toner and Skin
+        <a href="https://www.oliveyoung.co.kr/store/display/getMCategoryList.do?dispCatNo=1000001000100080001&fltDispCatNo=&prdSort=01&pageIdx=1&rowsPerPage=24&searchTypeSort=btn_thumb&plusButtonFlag=N&isLoginCnt=0&aShowCnt=0&bShowCnt=0&cShowCnt=0&trackingCd=Cat1000001000100080001_Small">
+        <button oneclick="cosme_list()">해당 리스트 보기</button>
+        </a>
+    </li>
+    <br>
+    <li>Loction
+        <a href="https://www.oliveyoung.co.kr/store/display/getMCategoryList.do?dispCatNo=1000001000100080002&fltDispCatNo=&prdSort=01&pageIdx=1&rowsPerPage=24&searchTypeSort=btn_thumb&plusButtonFlag=N&isLoginCnt=0&aShowCnt=0&bShowCnt=0&cShowCnt=0&trackingCd=Cat1000001000100080002_Small">
+        <button oneclick="cosme_list()">해당 리스트 보기</button>
+        </a>
+    </li>
+    <bR>
+    <li>Cream
+        <a href="https://www.oliveyoung.co.kr/store/display/getMCategoryList.do?dispCatNo=1000001000100090002&trackingCd=Cat10000010001_Planshop3_PROD">
+        <button oneclick="cosme_list()">해당 리스트 보기</button>
+        </a>
+    </li>
+    <BR>
+    <li>Oil and balm
+        <a href="https://www.oliveyoung.co.kr/store/display/getMCategoryList.do?dispCatNo=1000001000100100002&fltDispCatNo=&prdSort=01&pageIdx=1&rowsPerPage=24&searchTypeSort=btn_thumb&plusButtonFlag=N&isLoginCnt=0&aShowCnt=0&bShowCnt=0&cShowCnt=0&trackingCd=Cat1000001000100100002_Small">
+        <button oneclick="cosme_list()">해당 리스트 보기</button>
+        </a>
+    </li>
+    <BR>
+    <li>Serum and Ampoule
+        <a href="https://www.oliveyoung.co.kr/store/display/getMCategoryList.do?dispCatNo=1000001000100090001&fltDispCatNo=&prdSort=01&pageIdx=1&rowsPerPage=24&searchTypeSort=btn_thumb&plusButtonFlag=N&isLoginCnt=0&aShowCnt=0&bShowCnt=0&cShowCnt=0&trackingCd=Cat1000001000100090001_Small">
+        <button oneclick="cosme_list()">해당 리스트 보기</button>
+        </a>
+    </li>
+  </ul>
+  <script>
+    function cosme_list() {
+      const listItem = document.getElementById('best-list').getElementsByTagName('li')[1];
+      listItem.textContent = '화장품 목록';
+    }
+  </script>
+</body>
+
