@@ -96,7 +96,11 @@ ORDER BY grade ASC, id ASC;
 1) user1@gmail.com 사원 정보 보기
 SELECT userno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade
 FROM member
+<<<<<<< HEAD
 WHERE userno = 1;
+=======
+WHERE userno = 3;
+>>>>>>> eb75c144601d5d5a68ce54df5dff4c3c628112fe
 
 SELECT userno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade
 FROM member
