@@ -100,27 +100,7 @@ public class MemberCont {
     return mav; // forward
   }
   
-  /**
-  * 목록 출력 가능
-  * @param session
-  * @return
-  */
-  @RequestMapping(value="/member/list.do", method=RequestMethod.GET)
-  public ModelAndView list(HttpSession session) {
-    ModelAndView mav = new ModelAndView();
-    
-    if (this.adminProc.isAdmin(session) == true) {
-      ArrayList<MemberVO> list = this.memberProc.list();
-      mav.addObject("list", list);
-
-      mav.setViewName("/member/list"); // /webapp/WEB-INF/views/member/list.jsp
-
-    } else {
-      mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
-    }
-        
-    return mav;
-  } 
+  
   
   
 
