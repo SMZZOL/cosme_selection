@@ -7,10 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,21 +28,24 @@ public class CosmeCont {
 		
 		return mav;
 	}
+	
+	// http://localhost:9093/cosme/list_by_type.do 404
+//	@PostMapping("/cosme/list_by_type.do")
+	@ResponseBody
 	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.POST)
-	public String list_by_type_post(@RequestBody Map<String, Object> request) {
+	public String listByTypePost(@RequestBody Map<String, Object> request) {
 
-		
 		ArrayList<String> list= (ArrayList<String>) request.get("list");
 		if(list.isEmpty()) {
 			System.out.println("empty");
 		}
 		for(String num : list) {
-			System.out.println(num);
+			System.out.print(num + ", ");
 		}
 	//	System.out.println(request);
 //		System.out.println("들어와따!");
 		
 		
-		return "반환성공";
+		return "씨짜라라짜라ㅉ라ㅉ라짜ㅏㅉ라짜짜짜라";
 	}
 }
