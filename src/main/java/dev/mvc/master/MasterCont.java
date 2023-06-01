@@ -58,7 +58,8 @@ public class MasterCont {
       session.setAttribute("master_mname", masterVO_read.getMname());
       session.setAttribute("master_grade", masterVO_read.getGrade());
   
-      mav.setViewName("redirect:/index.do"); // 시작 페이지
+      mav.setViewName("redirect:/main.do"); // 시작 페이지
+      
     } else {  // 로그인 실패
       // /WEB-INF/views/admin/login_fail_msg.jsp
       // POST 방식에서는 jsp에서 <c:import 태그가 실행이 안됨.
@@ -69,6 +70,21 @@ public class MasterCont {
     }
        
     return mav;    
+  }
+  
+  /**
+   * 로그아웃 처리
+   * @param session
+   * @return
+   */
+  @RequestMapping(value="/master/logout.do", method=RequestMethod.GET)
+  public ModelAndView logout(HttpSession session){
+    ModelAndView mav = new ModelAndView();
+    session.invalidate(); // 모든 session 변수 삭제
+    
+    mav.setViewName("redirect:/index.do"); 
+    
+    return mav;
   }
   
   /**
@@ -83,5 +99,7 @@ public class MasterCont {
     
     return mav; // forward
   }
+  
+
   
 }

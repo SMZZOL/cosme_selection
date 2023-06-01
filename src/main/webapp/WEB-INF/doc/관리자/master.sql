@@ -33,13 +33,13 @@ CREATE SEQUENCE master_seq
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
 
 INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master1', '69017000', '관리자1', sysdate, 1);
+VALUES(master_seq.nextval, 'master1@gmail.com', '69017000', '관리자1', sysdate, 1);
 
-INSERT INTO manager(managerno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master2', '1234', '관리자2', sysdate, 1);
+INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
+VALUES(master_seq.nextval, 'master2@gmail.com', '1234', '관리자2', sysdate, 1);
 
-INSERT INTO manager(managerno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master3', '1234', '관리자3', sysdate, 1);
+INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
+VALUES(master_seq.nextval, 'master3@gmail.com', '1234', '관리자3', sysdate, 1);
 
 commit;
 

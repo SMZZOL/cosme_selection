@@ -22,5 +22,26 @@ public class MasterProc implements MasterProcInter{
     return masterVO;
   }
   
+  @Override
+  public boolean isMaster(HttpSession session) {
+    boolean master_sw = false;
+    
+    if (session != null) {
+      String master_id = (String)session.getAttribute("master_id");
+      
+      if (master_id != null) {
+        master_sw = true; // 정상적으로 로그인 한 경우
+      }
+    }
+    
+    return master_sw;
+  }
+
+  @Override
+  public MasterVO read(int masterno) {
+    MasterVO masterVO = this.masterDAO.read(masterno);
+    return masterVO;
+  }
+  
 
 }
