@@ -25,12 +25,12 @@
 
 <DIV class='content_body'>
   <DIV id='panel_create' style='padding: 10px 0px 10px 0px; background-color: #F9F9F9; width: 100%; text-align: center;'>
-    <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
+    <FORM name='frm_create' id='frm_create' method='POST' action='/cosme_cate/create.do'>
       <label>화장품 종류 이름</label>
-      <input type='text' name='name' value='' required="required" style='width: 25%; margin-right: 10px;' autofocus="autofocus">
+      <input type='text' name='cosme_catename' value='' required="required" style='width: 25%; margin-right: 10px;' autofocus="autofocus">
   
       <button type="submit" id='submit' class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>등록</button>
-      <button type="button" onclick="location.href='/cate/list_all.do'" class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>취소</button>
+      <button type="button" onclick="location.href='/cosme_cate/list_all.do'" class='btn btn-info btn-sm' style='height: 28px; margin-bottom: 5px;'>취소</button>
     </FORM>
   </DIV>
 

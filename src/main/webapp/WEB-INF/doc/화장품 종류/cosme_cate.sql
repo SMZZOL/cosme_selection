@@ -8,7 +8,7 @@ CREATE TABLE cosme_cate(
 		cosme_catename VARCHAR2(20) NOT NULL
 );
 
-COMMENT ON TABLE cosme_cate is '일정';
+COMMENT ON TABLE cosme_cate is '화장품 종류';
 COMMENT ON COLUMN cosme_cate.cosme_cateno is '화장품 종류 번호';
 COMMENT ON COLUMN cosme_cate.cosme_catename is '화장품 종류 이름';
 
@@ -38,5 +38,7 @@ WHERE cosme_cateno = 5;
 
 DELETE FROM cosme_cate
 WHERE cosme_cateno = 5;
+
+grant select, update, insert, delete on cosme_cate to team2;
 
 commit;
