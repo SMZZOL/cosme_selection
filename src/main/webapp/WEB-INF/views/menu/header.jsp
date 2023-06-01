@@ -42,10 +42,17 @@
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/cosme/create.do">화장품 등록 </a>
+<<<<<<< HEAD
+      <a href="/cosme_cate/create.do">화장품 등록 </a>
+=======
+      <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+>>>>>>> de6f6d61a13f0fb882ea8828673300b718836743
     </div>
   </div>
   
+  <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>
+ 
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->
   <a href="/register" class="right btn btn-primary">회원 가입</a> 
     <div class="dropdown" style="float:right;">  
