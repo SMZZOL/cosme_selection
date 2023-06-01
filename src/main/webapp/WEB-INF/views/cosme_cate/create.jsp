@@ -24,7 +24,7 @@
 <DIV class='title_line'>화장품 종류 등록</DIV>
 
 <DIV class='content_body'>
-  <FORM name='frm' method='POST' action='./create.do'> <!-- /cate 폴더 자동 인식, 권장 -->
+  <FORM name='frm' method='POST' action='/cosme_cate/create.do'> <!-- /cate 폴더 자동 인식, 권장 -->
     <div>
        <label>화장품 이름</label>
        <input type='text' name='cosme_catename' value='' required="required" 

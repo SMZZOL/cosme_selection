@@ -43,11 +43,16 @@
     </button>
     <div class="dropdown-content">
 
+
       <a href="/cosme_cate/create.do">화장품 등록 </a>
 
       <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
 
+
+      <a href="/cosme_cate/create.do">화장품  종류 등록 </a>
+      <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
     </div>
   </div>
   
