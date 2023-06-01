@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.cosme_cate.Cosme_cateDAOInter">
+  <!-- 등록: 추가한 레코드 갯수를 리턴 -->
+  <insert id="create" parameterType="dev.mvc.cosme_cate.Cosme_cateVO">
+    INSERT INTO cosme_cate(cosme_cateno, cosme_catename) 
+    VALUES(cosme_cate_seq.nextval, #{cosme_catename})
+  </insert>
+  
+  <!-- 목록 -->
+  <select id="list_all" resultType="dev.mvc.cosme_cate.Cosme_cateVO">
+    SELECT cosme_cateno, cosme_catename
+    FROM cosme_cate 
+    ORDER BY cosme_cateno ASC
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

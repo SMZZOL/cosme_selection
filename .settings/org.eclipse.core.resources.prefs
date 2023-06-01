@@ -1,8 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=f814cdf494d47dcf180ce50b0936dbe1d3bac758
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/doc/DDL/main.ddl=UTF-8
-<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/doc/ERD/main.sql=utf-8
-=======
 encoding//src/main/webapp/WEB-INF/doc/\uAD00\uB9AC\uC790/member.sql=UTF-8
->>>>>>> f814cdf494d47dcf180ce50b0936dbe1d3bac758
+encoding//src/main/webapp/WEB-INF/doc/\uD654\uC7A5\uD488\ \uC885\uB958/cosme_cate.sql=utf-8
 encoding//src/main/webapp/WEB-INF/doc/\uD654\uC7A5\uD488/cosme_c.sql=utf-8
