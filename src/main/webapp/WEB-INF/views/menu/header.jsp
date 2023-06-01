@@ -42,12 +42,12 @@
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-<<<<<<< HEAD
+
       <a href="/cosme_cate/create.do">화장품 등록 </a>
-=======
+
       <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
->>>>>>> de6f6d61a13f0fb882ea8828673300b718836743
+
     </div>
   </div>
   
