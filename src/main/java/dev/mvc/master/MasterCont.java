@@ -46,29 +46,42 @@ public class MasterCont {
   */
   @RequestMapping(value="/master/login.do", method=RequestMethod.POST)
   public ModelAndView login(HttpSession session, MasterVO masterVO) {
-   ModelAndView mav = new ModelAndView();
+    ModelAndView mav = new ModelAndView();
    
-   int cnt = this.masterProc.login(masterVO);
+    int cnt = this.masterProc.login(masterVO);
    
-   if (cnt == 1) { // 로그인 성공
-     MasterVO masterVO_read = this.masterProc.read_by_id(masterVO.getId()); // 관리자 정보 읽기
+    if (cnt == 1) { // 로그인 성공
+      MasterVO masterVO_read = this.masterProc.read_by_id(masterVO.getId()); // 관리자 정보 읽기
      
-     session.setAttribute("masterno", masterVO_read.getMasterno()); // 서버의 메모리에 기록
-     session.setAttribute("master_id", masterVO_read.getId());
-     session.setAttribute("master_mname", masterVO_read.getMname());
-     session.setAttribute("master_grade", masterVO_read.getGrade());
+      session.setAttribute("masterno", masterVO_read.getMasterno()); // 서버의 메모리에 기록
+      session.setAttribute("master_id", masterVO_read.getId());
+      session.setAttribute("master_mname", masterVO_read.getMname());
+      session.setAttribute("master_grade", masterVO_read.getGrade());
   
-     mav.setViewName("redirect:/index.do"); // 시작 페이지
-   } else {  // 로그인 실패
-     // /WEB-INF/views/admin/login_fail_msg.jsp
-     // POST 방식에서는 jsp에서 <c:import 태그가 실행이 안됨.
-     // mav.setViewName("/admin/login_fail_msg");   
+      mav.setViewName("redirect:/index.do"); // 시작 페이지
+    } else {  // 로그인 실패
+      // /WEB-INF/views/admin/login_fail_msg.jsp
+      // POST 방식에서는 jsp에서 <c:import 태그가 실행이 안됨.
+      // mav.setViewName("/admin/login_fail_msg");   
      
-     mav.addObject("url", "/master/login_fail_msg"); // /WEB-INF/views/master/login_fail_msg.jsp
-     mav.setViewName("redirect:/master/msg.do");   // POST -> url -> GET
-   }
+      mav.addObject("url", "/master/login_fail_msg"); // /WEB-INF/views/master/login_fail_msg.jsp
+      mav.setViewName("redirect:/master/msg.do");   // POST -> url -> GET
+    }
        
-   return mav;
+    return mav;    
+  }
+  
+  /**
+   * POST 요청시 JSP 페이지에서 JSTL 호출 기능 지원, 새로고침 방지, EL에서 param으로 접근
+   * @return
+   */
+  @RequestMapping(value="/master/msg.do", method=RequestMethod.GET)
+  public ModelAndView msg(String url){
+    ModelAndView mav = new ModelAndView();
+
+    mav.setViewName(url); // forward
+    
+    return mav; // forward
   }
   
 }

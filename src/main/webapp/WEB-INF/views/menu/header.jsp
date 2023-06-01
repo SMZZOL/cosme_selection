@@ -38,6 +38,14 @@
     </div>
   </div>
   
+    <div class="dropdown">
+    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/cosme/create.do">화장품 등록 </a>
+    </div>
+  </div>
+  
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->
   <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
     <div class="dropdown" style="float:right;">  
