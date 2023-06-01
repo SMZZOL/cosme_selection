@@ -39,7 +39,7 @@
   </div>
   
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->
-  <a href="/register" class="right btn btn-primary">회원 가입</a> 
+  <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
     <div class="dropdown" style="float:right;">  
     <button class="dropbtn">  
     로그인
@@ -63,6 +63,7 @@
       </div>
     </div>
     <button type="submit" class="right btn btn-primary">Sign in</button>
+    <A href='master/msg'></A>
   </form>
 </div>
 </div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="dev.mvc.master.MasterDAOInter">
+  <!-- 로그인 -->
+  <select id="login" resultType="int" parameterType="dev.mvc.master.MasterVO">
+    SELECT COUNT(*) as cnt
+    FROM master
+    WHERE id=#{id} AND passwd=#{passwd} 
+  </select>
+  
+  <!-- 회원 정보 -->
+  <select id="read_by_id" resultType="dev.mvc.master.MasterVO" parameterType ="String" >
+		SELECT masterno, id, passwd, mname, mdate, grade 
+		FROM master 
+    WHERE id=#{id}
+  </select>
+  
+  </mapper>
