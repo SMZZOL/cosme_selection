@@ -4,6 +4,8 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -15,8 +17,6 @@
       function buttonchange(button) {
         var color = button.style.color;
         var value = button.value;
-        console.log(color)
-        console.log(value)
         if(color =="lightgray"){
           button.style.color = "black";
         }else{
@@ -42,20 +42,21 @@
             xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("전송 성공");
-
-                var response = JSON.parse(xhr.responseText);
-                // 반환된 값 사용
-                console.log(response);
-              }
+                var response = xhr.responseText; // 처리된 결과 문자열을 받음
+                console.log("받은 결과 문자열: " + response);
+              }else{
+                  console.log("전송 실패");
+                  } 
             };
             xhr.send(JSON.stringify({ list: list }));
           } else {
             console.log("해당 div 요소를 찾을 수 없습니다.");
           }
-        }</script>
+        }
+
+      </script>
 </head>
 <style>
-
 </style>
 <body>
   <c:import url="../menu/header.jsp" />
@@ -78,6 +79,21 @@
       <img class="img-90" src="" alt="상품 2 이미지">
       <h3>상품 2</h3>
       <p>상품 2 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
     </div>
     <div class="product-item">
       <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
