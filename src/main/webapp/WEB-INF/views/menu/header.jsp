@@ -22,7 +22,7 @@
     <button class="dropbtn">성분 검색 <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="">컨텐츠1 </a>
+      <a href="/cosme/list_by_type.do">컨텐츠1 </a>
       <a href="">컨텐츠2 </a>
       <a href="">컨텐츠3 </a>
     </div>
@@ -35,6 +35,14 @@
       <a href="">컨텐츠1 </a>
       <a href="">컨텐츠2 </a>
       <a href="">컨텐츠3 </a>
+    </div>
+  </div>
+  
+    <div class="dropdown">
+    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/cosme/create.do">화장품 등록 </a>
     </div>
   </div>
   

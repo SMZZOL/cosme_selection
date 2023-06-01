@@ -8,8 +8,7 @@
 
 <title>team2</title>
 </head>
-<body>
-    <c:import url="../views/menu/header.jsp" />
+<body><c:import url="../views/menu/header.jsp" />
 
 <div style="text-align: center"><IMG src='/images/logo2.gif'></div>
 
