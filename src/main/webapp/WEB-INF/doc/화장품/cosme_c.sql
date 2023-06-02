@@ -104,7 +104,7 @@ CREATE SEQUENCE cosme_seq
   CACHE 2                        -- 2번은 메모리에서만 계산
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
   
-INSERT INTO cosme(cosmeno, brand, cosmename, age, rdate, masterno, cosme_cateno, cosme_file, cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube)
+INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file, cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube)
 VALUES(cosme_seq.nextval, '한율', '한율 어린쑥 수분진정 크림', sysdate, 1, 1, '1', '2', '3', 4, '5');
 
 

@@ -44,17 +44,6 @@ public class CosmeCont {
   public CosmeCont() {
     System.out.println("-> CosmeCont created.");
   }
-
-	
-	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.GET)
-	public ModelAndView list_by_type() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("/cosme/list_by_type");
-		
-		
-		return mav;
-	}
 	
 	// http://localhost:9093/cosme/list_by_type.do 404
 	//	@PostMapping("/cosme/list_by_type.do")
@@ -190,5 +179,22 @@ public class CosmeCont {
       }
       
       return mav; // forward
+    }
+    
+    
+    /**
+     * 모든 카테고리의 등록된 글목록, http://localhost:9093/cosme/list_by_type.do
+     * @return
+     */
+    @RequestMapping(value="/cosme/list_by_type.do", method=RequestMethod.GET)
+    public ModelAndView cosme_all() {
+      ModelAndView mav = new ModelAndView();
+      
+      ArrayList<CosmeVO> list = this.cosmeProc.cosme_all();
+      mav.addObject("list", list);
+      
+      mav.setViewName("/cosme/list_by_type"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
+      
+      return mav;
     }
 }

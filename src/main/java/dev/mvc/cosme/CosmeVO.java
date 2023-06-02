@@ -14,7 +14,7 @@ public class CosmeVO{
     /** 화장품 이름 */
     private String cosmename = "";
     /** 등록일 */
-    private int rdate;
+    private String rdate;
     /** 관리자 번호 */
     private int masterno;
     /** 화장품 종류 번호 */
@@ -54,11 +54,11 @@ public class CosmeVO{
       this.cosmename = cosmename;
     }
 
-    public int getRdate() {
+    public String getRdate() {
       return rdate;
     }
 
-    public void setRdate(int rdate) {
+    public void setRdate(String rdate) {
       this.rdate = rdate;
     }
 
