@@ -21,7 +21,7 @@ public interface MasterDAOInter {
    * @param masterno 관리자 번호
    * @return
    */
-  public MasterVO read(int  masterno);
+  public MasterVO read(int masterno);
   
 
 }

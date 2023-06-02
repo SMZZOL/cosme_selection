@@ -18,11 +18,19 @@
  
 <body>
 <c:import url="/menu/header.do" />
+
+ <div class="navbar">
+ <a href="/" style="float: left; ">Home</a> 
+  </div>
+    <br>
+
+<DIV class='content_body'>
  
   <DIV class='message'>
     <H4>관리자 로그인이 필요한 페이지입니다.</H4>
     <BR><BR>
     <button type='button' onclick="location.href='/master/login.do'" class="btn btn-info">로그인</button>       
+  </DIV>
   </DIV>
  
 <jsp:include page="../menu/footer.jsp" flush='false' />

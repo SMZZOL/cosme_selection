@@ -20,11 +20,12 @@
 <body>
 <c:import url="/menu/header.do" />
  
- <div class="navbar" style='height: 60px;'>
- <a href="/" style="float: left;" >Home</a> 
+ <div class="navbar">
+ <a href="/" style="float: left; ">Home</a> 
   </div>
     <br>
     
+    <DIV class='content_body'>
   <DIV class='title_line'>관리자 로그인</DIV>
    <br>
   <br>

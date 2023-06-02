@@ -38,53 +38,20 @@
     </div>
   </div>
   
-    <div class="dropdown">
-    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
+<!-- 관리자 로그인 -->
+
      <%
       String master_id = (String)session.getAttribute("master_id");
 
       if (master_id == null) { // 로그인 안된 경우
       %>
-        <a href="/master/login.do" class="menu_link">M</a><span class='top_menu_sep'> </span>
-      <%  
-      } else { // 로그인 한 경우
-      %>
-        <A class="dropdown-item"  href='/cosme_cate/create.do'>화장품  종류 등록</A>
-        <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-      <%  
-      }
-      %> 
-      
-    </div>
-  </div>
-  
-  <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>
- 
-	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->     
-
-     <%
-
-      if (master_id == null) { // 로그인 안된 경우
-      %>
-        <a href="/master/login.do" class="menu_link" style="float: right;">M</a><span class='top_menu_sep'> </span>
-      <%  
-      } else { // 로그인 한 경우
-      %>
-
-        <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
-      <%  
-      }
-      %> 
-  <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
+      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+        <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
     <div class="dropdown" style="float:right;">  
     <button class="dropbtn">  
     로그인
     </button>
   <form class="dropdown-content">
-   
     <div class="mb-3">
       <label for="exampleDropdownFormEmail2" class="form-label">이메일</label>
       <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
@@ -105,4 +72,28 @@
     <A href='master/msg'></A>
   </form>
 </div>
+<a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
+      <%  
+      } else { // 로그인 한 경우
+      %>
+      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+          <div class="dropdown">
+    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <A class="dropdown-item"  href='/cosme_cate/create.do'>화장품  종류 등록</A>
+        <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+        </div>
+      </div>
+ 
+      <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
+      <%  
+      }
+      %> 
+      
+
+	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->     
+
+
 </div>

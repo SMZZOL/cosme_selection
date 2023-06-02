@@ -21,6 +21,12 @@
 <body>
 <c:import url="/menu/header.do" />
 
+ <div class="navbar">
+ <a href="/" style="float: left; ">Home</a> 
+  </div>
+    <br>
+
+<DIV class='content_body'>
 <DIV class='title_line'>알림</DIV>
   <DIV class='message'>
     <fieldset class='fieldset_basic'>
@@ -29,13 +35,13 @@
         <li class='li_none'>ID 또는 패스워드가 일치하지 않습니다.</li>
         <li class='li_none'>
           <button type="button" id="btn_retry" class="btn btn-info" onclick="location.href='./login.do'">로그인 다시 시도</button>
-          <button type="button" id="btn_home" class="btn btn-info" onclick="location.href='/index.do'">확인</button>
+          <button type="button" id="btn_home" class="btn btn-info" onclick="location.href='/'">확인</button>
         </li>
         
       </ul>
     </fieldset>    
   </DIV>
- 
+ </DIV>
 <jsp:include page="../menu/footer.jsp" flush='false' />
 </body>
  
