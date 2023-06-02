@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.cosme_cate.*;
+import dev.mvc.cosme.*;
+
 public interface CosmeProcInter {
   /**
    * 화장품 등록
@@ -11,7 +14,7 @@ public interface CosmeProcInter {
    * @param contentsVO
    * @return
    */
-  public int make(CosmeVO cosmeVO);
+  public int create(CosmeVO cosmeVO);
   
   /**
    * 화장품의 등록된 글목록

@@ -3,8 +3,11 @@ package dev.mvc.cosme;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +21,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.tool.Tool;
+import dev.mvc.tool.Upload;
+import dev.mvc.master.*;
+import dev.mvc.cosme_cate.*;
+import dev.mvc.ingred.*;
 
 @Controller
 public class CosmeCont {
+  @Autowired
+  @Qualifier("dev.mvc.cosme.CosmeProc")
+  private CosmeProcInter cosmeProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.cosme_cate.Cosme_cateProc")
+  private Cosme_cateProcInter cosme_cateProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.master.MasterProc")
+  private MasterProcInter masterProc;
   
   public CosmeCont() {
     System.out.println("-> CosmeCont created.");
@@ -38,7 +57,7 @@ public class CosmeCont {
 	}
 	
 	// http://localhost:9093/cosme/list_by_type.do 404
-//	@PostMapping("/cosme/list_by_type.do")
+	//	@PostMapping("/cosme/list_by_type.do")
 	@ResponseBody
 	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.POST)
 	public String listByTypePost(@RequestBody Map<String, Object> request) {
@@ -63,46 +82,93 @@ public class CosmeCont {
 //	 * @param cosmeno
 //	 * @return
 //	 */
-//	@RequestMapping(value="/cosme/create.do", method = RequestMethod.GET)
-//	public ModelAndView create(int cosmeno) {
-//	  ModelAndView mav = new ModelAndView();
-//
-//    mav.setViewName("/cosme/create"); 
-//    
-//    return mav;
-//	  
-//    
+	  @RequestMapping(value="/cosme/create.do", method = RequestMethod.GET)
+	  public ModelAndView create(int cosmeno) {
+	  ModelAndView mav = new ModelAndView();
+
+    mav.setViewName("/cosme/create"); 
+    
+    return mav;
+	  }
+ 
 //    /**
 //     * 등록 처리
 //     * http://localhost:9093/cosme/create.do
 //     * @return
 //     */
-//    @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-//    public ModelAndView create(CosmeVO cosmeVO) {
-//      
-//      ModelAndView mav = new ModelAndView();
-//      mav.setViewName("/cosme/msg");
-//      
-//      int cnt = this.cosmeProc.create(cosmeVO);
-//      
-//      if (cnt == 1) {
-//        mav.addObject("code", "create_success");
-//      } else {
-//        mav.addObject("code", "create_fail");
-//      }
-//      
-//      mav.addObject("cnt", cnt);
-//      
-//      return mav;
-//    }
-    
+    @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
+    public ModelAndView create(CosmeVO cosmeVO) {
 
-
-    // 다른 필요한 핸들러 메서드를 추가로 구현할 수 있습니다.
-
-
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("/cosme/msg");
   
+      int cnt = this.cosmeProc.create(cosmeVO);
+ 
+      if (cnt == 1) {
+        mav.addObject("code", "create_success");
+        } else {
+          mav.addObject("code", "create_fail");
+        }
+ 
+        mav.addObject("cnt", cnt);
+ 
+        return mav;
+    }
     
-	  
+    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
+    public ModelAndView create(HttpServletRequest request, HttpSession session, CosmeVO cosmeVO) {
+      ModelAndView mav = new ModelAndView();
+      
+      if (masterProc.isMaster(session)) { // 관리자로 로그인한경우
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 시작
+        // ------------------------------------------------------------------------------
+        String file1 = "";          // 원본 파일명 image
+        String file1saved = "";   // 저장된 파일명, image
+        String thumb1 = "";     // preview image
 
+        String upDir =  Cosme.getUploadDir();
+        System.out.println("-> upDir: " + upDir);
+        
+        // 전송 파일이 없어도 file1MF 객체가 생성됨.
+        // <input type='file' class="form-control" name='file1MF' id='file1MF' 
+        //           value='' placeholder="파일 선택">
+        MultipartFile mf = cosmeVO.getFile1MF();
+        
+        file1 = Tool.getFname(mf.getOriginalFilename()); // 원본 순수 파일명 산출
+        System.out.println("-> file1: " + file1);
+        
+        long size1 = mf.getSize();  // 파일 크기
+        
+        if (size1 > 0) { // 파일 크기 체크
+          // 파일 저장 후 업로드된 파일명이 리턴됨, spring.jsp, spring_1.jpg...
+          file1saved = Upload.saveFileSpring(mf, upDir); 
+          
+          if (Tool.isImage(file1saved)) { // 이미지인지 검사
+            // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+            thumb1 = Tool.preview(upDir, file1saved, 200, 150); 
+          }
+          
+        }    
+        
+        cosmeVO.setCosme_file(file1);   // 순수 원본 파일명
+        cosmeVO.setCosme_file_saved(file1saved); // 저장된 파일명(파일명 중복 처리)
+        cosmeVO.setCosme_file_preview(thumb1);      // 원본이미지 축소판
+        cosmeVO.setCosme_file_size(size1);  // 파일 크기
+        // ------------------------------------------------------------------------------
+        // 파일 전송 코드 종료
+        // ------------------------------------------------------------------------------
+        
+
+        // 다른 필요한 핸들러 메서드를 추가로 구현할 수 있습니다.
+
+        // Call By Reference: 메모리 공유, Hashcode 전달
+        int masterno = (int)session.getAttribute("masterno"); // adminno FK
+        cosmeVO.setMasterno(masterno);
+        int cnt = this.cosmeProc.create(cosmeVO); 
+
+
+        }
+      return mav;
+    }
 }
