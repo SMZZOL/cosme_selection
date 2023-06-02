@@ -76,7 +76,7 @@
       <%  
       } else { // 로그인 한 경우
       %>
-      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+      <a class="dropdown-item" href='#'>화장품 종류 목록</a>      
           <div class="dropdown">
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
@@ -84,6 +84,7 @@
         <A class="dropdown-item"  href='/cosme_cate/create.do'>화장품  종류 등록</A>
         <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         </div>
       </div>
  
