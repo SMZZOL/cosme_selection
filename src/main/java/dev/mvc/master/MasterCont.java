@@ -149,7 +149,7 @@ public class MasterCont {
       response.addCookie(ck_master_passwd_save);
       // -------------------------------------------------------------------
    
-      mav.setViewName("redirect:/main.do");  
+      mav.setViewName("redirect:/");  
     } else {
       mav.addObject("url", "/master/login_fail_msg");
       mav.setViewName("redirect:/master/msg.do"); 
@@ -168,7 +168,7 @@ public class MasterCont {
     ModelAndView mav = new ModelAndView();
     session.invalidate(); // 모든 session 변수 삭제
     
-    mav.setViewName("redirect:/main.do"); 
+    mav.setViewName("redirect:/"); 
     
     return mav;
   }

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/css/style.css" rel="Stylesheet" type="text/css">
+
 
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -8,16 +8,20 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>team2</title>
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
 
 </head> 
  
 <body>
 <c:import url="/menu/header.do" />
  
- <div class="navbar">
- <a href="/" style="float: left;">Home</a>
+ <div class="navbar" style='height: 60px;'>
+ <a href="/" style="float: left;" >Home</a> 
   </div>
     <br>
     
