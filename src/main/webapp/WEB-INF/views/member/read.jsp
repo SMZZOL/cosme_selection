@@ -115,20 +115,6 @@
       return false; // 가입 중지
     } 
          
-    // 패스워드를 정상적으로 2번 입력했는지 확인
-    if ($('#passwd').val() != $('#passwd2').val()) {
-      $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
-
-      $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경
-      msg = '입력된 패스워드가 일치하지 않습니다.<br>';
-      msg += "패스워드를 다시 입력해주세요.<br>"; 
-      $('#modal_content').html(msg);  // 내용
-      $('#btn_close').attr('data-focus', 'passwd');
-      $('#modal_panel').modal();         // 다이얼로그 출력
-      
-      return false; // submit 중지
-    }
-
     let mname = $('#mname').val(); // 태그의 아이디가 'id'인 태그의 값
     if ($.trim(mname).length == 0) { // id를 입력받지 않은 경우
       $('#modal_title').html('이름 입력 누락'); // 제목 
@@ -148,10 +134,9 @@
 
 
 <body>
-<div class="navbar">
-<a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
-  </div>
- <!-- ******************** Modal 알림창 시작 ******************** -->
+<c:import url="/menu/top.do" />
+
+  <!-- ******************** Modal 알림창 시작 ******************** -->
   <div id="modal_panel" class="modal fade"  role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -170,65 +155,66 @@
       </div>
     </div>
   </div>
+  <!-- ******************** Modal 알림창 종료 ******************** -->
+
+  <DIV class='title_line'>회원 정보 조회 및 수정(*: 필수)</DIV>
+
+  <DIV class='content_body'>
+
+  <ASIDE class="aside_right">
+    <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' >│</span> 
+    <A href='./create.do'>회원 가입</A>
+    <span class='menu_divide' >│</span> 
+    <A href='./list.do'>목록</A>
+  </ASIDE> 
+
+  <div class='menu_line'></div>
   
-   <!-- ******************** Modal 알림창 종료 ******************** -->
-  <br>
-  <br>
   <div style="width: 60%; margin: 0px auto ">
-  <FORM name='frm' id='frm' method='POST' action='./create.do' class="">
-  
+  <FORM name='frm' id='frm' method='POST' action='./update.do' class="">
+    <input type="hidden" name="memberno" value="${memberVO.memberno }">
+    
     <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
       <label>아이디*:
-        <input type='text' class="form-control form-control-sm" name='id' id='id' value='user1@gmail.com' required="required" placeholder="아이디" autofocus="autofocus">
+        <input type='text' class="form-control form-control-sm" name='id' id='id' value='${memberVO.id }' required="required" placeholder="아이디*" autofocus="autofocus">
       </label>
       <button type='button' id="btn_checkID" onclick="checkID()" class="btn btn-info btn-sm">중복확인</button>
     </div>   
-                
-    <div class="form-group"> <%-- label의 크기에따라 input 태그의 크기가 지정되는 형태 --%>
-      <label>패스워드*: 
-        <input type='password' class="form-control form-control-sm" name='passwd' id='passwd' value='1234' required="required" placeholder="패스워드">
-      </label>
-    </div>   
-
-    <div class="form-group"> <%-- label의 크기에따라 input 태그의 크기가 지정되는 형태 --%>
-      <label>패스워드 확인*: 
-        <input type='password' class="form-control form-control-sm" name='passwd2' id='passwd2' value='1234' required="required" placeholder="패스워드 확인">
-      </label>
-    </div>   
-    
+  
     <div class="form-group"> <%-- label의 크기에따라 input 태그의 크기가 지정되는 형태 --%>
       <label>성명*:
-        <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='하정우' required="required" placeholder="성명">
+        <input type='text' class="form-control form-control-sm" name='mname' id='mname' value='${memberVO.mname }' required="required" placeholder="성명">
       </label>
     </div>   
 
     <div class="form-group"> <%-- label의 크기에따라 input 태그의 크기가 지정되는 형태, 줄이 변경되지 않는 패턴 --%>
       <label>전화 번호:
-        <input type='text' class="form-control form-control-sm" name='tel' id='tel' value='010-0000-0000' required="required" placeholder="전화번호">
+        <input type='text' class="form-control form-control-sm" name='tel' id='tel' value='${memberVO.tel }' required="required" placeholder="전화번호">
       </label>
       예) 010-0000-0000
     </div>   
 
     <div class="form-group"> <%-- 줄이 변경되지 않는 패턴 --%>
       <label>우편 번호:
-        <input type='text' class="form-control form-control-sm" name='zipcode' id='zipcode' value='' placeholder="우편번호">
+        <input type='text' class="form-control form-control-sm" name='zipcode' id='zipcode' value='${memberVO.zipcode }' placeholder="우편번호">
       </label>
       <button type="button" id="btn_DaumPostcode" onclick="DaumPostcode()" class="btn btn-info btn-sm">우편번호 찾기</button>
     </div>  
 
     <div class="form-group">
       <label style="width: 100%;">주소:</label> <%-- label의 크기를 변경하여 주소를 많이 입력받는 패턴 --%>
-      <input type='text' class="form-control form-control-sm" name='address1' id='address1' value='' placeholder="주소">
+      <input type='text' class="form-control form-control-sm" name='address1' id='address1' value='${memberVO.address1 }' placeholder="주소">
     </div>   
 
     <div class="form-group">
       <label style="width: 100%;">상세 주소:</label>
-      <input type='text' class="form-control form-control-sm" name='address2' id='address2' value='' placeholder="상세 주소">
+      <input type='text' class="form-control form-control-sm" name='address2' id='address2' value='${memberVO.address2 }' placeholder="상세 주소">
     </div>   
 
     <div>
-    
-    <!-- ------------------------------ DAUM 우편번호 API 시작 ------------------------------ -->
+
+<!-- ------------------------------ DAUM 우편번호 API 시작 ------------------------------ -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
@@ -313,19 +299,19 @@
         element_wrap.style.display = 'block';
     }
 </script>
-
 <!-- ------------------------------ DAUM 우편번호 API 종료 ------------------------------ -->
 
     </div>
     
     <div class="form_input">
-      <button type="button" id='btn_send' onclick="send()" class="btn btn-info btn-sm">가입</button>
+      <button type="button" id='btn_send' onclick="send()" class="btn btn-info btn-sm">저장</button>
       <button type="button" onclick="history.back()" class="btn btn-info btn-sm">취소</button>
     </div>   
   </FORM>
   </DIV>
   
-
+  </DIV>
+  
 <jsp:include page="../menu/footer.jsp" flush='false' />
 </body>
 
