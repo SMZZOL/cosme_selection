@@ -44,5 +44,18 @@ public interface CosmeProcInter {
    */
   public int delete(int csomeno);
   
+  /**
+   * 글수 증가 
+   * @param cosmeno
+   * @return
+   */
+  public int update_cnt_add(int cosmeno);
+  
+  /**
+   * 글수 감소
+   * @param cosmeno
+   * @return
+   */
+  public int update_cnt_sub(int cosmeno);
   
 }

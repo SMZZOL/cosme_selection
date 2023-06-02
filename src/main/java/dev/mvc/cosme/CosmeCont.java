@@ -167,8 +167,28 @@ public class CosmeCont {
         cosmeVO.setMasterno(masterno);
         int cnt = this.cosmeProc.create(cosmeVO); 
 
-
+        // ------------------------------------------------------------------------------
+        // PK의 return
+        // ------------------------------------------------------------------------------
+        if (cnt == 1) {
+          this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
+          mav.addObject("code", "create_success");
+        } else {
+          mav.addObject("code", "create_fail");
         }
-      return mav;
+        mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
+        
+        // redirect시에 hidden tag로 보낸것들이 전달이 안됨으로 request에 다시 저장
+        mav.addObject("cosmeno", cosmeVO.getCosmeno()); // redirect parameter 적용
+        
+        mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
+        mav.setViewName("redirect:/contents/msg.do"); 
+
+      } else {
+        mav.addObject("url", "/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+        mav.setViewName("redirect:/contents/msg.do"); 
+      }
+      
+      return mav; // forward
     }
 }

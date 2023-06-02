@@ -53,6 +53,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE cateno=#{cateno}
   </delete>
              
+             
+  <!-- 자료수 증가, cnt 컬럼 1씩 증가, id: update_cnt_add -->
+  <update id="update_cnt_add" parameterType="int">
+    UPDATE cosme 
+    SET cnt = cnt + 1 
+    WHERE cosmeno = #{cosmeno}
+  </update>
+
+  <!-- 자료수 감소, cnt 컬럼 1씩 증가, id: update_cnt_add -->
+  <update id="update_cnt_sub" parameterType="int">
+    UPDATE cosme 
+    SET cnt = cnt - 1 
+    WHERE cosmeno = #{cosmeno}
+  </update>          
 </mapper> 
 
 
