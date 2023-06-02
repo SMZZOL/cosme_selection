@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.master.MasterProcInter;
+
 @Controller
 public class MemberCont {
+  @Autowired
+  @Qualifier("dev.mvc.master.MasterProc")
+  private MasterProcInter MasterProc;
+	  
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
   private MemberProcInter memberProc = null;
@@ -116,7 +122,7 @@ public class MemberCont {
       mav.setViewName("/member/list"); // /webapp/WEB-INF/views/member/list.jsp
 
     } else {
-      mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
+      mav.setViewName("/master/login_need"); // /WEB-INF/views/admin/login_need.jsp
     }
         
     return mav;

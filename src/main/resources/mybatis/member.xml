@@ -10,13 +10,13 @@
   </select>
   
   <insert id="create" parameterType="dev.mvc.member.MemberVO">
-    INSERT INTO member(userno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade)
+    INSERT INTO member(memberno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade)
     VALUES (member_seq.nextval, #{id}, #{passwd}, #{email}, #{mname}, #{tel}, #{zipcode}, 
                  #{address1}, #{address2}, sysdate, #{grade})
   </insert>
   
   <select id="list" resultType="dev.mvc.member.MemberVO">
-    SELECT userno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade
+    SELECT memberno, id, passwd, email, mname, tel, zipcode, address1, address2, mdate, grade
     FROM member
     ORDER BY grade ASC, id ASC
   </select>

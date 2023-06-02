@@ -526,11 +526,6 @@ A:active { /* A 태그를 클릭한 상태 */
 .text-center{
     text-align:center!important
 }
-.h3,h3{
-    font-size:calc(1.3rem + .6vw);
-    color : white;
-}
-
 
 .card-body{
     flex:1 1 auto;
@@ -776,5 +771,69 @@ button,input,optgroup,select,textarea{
   height: auto
 }
 
+/*================list_by_type css===========================*/
+
+.btn_type{
+      font-weight:400;
+      line-height:1.5;
+      color:gray;
+      text-align:center;
+      text-decoration:none;
+      vertical-align:middle;
+      cursor:pointer;
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      user-select:none;
+      background-color:transparent;
+      border:none;
+      border-color: black;
+      font-size:1rem;
+      margin: 20px;
+      border-radius:.95rem;
+      transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+  }
+  #buttondiv{
+    /* display: flex;
+  align-items: center;
+  justify-content: center;
+    border:1px solid transparent;
+    border-color: black;
+    border-radius:.25rem;
+    height: 50px; 
+    padding: 20px;
+    
+    */
+
+    width: 80%;
+    margin: auto;
+  }
+
+  #grid{
+    width: 80%;
+    margin: auto;
+  }
+  .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 3개의 열로 구성된 그리드 */
+      grid-gap: 20px; /* 각 상품 사이의 간격 */
+    }
+    
+    .product-item {
+      /* border: 2px solid #ccc; */
+      padding: 10px;
+      background-color: rgb(243, 243, 243);
+      text-align: center;
+    }
+    
+    .img-90 {
+  max-width: 90%;
+  height: auto
+}
+h3{
+  font-size:20px;
+  margin:10px;
+}
+    
+    /*================list_by_type css end===========================*/
 
 

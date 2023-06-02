@@ -8,6 +8,12 @@ public class MasterVO {
 	private String mdate="";
 	private int grade = 0;
 	
+	/** id 저장 여부 */
+	private String id_save;
+	  
+	/** 패스워드 저장 여부 */
+	private String passwd_save;
+	
 	public int getMasterno() {
 		return masterno;
 	}
@@ -44,5 +50,19 @@ public class MasterVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-
+  
+  public String getId_save() {
+    return id_save;
+  }
+  public void setId_save(String id_save) {
+    this.id_save = id_save;
+  }
+  public String getPasswd_save() {
+    return passwd_save;
+  }
+  public void setPasswd_save(String passwd_save) {
+    this.passwd_save = passwd_save;
+  }
+  
+  
 }

@@ -5,16 +5,16 @@ DROP TABLE qboard;
 
 CREATE TABLE qboard(
         qboardno         NUMBER(7)    NOT NULL     PRIMARY KEY,
-        userno            NUMBER(7)     NOT NULL , -- FK
+        memberno            NUMBER(7)     NOT NULL , -- FK
         qtitle             VARCHAR(50)    NOT NULL,
         qcontent           VARCHAR(50)    NOT NULL,
         rdate               DATE           NOT NULL,
-        FOREIGN KEY (userno) REFERENCES member (userno)
+        FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
 
 COMMENT ON TABLE qboard is '질문 게시판';
 COMMENT ON COLUMN qboard.qboardno is '질문 게시판 번호';
-COMMENT ON COLUMN qboard.userno is '회원 번호';
+COMMENT ON COLUMN qboard.memberno is '회원 번호';
 COMMENT ON COLUMN qboard.qtitle is '질문 게시판 제목';
 COMMENT ON COLUMN qboard.qcontent is '질문 게시판 내용';
 COMMENT ON COLUMN qboard.rdate is '등록일';
@@ -28,23 +28,23 @@ CREATE SEQUENCE qboard_seq
   CACHE 2                        -- 2번은 메모리에서만 계산
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
 
-INSERT INTO qboard(qboardno, userno, qtitle, qcontent, rdate)
+INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
 VALUES(qboard_seq.nextval, 1, '질문', '있어요', sysdate);
 
 commit;     
 
 -- 등록 화면 유형 1: 커뮤니티(공지사항, 게시판, 자료실, 갤러리,  Q/A...)글 등록
-INSERT INTO qboard(qboardno, userno, qtitle, qcontent, rdate)
+INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
 VALUES(qboard_seq.nextval, 1, '질문', '궁금합니다', sysdate);
             
-INSERT INTO qboard(qboardno, userno, qtitle, qcontent, rdate)
+INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
 VALUES(qboard_seq.nextval, 1, '질문', '이 제품 성분이,,,', sysdate);
             
-INSERT INTO qboard(qboardno, userno, qtitle, qcontent, rdate)
+INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
 VALUES(qboard_seq.nextval, 1, '질문', '써 보신 분 있나요', sysdate);
 
 -- 유형 1 전체 목록
-SELECT qboardno, userno, qtitle, qcontent, rdate
+SELECT qboardno, memberno, qtitle, qcontent, rdate
 FROM qboard
 ORDER BY qboardno ASC;
          
@@ -70,14 +70,14 @@ WHERE qboardno = 1;
 commit;
 
 DELETE FROM qboard
-WHERE qboardno=1 AND userno = 1;
+WHERE qboardno=1 AND memberno = 1;
 
 commit;
 
 -- ----------------------------------------------------------------------------
 -- 조회
 -- ----------------------------------------------------------------------------
-SELECT qboardno, userno, qtitle, qcontent, rdate
+SELECT qboardno, memberno, qtitle, qcontent, rdate
 FROM qboard
 WHERE qboardno = 3;
 
@@ -105,16 +105,16 @@ commit;
 -- 특정 관리자에 속한 레코드 갯수 산출
 SELECT COUNT(*) as cnt 
 FROM qboard 
-WHERE userno=1;
+WHERE memberno=1;
 
 -- 특정 관리자에 속한 레코드 모두 삭제
 DELETE FROM qboard
-WHERE userno=1;
+WHERE memberno=1;
 
 -- 다수의 관리자에 속한 레코드 모두 삭제: IN
-SELECT qboardno, userno, qtitle
+SELECT qboardno, memberno, qtitle
 FROM qboard
-WHERE userno IN(1,2,3);
+WHERE memberno IN(1,2,3);
  QBOARDNO     USERNO QTITLE                                            
 ---------- ---------- --------------------------------------------------
          1          1 질문                                              
@@ -122,7 +122,7 @@ WHERE userno IN(1,2,3);
          3          1 질문                                              
          4          1 질문                                                                                                                                                    
                                                                                                                                                                                                                     
-SELECT qboardno, userno, qtitle
+SELECT qboardno, memberno, qtitle
 FROM qboard
 WHERE userno IN('1','2','3');
  QBOARDNO     USERNO QTITLE                                            
