@@ -1,12 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dev.mvc.cosme_cate.Cosme_cateVO" %>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 
 <div class="navbar">
 	<a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
-  <a href="#" class="right btn btn-primary" style="float: left;">Home</a> 
+  <a href="#" class="right btn btn-primary" style="float:left;">Home</a> 
   
 	<div class="dropdown">
 		<button class="dropbtn">
@@ -53,33 +51,18 @@
   <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>
  
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->
-  <a href="/master/login.do" class="right btn btn-primary">M</a>
    <%
-      // 레코드가 없어도 list는 null 아님
-      ArrayList<Cosme_cateVO> list = (ArrayList<Cosme_cateVO>)request.getAttribute("list");
-      for (int i=0; i < list.size(); i++) {
-    	  Cosme_cateVO cosme_cateVO = list.get(i);
-      %>
-        <A href="#" class="menu_link"><%=cosme_cateVO.getCosme_catename() %></A><span class='top_menu_sep'> </span>
-      <%  
-      }
-      %>
-      
-      <%
       String master_id = (String)session.getAttribute("master_id");
 
       if (master_id == null) { // 로그인 안된 경우
       %>
-        <a href="/master/login.do" class="menu_link">관리자 로그인</a><span class='top_menu_sep'> </span>
+        <a href="/master/login.do" class="menu_link" style="float: right;">M</a><span class='top_menu_sep'> </span>
       <%  
       } else { // 로그인 한 경우
       %>
-        
-        <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-        <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         <A class='menu_link'  href='/cosme_cate/create.do'>화장품  종류 등록</A><span class='top_menu_sep'> </span>
         
-        <a href="/master/logout.do" class="menu_link">관리자 <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
+        <a href="/master/logout.do" class="menu_link">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
       <%  
       }
       %> 
@@ -108,9 +91,7 @@
       </div>
     </div>
     <button type="submit" class="right btn btn-primary">Sign in</button>
-    <A href='/member/msg'></A>
-    
-    
+    <A href='master/msg'></A>
   </form>
 </div>
 </div>
