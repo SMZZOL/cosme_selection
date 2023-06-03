@@ -72,7 +72,7 @@ public class CosmeCont {
 //	 * @return
 //	 */
 	  @RequestMapping(value="/cosme/create.do", method = RequestMethod.GET)
-	  public ModelAndView create(int cosmeno) {
+	  public ModelAndView create() {
 	  ModelAndView mav = new ModelAndView();
 
     mav.setViewName("/cosme/create"); 

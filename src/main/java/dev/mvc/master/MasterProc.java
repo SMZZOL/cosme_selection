@@ -13,6 +13,7 @@ public class MasterProc implements MasterProcInter{
   @Override
   public int login(MasterVO masterVO) {
     int cnt = this.masterDAO.login(masterVO);
+    System.out.println(cnt);
     return cnt;
   }
 

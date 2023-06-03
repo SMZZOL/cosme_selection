@@ -94,13 +94,16 @@ public class MasterCont {
     ModelAndView mav = new ModelAndView();
    
     int cnt = masterProc.login(masterVO);
+    System.out.println(masterVO.getId());
+    System.out.println(masterVO.getPasswd());
+
+    
     if (cnt == 1) { // 로그인 성공
       MasterVO masterVO_read = masterProc.read_by_id(masterVO.getId()); // DBMS에서 id를 이용한 회원 조회
       session.setAttribute("masterno", masterVO_read.getMasterno()); // 서버의 메모리에 기록
       session.setAttribute("master_id", masterVO_read.getId());
       session.setAttribute("master_mname", masterVO_read.getMname());
       session.setAttribute("master_grade", masterVO_read.getGrade());
-   
       String id_save = Tool.checkNull(masterVO.getId_save()); // 폼에 입력된 id 저장 여부
       String id = masterVO.getId();              // 폼에 입력된 id
       String passwd_save = Tool.checkNull(masterVO.getPasswd_save()); // 폼에 입력된 passwd 저장 여부
