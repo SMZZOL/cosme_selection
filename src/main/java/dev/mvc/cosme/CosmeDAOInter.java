@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import dev.mvc.cosme_cate.*;
-import dev.mvc.cosme.*;
-
 public interface CosmeDAOInter {
   /**
    * 화장품 등록

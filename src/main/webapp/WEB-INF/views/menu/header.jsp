@@ -32,7 +32,7 @@
     <button class="dropbtn">타입별 추천 <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="">컨텐츠1 </a>
+      <a href="/cosmetype/list_all.do">컨텐츠1 </a>
       <a href="">컨텐츠2 </a>
       <a href="">컨텐츠3 </a>
     </div>

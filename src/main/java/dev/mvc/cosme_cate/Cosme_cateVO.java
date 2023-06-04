@@ -6,14 +6,14 @@ package dev.mvc.cosme_cate;
 //);
 
 public class Cosme_cateVO {
-  private String cosme_cateno;
+  private int cosme_cateno;
   private String cosme_catename;
   
   
-  public String getCosme_cateno() {
+  public int getCosme_cateno() {
     return cosme_cateno;
   }
-  public void setCosme_cateno(String cosme_cateno) {
+  public void setCosme_cateno(int cosme_cateno) {
     this.cosme_cateno = cosme_cateno;
   }
   public String getCosme_catename() {

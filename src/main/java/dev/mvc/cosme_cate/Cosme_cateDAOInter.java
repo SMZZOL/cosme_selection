@@ -7,7 +7,7 @@ public interface Cosme_cateDAOInter {
   /**
    * 등록
    * @param cosme_cateVO
-   * @return 
+   * @return
    */
   public int create(Cosme_cateVO cosme_cateVO); 
   
