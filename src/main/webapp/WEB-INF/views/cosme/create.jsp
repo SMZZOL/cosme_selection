@@ -21,9 +21,6 @@
 
 <DIV class='content_body'>
   <DIV class='title_line'>화장품 등록</DIV>
-  
-  <FORM name='frm' method='POST' action='/cosme/create.do' enctype="multipart/form-data">
-    <input type="hidden" name="cosmeno" value="${param.cosmeno }">
     
     <div>
        <label class="">제목</label>

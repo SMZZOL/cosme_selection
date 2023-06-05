@@ -95,8 +95,10 @@ public class CosmeCont {
  
       if (cnt == 1) {
         mav.addObject("code", "create_success");
+        mav.setViewName("redirect:/cosme/list_all.do");     // 목록으로 자동 이동
         } else {
           mav.addObject("code", "create_fail");
+          mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
         }
  
         mav.addObject("cnt", cnt);
@@ -182,8 +184,8 @@ public class CosmeCont {
     }
     
 //  /**
-//  * 등록 폼
-//  * http://localhost:9093/cosme/create.do
+//  * 수정 폼
+//  * http://localhost:9093/cosme/update.do
 //  * @param cosmeno
 //  * @return
 //  */
@@ -197,8 +199,8 @@ public class CosmeCont {
    }
 
 //   /**
-//    * 등록 처리
-//    * http://localhost:9093/cosme/create.do
+//    * 수정 처리
+//    * http://localhost:9093/cosme/update.do
 //    * @return
 //    */
    @RequestMapping(value="/cosme/update.do", method=RequestMethod.POST)
