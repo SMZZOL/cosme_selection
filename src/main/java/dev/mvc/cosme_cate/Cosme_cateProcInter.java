@@ -17,4 +17,6 @@ public interface Cosme_cateProcInter {
    */
   public ArrayList<Cosme_cateVO>list_all();
 
+
+
 }

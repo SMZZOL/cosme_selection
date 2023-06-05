@@ -13,7 +13,7 @@ CREATE TABLE fboard(
         file1saved            VARCHAR(100)          NULL,  -- 저장된 파일명, image
         thumb1                VARCHAR(100)          NULL,   -- preview image
         size1                 NUMBER(10)      DEFAULT 0 NULL,  -- 파일 사이즈
-        FOREIGN KEY (userno) REFERENCES member (userno)
+        FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
 
 COMMENT ON TABLE fboard is '자유게시판';

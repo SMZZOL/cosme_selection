@@ -13,7 +13,7 @@
 		</button>
 		<div class="dropdown-content">
 			<a href="#">공지사항</a>
-			<a href="#">질문 게시판</a>
+			<a href="/qboard/create.do">질문 게시판</a>
 			<a href="#">자유 게시판</a>
 		</div>
 	</div> 
