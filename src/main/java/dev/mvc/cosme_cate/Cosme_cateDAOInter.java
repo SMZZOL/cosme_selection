@@ -17,5 +17,6 @@ public interface Cosme_cateDAOInter {
    * @return
    */
   public ArrayList<Cosme_cateVO>list_all();
+ 
   
 }

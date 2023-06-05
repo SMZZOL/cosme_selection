@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import dev.mvc.cosme_cate.Cosme_cateVO;
+
 public interface CosmeDAOInter {
   /**
    * 화장품 등록
@@ -54,6 +56,12 @@ public interface CosmeDAOInter {
    * @return
    */
   public int update_cnt_sub(int cosmeno);
+  
+  /**
+   * 전체 목록
+   * @return
+   */
+  public ArrayList<CosmeVO>cate_all();
   
   
 }

@@ -46,8 +46,8 @@
     <div>
         <label>화장품 카테고리</label>
         <select>
-          <c:forEach var="item" items="${cosme_cate}" >
-            <option value="${item.cosme_cateno}">${item.cosme_catename}</option>
+          <c:forEach var="cosme_cateVO" items="${list2}" >
+            <option value="${cosme_cateVO.cosme_cateno}">${cosme_cateVO.cosme_catename}</option>
           </c:forEach>
         </select>
     </div>
