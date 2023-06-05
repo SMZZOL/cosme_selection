@@ -21,27 +21,30 @@
 
 <DIV class='content_body'>
   <DIV class='title_line'>화장품 등록</DIV>
+  
+  <FORM name='frm' method='POST' action='/cosme/create.do' enctype="multipart/form-data">
+    <input type="hidden" name="cosmeno" value="${param.cosmeno }">
     
     <div>
        <label class="">제목</label>
-       <input type='text' name='cosmename' value='화장품 이름' required="required" 
+       <input type='text' name='cosmename' value='${cosmename }' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
     <br><Br>
     <div>
        <label class="">브랜드</label>
-       <input type='text' name='brand' value='화장품 브랜드' required="required" 
+       <input type='text' name='brand' value='${brand }' required="required" 
                  class="form-control" style='width: 100%;'>
     </div>
     <div>
        <label class="">화장품 관련 유튜브 채널</label>
-       <input type='text' name='cosme_youtube' value='화장품 유튜브 채널' 
+       <input type='text' name='cosme_youtube' value='${cosme_youtube }' 
                  class="form-control" style='width: 100%;'>
     </div>
     <div>
        <label>이미지</label>
        <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                 value='' placeholder="파일 선택">
+                 value='${file1MF }' placeholder="파일 선택">
     </div>   
     <div>
         <label>화장품 카테고리</label>
@@ -69,7 +72,7 @@
     </div>
 
     <div class="content_body_bottom">
-      <button type="submit" class="btn btn-primary">등록</button>
+      <button type="submit" class="btn btn-primary">수정</button>
     </div>
   
   </FORM>

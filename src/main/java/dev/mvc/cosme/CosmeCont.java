@@ -95,8 +95,10 @@ public class CosmeCont {
  
       if (cnt == 1) {
         mav.addObject("code", "create_success");
+        mav.setViewName("redirect:/cosme/list_all.do");     // 목록으로 자동 이동
         } else {
           mav.addObject("code", "create_fail");
+          mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
         }
  
         mav.addObject("cnt", cnt);
@@ -180,6 +182,45 @@ public class CosmeCont {
       
       return mav; // forward
     }
+    
+//  /**
+//  * 수정 폼
+//  * http://localhost:9093/cosme/update.do
+//  * @param cosmeno
+//  * @return
+//  */
+   @RequestMapping(value="/cosme/update.do", method = RequestMethod.GET)
+   public ModelAndView update_all_cosme() {
+   ModelAndView mav = new ModelAndView();
+
+   mav.setViewName("/cosme/update"); 
+   
+   return mav;
+   }
+
+//   /**
+//    * 수정 처리
+//    * http://localhost:9093/cosme/update.do
+//    * @return
+//    */
+   @RequestMapping(value="/cosme/update.do", method=RequestMethod.POST)
+   public ModelAndView update_all_cosme(CosmeVO cosmeVO) {
+
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/cosme/msg");
+ 
+     int cnt = this.cosmeProc.update_all_cosme(cosmeVO);
+
+     if (cnt == 1) {
+       mav.addObject("code", "update_success");
+       } else {
+         mav.addObject("code", "update_fail");
+       }
+
+       mav.addObject("cnt", cnt);
+
+       return mav;
+   }
     
     
     /**
