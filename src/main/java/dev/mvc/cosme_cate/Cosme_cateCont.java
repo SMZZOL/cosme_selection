@@ -89,7 +89,7 @@ public ModelAndView create(HttpSession session) {
   */
  // http://localhost:9093/cosme_cate/list_all.do
  @RequestMapping(value="/cosme_cate/list_all.do", method=RequestMethod.GET)
- public ModelAndView cosme_all() {
+ public ModelAndView list_all() {
    ModelAndView mav = new ModelAndView();
    
 	      mav.setViewName("/cosme_cate/list_all"); // /WEB-INF/views/cosme_cate/list_all.jsp
