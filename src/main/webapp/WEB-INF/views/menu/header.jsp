@@ -78,6 +78,17 @@
   </form>
 </div>    --> 
 
+           <!-- 회원 로그인/로그아웃 -->
+          <c:choose>
+             <c:when test="${sessionScope.id == null}">
+                      <a class="menu-link" href="/member/login.do" style="float: right;">로그인</a>
+              </c:when>
+                <c:otherwise>
+                   <a class="menu-link" href='/member/logout.do' style="float: right;">${sessionScope.id } 로그아웃</a>
+                </c:otherwise>
+              </c:choose>
+      
+
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
       <%  
       } else { // 로그인 한 경우
@@ -98,16 +109,7 @@
       <%  
       }
       %> 
-             <!-- 회원 로그인/로그아웃 -->
-          <c:choose>
-             <c:when test="${sessionScope.id == null}">
-                      <a class="menu-link" href="/member/login.do" style="float: right;">로그인</a>
-              </c:when>
-                <c:otherwise>
-                   <a class="menu-link" href='/member/logout.do' style="float: right;">${sessionScope.id } 로그아웃</a>
-                </c:otherwise>
-              </c:choose>
-      
+  
     
 
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->     
