@@ -181,6 +181,45 @@ public class CosmeCont {
       return mav; // forward
     }
     
+//  /**
+//  * 등록 폼
+//  * http://localhost:9093/cosme/create.do
+//  * @param cosmeno
+//  * @return
+//  */
+   @RequestMapping(value="/cosme/update.do", method = RequestMethod.GET)
+   public ModelAndView update_all_cosme() {
+   ModelAndView mav = new ModelAndView();
+
+   mav.setViewName("/cosme/update"); 
+   
+   return mav;
+   }
+
+//   /**
+//    * 등록 처리
+//    * http://localhost:9093/cosme/create.do
+//    * @return
+//    */
+   @RequestMapping(value="/cosme/update.do", method=RequestMethod.POST)
+   public ModelAndView update_all_cosme(CosmeVO cosmeVO) {
+
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/cosme/msg");
+ 
+     int cnt = this.cosmeProc.update_all_cosme(cosmeVO);
+
+     if (cnt == 1) {
+       mav.addObject("code", "update_success");
+       } else {
+         mav.addObject("code", "update_fail");
+       }
+
+       mav.addObject("cnt", cnt);
+
+       return mav;
+   }
+    
     
     /**
      * 모든 카테고리의 등록된 글목록, http://localhost:9093/cosme/list_by_type.do
