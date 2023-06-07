@@ -12,7 +12,7 @@
       <i class="fa fa-caret-down"></i>
 		</button>
 		<div class="dropdown-content">
-			<a href="#">공지사항</a>
+			<a href="/notice/list_all.do">공지사항</a>
 			<a href="#">질문 게시판</a>
 			<a href="#">자유 게시판</a>
 		</div>
@@ -79,25 +79,7 @@
 </div>    --> 
 
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
-      <%  
-      } else { // 로그인 한 경우
-      %>
-      <a class="dropdown-item" href='#'>화장품 종류 목록</a>      
-          <div class="dropdown">
-    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-        <A class="dropdown-item"  href='/cosme_cate/create.do'>화장품  종류 등록</A>
-        <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-      <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-        </div>
-      </div>
- 
-      <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
-      <%  
-      }
-      %> 
+
              <!-- 회원 로그인/로그아웃 -->
           <c:choose>
              <c:when test="${sessionScope.id == null}">
@@ -107,6 +89,28 @@
                    <a class="menu-link" href='/member/logout.do' style="float: right;">${sessionScope.id } 로그아웃</a>
                 </c:otherwise>
               </c:choose>
+              
+      <%  
+      } else { // 로그인 한 경우
+      %>
+      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+          <div class="dropdown">
+    <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <A class="dropdown-item"  href='/cosme_cate/create.do'>화장품  종류 등록</A>
+        <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+      <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+        <a href="/notice/create.do">공지사항 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
+        </div>
+      </div>
+ 
+      <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
+      <%  
+      }
+      %> 
+
       
     
 
