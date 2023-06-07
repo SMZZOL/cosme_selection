@@ -73,11 +73,18 @@ public class CosmeCont {
 //	 */
 	  @RequestMapping(value="/cosme/create.do", method = RequestMethod.GET)
 	  public ModelAndView create() {
-	  ModelAndView mav = new ModelAndView();
+  	  ModelAndView mav = new ModelAndView();
+     
+  	  ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+  	  
+  	  for (Cosme_cateVO item : list2) {
+//  	    System.out.println("화장품 종류 이름: " + item.getCosme_catename());
+  	  }
 
-    mav.setViewName("/cosme/create"); 
-    
-    return mav;
+  	  mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
+      mav.setViewName("/cosme/create"); // create.jsp
+      
+      return mav;
 	  }
  
 //    /**
@@ -86,22 +93,32 @@ public class CosmeCont {
 //     * @return
 //     */
     @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-    public ModelAndView create(CosmeVO cosmeVO) {
+    public ModelAndView create(CosmeVO cosmeVO, HttpSession session) {
 
       ModelAndView mav = new ModelAndView();
       mav.setViewName("/cosme/msg");
-  
-      int cnt = this.cosmeProc.create(cosmeVO);
  
-      if (cnt == 1) {
-        mav.addObject("code", "create_success");
-        } else {
-          mav.addObject("code", "create_fail");
+      if (this.masterProc.isMaster(session) == true) {
+        int cnt = this.cosmeProc.create(cosmeVO);
+          if (cnt == 1) {
+            // request.setAttribute("code", "create_success"); // 고전적인 jsp 방법 
+            // mav.addObject("code", "create_success");
+            mav.setViewName("redirect:/cosme/list_all.do");     // 목록으로 자동 이동
+            
+          } else {
+            // request.setAttribute("code", "create_fail");
+            mav.addObject("code", "create_fail");
+            mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
+
+          }
+          
+          // request.setAttribute("cnt", cnt);
+          mav.addObject("cnt", cnt);
+      } else {
+          mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
         }
- 
-        mav.addObject("cnt", cnt);
- 
-        return mav;
+      
+      return mav;
     }
     
     @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
@@ -181,6 +198,63 @@ public class CosmeCont {
       return mav; // forward
     }
     
+//    /**
+//     * 화장품 등록 창에서 카테고리 목록 표시
+//     * http://localhost:9093/cosme/create.do
+//     * @return
+//     */
+//    // http://localhost:9093/cosme/create.do
+//    @RequestMapping(value="/cosme/create.do", method = RequestMethod.POST)
+//    public ModelAndView cate_all() {
+//        ModelAndView mav = new ModelAndView();
+//        
+//        ArrayList<CosmeVO> list2 = this.cosmeProc.cate_all(); // 카테고리 목록 가져오기
+//        mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
+//        
+//        mav.setViewName("/cosme/create"); 
+//        
+//        return mav;
+//    }
+    
+//  /**
+//  * 수정 폼
+//  * http://localhost:9093/cosme/update.do
+//  * @param cosmeno
+//  * @return
+//  */
+   @RequestMapping(value="/cosme/update.do", method = RequestMethod.GET)
+   public ModelAndView update_all_cosme() {
+   ModelAndView mav = new ModelAndView();
+
+   mav.setViewName("/cosme/update"); 
+   
+   return mav;
+   }
+
+//   /**
+//    * 수정 처리
+//    * http://localhost:9093/cosme/update.do
+//    * @return
+//    */
+   @RequestMapping(value="/cosme/update.do", method=RequestMethod.POST)
+   public ModelAndView update_all_cosme(CosmeVO cosmeVO) {
+
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/cosme/msg");
+ 
+     int cnt = this.cosmeProc.update_all_cosme(cosmeVO);
+
+     if (cnt == 1) {
+       mav.addObject("code", "update_success");
+       } else {
+         mav.addObject("code", "update_fail");
+       }
+
+       mav.addObject("cnt", cnt);
+
+       return mav;
+   }
+    
     
     /**
      * 모든 카테고리의 등록된 글목록, http://localhost:9093/cosme/list_by_type.do
@@ -197,4 +271,6 @@ public class CosmeCont {
       
       return mav;
     }
+    
+
 }

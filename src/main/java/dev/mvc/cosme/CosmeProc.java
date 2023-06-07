@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.cosme.CosmeProc")
@@ -73,6 +75,14 @@ public class CosmeProc implements CosmeProcInter {
   public int update_cnt_sub(int cosmeno) {
     int cnt = this.cosmeDAO.update_cnt_sub(cosmeno);
     return cnt;
+  }
+  
+  // 목록
+  @Override
+  public ArrayList<CosmeVO> cate_all() {
+    ArrayList<CosmeVO> list = this.cosmeDAO.cate_all();
+    
+    return list;
   }
   
 

@@ -2,13 +2,15 @@
 /* Table Name: 질문 게시판 */
 /**********************************/
 DROP TABLE qboard;
+DROP TABLE qboard CASCADE CONSTRAINTS; 
 
 CREATE TABLE qboard(
-        qboardno         NUMBER(7)    NOT NULL     PRIMARY KEY,
+        qboardno            NUMBER(7)    NOT NULL,
         memberno            NUMBER(7)     NOT NULL , -- FK
-        qtitle             VARCHAR(50)    NOT NULL,
-        qcontent           VARCHAR(50)    NOT NULL,
+        qtitle              VARCHAR(50)    NOT NULL,
+        qcontent            VARCHAR(50)    NOT NULL,
         rdate               DATE           NOT NULL,
+        PRIMARY KEY (qboardno),
         FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
 
@@ -124,10 +126,11 @@ WHERE memberno IN(1,2,3);
                                                                                                                                                                                                                     
 SELECT qboardno, memberno, qtitle
 FROM qboard
-WHERE userno IN('1','2','3');
+WHERE memberno IN('1','2','3');
  QBOARDNO     USERNO QTITLE                                            
 ---------- ---------- --------------------------------------------------
          1          1 질문                                              
          2          1 질문                                              
          3          1 질문                                              
-         4          1 질문                                                                                                                                                    
+         4          1 질문     
+ commit;   

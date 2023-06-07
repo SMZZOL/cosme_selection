@@ -58,4 +58,10 @@ public interface CosmeProcInter {
    */
   public int update_cnt_sub(int cosmeno);
   
+  /**
+   * 전체 목록
+   * @return
+   */
+  public ArrayList<CosmeVO>cate_all();
+  
 }

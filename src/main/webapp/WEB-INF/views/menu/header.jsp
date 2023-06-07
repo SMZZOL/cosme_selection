@@ -12,8 +12,13 @@
       <i class="fa fa-caret-down"></i>
 		</button>
 		<div class="dropdown-content">
+<<<<<<< HEAD
 			<a href="/notice/list_all.do">공지사항</a>
 			<a href="#">질문 게시판</a>
+=======
+			<a href="#">공지사항</a>
+			<a href="/qboard/create.do">질문 게시판</a>
+>>>>>>> 87fa7ccd44957726de29d8a342642e5cd1140529
 			<a href="#">자유 게시판</a>
 		</div>
 	</div> 
@@ -78,6 +83,17 @@
   </form>
 </div>    --> 
 
+           <!-- 회원 로그인/로그아웃 -->
+          <c:choose>
+             <c:when test="${sessionScope.id == null}">
+                      <a class="menu-link" href="/member/login.do" style="float: right;">로그인</a>
+              </c:when>
+                <c:otherwise>
+                   <a class="menu-link" href='/member/logout.do' style="float: right;">${sessionScope.id } 로그아웃</a>
+                </c:otherwise>
+              </c:choose>
+      
+
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
 
              <!-- 회원 로그인/로그아웃 -->
@@ -110,8 +126,12 @@
       <%  
       }
       %> 
+<<<<<<< HEAD
 
       
+=======
+  
+>>>>>>> 87fa7ccd44957726de29d8a342642e5cd1140529
     
 
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->     
