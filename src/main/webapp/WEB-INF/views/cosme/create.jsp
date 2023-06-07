@@ -20,28 +20,29 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
+  <FORM name='frm' method='POST' action='/cosme/create.do'> <
   <DIV class='title_line'>화장품 등록</DIV>
-    
     <div>
        <label class="">제목</label>
-       <input type='text' name='cosmename' value='화장품 이름' required="required" 
-                 autofocus="autofocus" class="form-control" style='width: 100%;'>
+       <input type='text' name='cosmename' placeholder='화장품 이름' required="required" 
+                 autofocus="autofocus" class="form-control" style='width: 80%;'>
     </div>
-    <br><Br>
+    <br>
     <div>
        <label class="">브랜드</label>
-       <input type='text' name='brand' value='화장품 브랜드' required="required" 
-                 class="form-control" style='width: 100%;'>
+       <input type='text' name='brand' placeholder='화장품 브랜드' required="required" 
+                 class="form-control" style='width: 80%;'>
     </div>
+        <br>
     <div>
        <label class="">화장품 관련 유튜브 채널</label>
-       <input type='text' name='cosme_youtube' value='화장품 유튜브 채널' 
-                 class="form-control" style='width: 100%;'>
+       <input type='text' name='cosme_youtube' placeholder='화장품 유튜브 채널' 
+                 class="form-control" style='width: 80%;'>
     </div>
     <div>
        <label>이미지</label>
        <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                 value='' placeholder="파일 선택">
+                 value='' placeholder="파일 선택" style='width: 80%;'>
     </div>   
     <div>
         <label>화장품 카테고리</label>
@@ -71,11 +72,9 @@
     <div class="content_body_bottom">
       <button type="submit" class="btn btn-primary">등록</button>
     </div>
-  
-  </FORM>
+      </FORM>
 </DIV>
  
-
  
 <jsp:include page="../menu/footer.jsp" />
 </body>
