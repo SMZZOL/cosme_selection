@@ -20,33 +20,33 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
-  <FORM name='frm' method='POST' action='/cosme/create.do'> <!-- /cosme 폴더 자동 인식, 권장 -->
+  <FORM name='frm' method='POST' action='/cosme/create.do' enctype="multipart/form-data"> <!-- /cosme 폴더 자동 인식, 권장 -->
   <DIV class='title_line'>화장품 등록</DIV>
+    
     <div>
        <label class="">제목</label>
        <input type='text' name='cosmename' placeholder='화장품 이름' required="required" 
-                 autofocus="autofocus" class="form-control" style='width: 80%;'>
+                 autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
-    <br>
+    <br><Br>
     <div>
        <label class="">브랜드</label>
        <input type='text' name='brand' placeholder='화장품 브랜드' required="required" 
-                 class="form-control" style='width: 80%;'>
+                 class="form-control" style='width: 100%;'>
     </div>
-        <br>
     <div>
        <label class="">화장품 관련 유튜브 채널</label>
        <input type='text' name='cosme_youtube' placeholder='화장품 유튜브 채널' 
-                 class="form-control" style='width: 80%;'>
+                 class="form-control" style='width: 100%;'>
     </div>
     <div>
        <label>이미지</label>
        <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                 value='' placeholder="파일 선택" style='width: 80%;'>
+                 value='' placeholder="파일 선택">
     </div>   
     <div>
         <label>화장품 카테고리</label>
-        <select>
+        <select name='cosme_cateno' >
           <c:forEach var="cosme_cateVO" items="${list2}" >
             <option value="${cosme_cateVO.cosme_cateno}">${cosme_cateVO.cosme_catename}</option>
           </c:forEach>
@@ -73,9 +73,11 @@
       <button type="submit" class="btn btn-info">등록</button>
       <button type="button" onclick="location.href='./list_by_type.do'" class="btn btn-info">목록</button>
     </div>
-      </FORM>
+  
+  </FORM>
 </DIV>
  
+
  
 <jsp:include page="../menu/footer.jsp" />
 </body>

@@ -18,6 +18,7 @@ public class CosmeProc implements CosmeProcInter {
   @Override
   public int create(CosmeVO cosmeVO) {
     int cnt = this.cosmeDAO.create(cosmeVO);
+    
     return cnt;      
     }
   
