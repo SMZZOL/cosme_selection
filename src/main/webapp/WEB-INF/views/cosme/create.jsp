@@ -20,6 +20,7 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
+  <FORM name='frm' method='POST' action='/cosme/create.do'> <!-- /cosme 폴더 자동 인식, 권장 -->
   <DIV class='title_line'>화장품 등록</DIV>
     
     <div>
