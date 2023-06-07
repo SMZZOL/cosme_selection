@@ -20,7 +20,7 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
-  <FORM name='frm' method='POST' action='/cosme/create.do'> <
+  <FORM name='frm' method='POST' action='/cosme/create.do'> <!-- /cosme 폴더 자동 인식, 권장 -->
   <DIV class='title_line'>화장품 등록</DIV>
     <div>
        <label class="">제목</label>
@@ -70,7 +70,8 @@
     </div>
 
     <div class="content_body_bottom">
-      <button type="submit" class="btn btn-primary">등록</button>
+      <button type="submit" class="btn btn-info">등록</button>
+      <button type="button" onclick="location.href='./list_by_type.do'" class="btn btn-info">목록</button>
     </div>
       </FORM>
 </DIV>

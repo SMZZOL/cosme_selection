@@ -93,24 +93,32 @@ public class CosmeCont {
 //     * @return
 //     */
     @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-    public ModelAndView create(CosmeVO cosmeVO) {
+    public ModelAndView create(CosmeVO cosmeVO, HttpSession session) {
 
       ModelAndView mav = new ModelAndView();
       mav.setViewName("/cosme/msg");
-  
-      int cnt = this.cosmeProc.create(cosmeVO);
  
-      if (cnt == 1) {
-        mav.addObject("code", "create_success");
-        mav.setViewName("redirect:/cosme/list_by_type.do");     // 목록으로 자동 이동
-        } else {
-          mav.addObject("code", "create_fail");
-          mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
+      if (this.masterProc.isMaster(session) == true) {
+        int cnt = this.cosmeProc.create(cosmeVO);
+          if (cnt == 1) {
+            // request.setAttribute("code", "create_success"); // 고전적인 jsp 방법 
+            // mav.addObject("code", "create_success");
+            mav.setViewName("redirect:/cosme/list_all.do");     // 목록으로 자동 이동
+            
+          } else {
+            // request.setAttribute("code", "create_fail");
+            mav.addObject("code", "create_fail");
+            mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
+
+          }
+          
+          // request.setAttribute("cnt", cnt);
+          mav.addObject("cnt", cnt);
+      } else {
+          mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
         }
- 
-        mav.addObject("cnt", cnt);
- 
-        return mav;
+      
+      return mav;
     }
     
     @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
