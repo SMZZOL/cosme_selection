@@ -24,8 +24,16 @@
   <FORM name='frm' method='POST' action='/qboard/create.do'>
     <br><Br>
     <div>
-       <label class="">이름</label>
-       <input type='text' name='qboardname'  placeholder='입력하세요' required="required" 
+    <label class="">회원번호</label>
+       <input type='text' name='memberno'  placeholder='입력하세요' required="required" 
+                class="form-control" style='width: 100%;'>
+                
+       <label class="">질문 제목</label>
+       <input type='text' name='qtitle'  placeholder='입력하세요' required="required" 
+                class="form-control" style='width: 100%;'>
+                
+       <label class="">질문 내용</label>
+       <input type='text' name='qcontent'  placeholder='입력하세요' required="required" 
                 class="form-control" style='width: 100%;'>
     </div>
     <br><Br>

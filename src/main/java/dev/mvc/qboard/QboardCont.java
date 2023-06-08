@@ -2,6 +2,7 @@ package dev.mvc.qboard;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import dev.mvc.cosmetype.CosmetypeVO;
-import dev.mvc.master.MasterProcInter;
+import dev.mvc.member.MemberProcInter;
 
 @Controller
 public class QboardCont {
   @Autowired
-  @Qualifier("dev.mvc.master.MasterProc")
-  private MasterProcInter masterProc;
+  @Qualifier("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
   
   @Autowired
   @Qualifier("dev.mvc.qboard.QboardProc")
@@ -38,10 +37,10 @@ public ModelAndView create(HttpSession session) {
  
  ModelAndView mav = new ModelAndView();
  
- if (this.masterProc.isMaster(session) == true) {
+ if (this.memberProc.isMember(session) == true) {
    mav.setViewName("/qboard/create");
  } else {
-     mav.setViewName("/master/login_need");
+     mav.setViewName("/member/login_need");
    }
 
  
@@ -59,7 +58,7 @@ public ModelAndView create(HttpSession session) {
    
    ModelAndView mav = new ModelAndView();
    
-   if (this.masterProc.isMaster(session) == true) {
+   if (this.memberProc.isMember(session) == true) {
      int cnt = this.qboardProc.create(qboardVO);
        if (cnt == 1) {
 
@@ -72,26 +71,23 @@ public ModelAndView create(HttpSession session) {
        }
        mav.addObject("cnt", cnt);
    } else {
-       mav.setViewName("/master/login_need");
+       mav.setViewName("/member/login_need");
      }
 
    return mav;
  }
  
- /**
-  * 질문게시판의 등록된 글목록, http://localhost:9093/qboard/list_all.do
-  * @return
-  */
- @RequestMapping(value="/qboard/list_all.do", method=RequestMethod.GET)
- public ModelAndView list_all() {
-   ModelAndView mav = new ModelAndView();
-   
-   ArrayList<QboardVO> list = this.qboardProc.list_all();
-   mav.addObject("list", list);
-   
-   mav.setViewName("/qboard/list_all"); // /webapp/WEB-INF/views/contents/list_all.jsp
-   
-   return mav;
- }
+//http://localhost:9091/cate/list_all.do
+@RequestMapping(value="/qboard/list_all.do", method=RequestMethod.GET)
+public ModelAndView list_all() {
+  ModelAndView mav = new ModelAndView();
+  mav.setViewName("/qboard/list_all"); // /WEB-INF/views/cate/list_all.jsp
+  
+  ArrayList<QboardVO> list = this.qboardProc.list_all();
+  mav.addObject("list", list);
+  
+  return mav;
+}
+
 
 }
