@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html> 
@@ -7,25 +8,16 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>team2</title>
+<title>관리자 로그인</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
 
 </head> 
  
 <body>
-<c:import url="/menu/header.do" />
- 
- <div class="navbar">
- <a href="/" style="float: left; ">Home</a> 
-  </div>
-    <br>
+  <c:import url="../menu/header.jsp" />
     
     <DIV class='content_body'>
+    <br>
   <DIV class='title_line'>관리자 로그인</DIV>
    <br>
   <br>
@@ -40,9 +32,11 @@
                     style='width: 80%;' placeholder="아이디" autofocus="autofocus">
           <Label>   
             <input type='checkbox' name='id_save' value='Y' ${cookie.ck_master_id_save.value == 'Y' ? "checked='checked'" : "" }> 저장
-          </Label>    
+            
+          </Label> 
+             
         </div>   
-     
+     <br>
         <div class="form_input">
           <input type='password' class="form-control" name='passwd' id='passwd' 
                     value='${cookie.ck_master_passwd.value }' required="required" style='width: 80%;' placeholder="패스워드">
@@ -52,14 +46,15 @@
         </div>   
      
         <div class="form_input">
-          <button type="submit" class="btn btn-info">로그인</button>
+          <button type="submit" class="my-btn btn">로그인</button>
         </div>   
         
       </FORM>
     </DIV>
   </DIV> <%-- <DIV class='content_body'> END --%>
+  </DIV>
  
-<jsp:include page="../menu/footer.jsp" flush='false' />
+<jsp:include page="../menu/footer.jsp"/>
 </body>
  
 </html>

@@ -38,4 +38,10 @@ public class NoticeProc implements NoticeProcInter{
 		return list;
 	}
 
+	@Override
+	public NoticeVO read(int noticeno) {
+		NoticeVO noticeVO = this.noticeDAO.read(noticeno);
+		return noticeVO;
+	}
+
 }

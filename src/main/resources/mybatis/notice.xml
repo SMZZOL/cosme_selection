@@ -18,4 +18,11 @@
     ORDER BY noticeno ASC
   </select> 
      
+  <!-- 공지사항 조회 -->
+  <select id="read" resultType="dev.mvc.notice.NoticeVO" parameterType="int">
+    SELECT noticeno, masterno, ntitle, ncontent, passwd, rdate
+    FROM notice
+    WHERE noticeno = #{noticeno}
+  </select> 
+  
     </mapper>

@@ -11,9 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.master.MasterProcInter;
+import dev.mvc.master.MasterVO;
+import dev.mvc.tool.Tool;
 
 @Controller
 public class NoticeCont {
@@ -109,6 +110,36 @@ public class NoticeCont {
     return mav;
   }
   
+  /**
+   * 조회
+   *  http://localhost:9093/notice/read.do
+   * @return
+   */
+  @RequestMapping(value="/notice/read.do", method=RequestMethod.GET )
+  public ModelAndView read(int noticeno) {
+    ModelAndView mav = new ModelAndView();
 
+    NoticeVO noticeVO = this.noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+    
+    String title = noticeVO.getNtitle();
+    String content = noticeVO.getNcontent();
+    
+    title = Tool.convertChar(title);  // 특수 문자 처리
+    content = Tool.convertChar(content); 
+    
+    noticeVO.setNtitle(title);
+    noticeVO.setNcontent(content);  
+    
+    mav.addObject("noticeVO", noticeVO); // request.setAttribute("noticeVO", noticeVO);
+
+    // 관리자 번호: masterno -> MasterVO -> mname
+    String mname = this.masterProc.read(noticeVO.getMasterno()).getMname();
+    mav.addObject("mname", mname);
+
+    mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
+        
+    return mav;
+  }
 
 }

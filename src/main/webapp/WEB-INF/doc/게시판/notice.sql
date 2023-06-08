@@ -81,7 +81,7 @@ commit;
 -- ----------------------------------------------------------------------------
 SELECT noticeno, masterno, ntitle, ncontent, passwd, rdate
 FROM notice
-WHERE noticeno = 3;
+WHERE noticeno = 2;
 
 -- 텍스트 수정: 예외 컬럼: 추천수, 조회수, 댓글 수
 UPDATE notice
