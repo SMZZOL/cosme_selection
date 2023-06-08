@@ -14,9 +14,9 @@
 		<div class="dropdown-content">
 
 
+
 			<a href="/notice/list_all.do">공지사항</a>
 			<a href="/qboard/list_all.do">질문 게시판</a>
-
 			<a href="#">자유 게시판</a>
 		</div>
 	</div> 

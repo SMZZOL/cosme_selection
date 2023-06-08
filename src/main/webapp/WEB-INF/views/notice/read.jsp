@@ -3,10 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="noticeno" value="${noticeVO.noticeno }" />
-<c:set var="masterno" value="${noticeVO.masterno }" />        
 <c:set var="ntitle" value="${noticeVO.ntitle }" />        
 <c:set var="ncontent" value="${noticeVO.ncontent }" />
-<c:set var="rdate" value="${contentsVO.rdate.substring(0, 16) }" />
+<c:set var="rdate" value="${noticeVO.rdate.substring(0, 16) }" />
 
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -38,9 +37,9 @@
       --%>
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
-      <A href="./update.do?noticeno=${noticeno}">글 수정</A>
+      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
       <span class='menu_divide' >│</span>
-      <A href="./delete.do?noticeno=${noticeno}">삭제</A>  
+      <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
     </c:if>
 
     <A href="javascript:location.reload();">새로고침</A>

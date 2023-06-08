@@ -19,7 +19,6 @@
  <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <body>
     <c:import url="../menu/header.jsp" />
- 
 
  <DIV class='content_body'>
  <Br>
@@ -27,14 +26,13 @@
 <br>
   <ASIDE class="aside_right">
 
-
-
   
     <%-- 관리자로그인 해야 보이는 것들 --%>
       <c:if test="${sessionScope.master_id != null }">
       <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
     </c:if>
-     <span class='menu_divide' >│</span>
+        <A href="./create.do">등록</A>
+      <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
 
   </ASIDE>
