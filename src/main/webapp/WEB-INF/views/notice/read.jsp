@@ -23,7 +23,8 @@
 <body>
 <c:import url="../menu/header.jsp" />
  
-<DIV class='title_line'><A href="./read.do" class='title_link'>공지사항</A></DIV>
+<DIV class='title_line'>
+<A href="./read.do" class='title_link'>공지사항</A></DIV>
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
@@ -37,9 +38,10 @@
       --%>
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
-      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
+     <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
       <span class='menu_divide' >│</span>
       <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
+    <span class='menu_divide' >│</span>  
     </c:if>
 
     <A href="javascript:location.reload();">새로고침</A>

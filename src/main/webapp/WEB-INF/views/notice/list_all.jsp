@@ -35,11 +35,7 @@
       --%>
          <br>
       <A href="./create.do">등록</A>
-      <span class='menu_divide' >│</span>
-      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
-      <span class='menu_divide' >│</span>
-      <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
-    <span class='menu_divide' >│</span>       
+      <span class='menu_divide' >│</span>     
     <A href="javascript:location.reload();">새로고침</A>
     </c:if>
 
@@ -52,34 +48,46 @@
           <col style="width: 80%;"></col>
           <col style="width: 10%;"></col>        
 
-     <thead>
+<!--      <thead> 
       <tr>
         <th style='text-align: center;'>번호</th>
         <th style='text-align: center;'>제목</th>
         <th style='text-align: center;'>등록일</th>
       </tr>
     
-    </thead>
+    </thead> -->
     
-    <tbody>
-      <%
-    ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list");
-    
-    for (int i=0; i < list.size(); i++) {
-    	NoticeVO noticeVO = list.get(i);
-    %>
-      <TR>
-        <TD class='td_bs'><%= noticeVO.getNoticeno() %></TD>
-        <TD class='td_bs'><%= noticeVO.getNtitle() %></TD>
-        <TD class='td_bs'><%=noticeVO.getRdate().substring(0, 10) %></TD>
-        <TD>
-         
-        </TD>
-      </TR>
-    <%  
-    }
-    %>
+<tbody>
+  <c:forEach var="noticeVO" items="${list}">
+  <c:set var="noticeno" value="${noticeVO.noticeno }" />
+  <c:set var="ntitle" value="${noticeVO.ntitle }" />        
+  <c:set var="ncontent" value="${noticeVO.ncontent }" />
+  
+   <tr style="height: 112px;" onclick="location.href='./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
+          <td style='vertical-align: middle; text-align: center; '>
+            <IMG src="/notice/images/url8.png" style="width: 15px; height: 15px;">          
+          </td>  
+          
+          <td style='vertical-align: middle;'>
+            <div style='font-weight: bold;'>${ntitle }</div>
 
+          </td>
+          
+          <c:choose>
+            <c:when test="${sessionScope.master_id != null }"> 
+              <td style='vertical-align: middle; text-align: center;'>
+                <A href="/notice/update.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/notice/images/update.png" class="icon"></A>
+                <A href="/notice/delete.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/notice/images/delete.png" class="icon"></A>
+              </td>
+            </c:when>
+            <c:otherwise>
+            
+            </c:otherwise>
+          </c:choose>
+                    
+        </tr>
+        
+      </c:forEach>
     </tbody>
   </table>
 </DIV>

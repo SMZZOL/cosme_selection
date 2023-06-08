@@ -22,8 +22,6 @@
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
-    <A href="./create.do">등록</A>
-    <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
    
   </ASIDE> 
