@@ -225,8 +225,15 @@ public class CosmeCont {
 //  */
    @RequestMapping(value="/cosme/update.do", method = RequestMethod.GET)
    public ModelAndView update_all_cosme() {
-   ModelAndView mav = new ModelAndView();
+     ModelAndView mav = new ModelAndView();
+     
+     ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+     
+    for (Cosme_cateVO item : list2) {
+//       System.out.println("화장품 종류 이름: " + item.getCosme_catename());
+     }
 
+   mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
    mav.setViewName("/cosme/update"); 
    
    return mav;
