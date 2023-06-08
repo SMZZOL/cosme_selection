@@ -14,7 +14,8 @@
     
 </head> 
  
-<body><c:import url="../menu/header.jsp" />
+<body>
+<c:import url="../menu/header.jsp" />
 
 
 

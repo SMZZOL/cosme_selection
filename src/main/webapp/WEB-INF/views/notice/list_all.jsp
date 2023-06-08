@@ -60,50 +60,30 @@
       </c:choose>
     </colgroup>
    
-<!--    <thead>  
+    <thead>  
     <TR>
       <TH class="th_bs">번호</TH>
       <TH class="th_bs">제목</TH>
       <TH class="th_bs">등록일</TH>
     </TR>
-    </thead> -->
+    </thead> 
     
     <tbody>
-      <c:forEach var="noticeVO" items="${list}">
-        <c:set var="ntitle" value="${noticeVO.ntitle }" />
-        <c:set var="ncontent" value="${noticeVO.ncontent }" />
-        <c:set var="noticeno" value="${noticeVO.noticeno }" />
-        <c:set var="rdate" value="${noticeVO.rdate.substring(0, 16) }" />
-        
-         <tr style="height: 112px;" onclick="location.href='./read.do?noticeno=${noticeno }'" class='hover'> 
-          <td style='vertical-align: middle; text-align: center; '>
-            <div style='font-weight: bold;'>
-            <a href="./read.do?noticeno=${noticeno }'">${ntitle }</a></div>
-            <c:choose> 
-              <c:when test="${ncontent.length() > 160 }"> <%-- 160자 이상이면 160자만 출력 --%>
-                  <a href="./read.do?noticeno=${noticeno }">${ncontent.substring(0, 160)}.....</a>
-              </c:when>
-              <c:when test="${ncontent.length() <= 160 }">
-                  <a href="./read.do?noticeno=${noticeno }">${ncontent}</a>
-              </c:when>
-            </c:choose>
-            <div style='font-size: 0.95em;'>${rdate }</div>
-          </td> 
-          
-          <c:choose>
-            <c:when test="${sessionScope.master_id != null }"> 
-              <td style='vertical-align: middle; text-align: center;'>
-                <A href="/notice/delete.do?noticeno=${noticeno}" title="삭제"><IMG src="/notice/images/delete.png" class="icon"></A>
-              </td>
-            </c:when>
-            <c:otherwise>
-            
-            </c:otherwise>
-          </c:choose>
-          
-        </tr>
-        
-      </c:forEach>
+      <%
+      ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list");
+    
+    for (int i=0; i < list.size(); i++) {
+    	NoticeVO noticeVO = list.get(i);
+    %>
+      <TR>
+        <TD class='td_bs'><%= noticeVO.getNoticeno() %></TD>
+        <TD class='td_bs'><%=noticeVO.getNtitle() %></TD>
+        <TD class='td_bs'><%=noticeVO.getRdate().substring(0, 10) %></TD>
+  
+      </TR>
+    <%  
+    }
+    %>
     </tbody>
    
   </TABLE>
