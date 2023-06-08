@@ -100,4 +100,21 @@ public ModelAndView create(HttpSession session) {
    return mav;
  }
  
+ /**
+  * 종류별 리스트
+  * http://localhost:9093/cosme_cate/list_by_cate.do
+  * @return
+  */
+ // http://localhost:9093/cosme_cate/list_all.do
+ @RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
+ public ModelAndView list_by_cate() {
+   ModelAndView mav = new ModelAndView();
+   
+        mav.setViewName("/cosme_cate/list_by_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
+        
+        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate();
+        mav.addObject("list", list);   
+
+   return mav;
+ }
  }

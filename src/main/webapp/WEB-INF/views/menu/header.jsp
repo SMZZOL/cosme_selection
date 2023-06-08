@@ -40,6 +40,17 @@
       <a href="">컨텐츠3 </a>
     </div>
   </div>
+  
+  <div class="dropdown">
+    <button class="dropbtn">종류별 추천 <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/cosme_cate/list_by_cate.do">컨텐츠1 </a>
+      <a href="">컨텐츠2 </a>
+      <a href="">컨텐츠3 </a>
+    </div>
+  </div>
+  
          
   
 <!-- 관리자 로그인 -->
