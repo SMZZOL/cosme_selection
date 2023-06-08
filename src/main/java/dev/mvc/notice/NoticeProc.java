@@ -12,6 +12,9 @@ public class NoticeProc implements NoticeProcInter{
 	@Autowired
 	private NoticeDAOInter noticeDAO;
 	
+  /**
+   * 등록
+   */
 	@Override
 	public int create(NoticeVO noticeVO) {
 		int cnt = this.noticeDAO.create(noticeVO);
@@ -19,6 +22,9 @@ public class NoticeProc implements NoticeProcInter{
 		return cnt;
 	}
 
+  /**
+   * 목록
+   */
 	@Override
 	public ArrayList<NoticeVO> list_all() {
 		ArrayList<NoticeVO> list = this.noticeDAO.list_all();
@@ -38,6 +44,9 @@ public class NoticeProc implements NoticeProcInter{
 		return list;
 	}
 
+  /**
+   * 조회
+   */
 	@Override
 	public NoticeVO read(int noticeno) {
 		NoticeVO noticeVO = this.noticeDAO.read(noticeno);

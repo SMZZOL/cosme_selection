@@ -20,17 +20,13 @@
 <body>
     <c:import url="../menu/header.jsp" />
  
-<<<<<<< HEAD
  <DIV class='content_body'>
  <Br>
 <DIV class='title_line'>질문게시판</DIV>
 <br>
   <ASIDE class="aside_right">
-=======
 <body>
 <c:import url="../menu/header.jsp" />
-
-
 
 <DIV class='title_line'>질문 게시판</DIV>
 
@@ -39,7 +35,6 @@
     <FORM name='frm_create' id='frm_create' method='POST' action='./create.do'>
       <label>질문 검색</label>
       <input type='text' name='name' value='' required="required" style='width: 25%;' autofocus="autofocus">
->>>>>>> 2d966367ff5d57bb67ddaaf7dc7c8900e2cd7b4a
   
     <%-- 관리자로그인 해야 보이는 것들 --%>
       <c:if test="${sessionScope.master_id != null }">

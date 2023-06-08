@@ -8,44 +8,46 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
+<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>공지사항</title>
-
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
     
 </head> 
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
-<body>
-    <c:import url="../menu/header.jsp" />
  
- <DIV class='content_body'>
- <Br>
-<DIV class='title_line'>공지사항</DIV>
-<br>
+<body>
+<c:import url="../menu/header.jsp" />
+
+<DIV class='content_body'>
+<DIV class='title_line'>
+  공지사항
+ 
+</DIV>
+
+
   <ASIDE class="aside_right">
-  
-    <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
+  <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
       http://localhost:9093/notice/create.do?noticeno=1
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
-         
+         <br>
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
       <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
       <span class='menu_divide' >│</span>
       <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
+    <span class='menu_divide' >│</span>       
+    <A href="javascript:location.reload();">새로고침</A>
     </c:if>
 
   </ASIDE>
 
-    <DIV class='menu_line'></DIV>
-    
-  <table class="table table-striped" style='width: 100%;'>
+  <DIV class='menu_line'></DIV>
+  
+  <table class="class='table table-hover" style='width: 100%;'>
     <colgroup>
       <c:choose>
         <c:when test="${sessionScope.master_id != null }">
@@ -59,34 +61,37 @@
         </c:otherwise>
       </c:choose>
     </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">번호</TH>
-      <TH class="th_bs">제목</TH>
-      <TH class="th_bs">등록일</TH>
-    </TR>
-    </thead> 
+
+     <thead>
+      <tr>
+        <th style='text-align: center;'>번호</th>
+        <th style='text-align: center;'>제목</th>
+        <th style='text-align: center;'>등록일</th>
+      </tr>
+    
+    </thead>
     
     <tbody>
       <%
-      ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list");
+    ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list");
     
     for (int i=0; i < list.size(); i++) {
     	NoticeVO noticeVO = list.get(i);
     %>
       <TR>
         <TD class='td_bs'><%= noticeVO.getNoticeno() %></TD>
-        <TD class='td_bs'><%=noticeVO.getNtitle() %></TD>
+        <TD class='td_bs'><%= noticeVO.getNtitle() %></TD>
         <TD class='td_bs'><%=noticeVO.getRdate().substring(0, 10) %></TD>
-  
+        <TD>
+         
+        </TD>
       </TR>
     <%  
     }
     %>
+
     </tbody>
-   
-  </TABLE>
+  </table>
 </DIV>
 
  
@@ -94,3 +99,4 @@
 </body>
  
 </html>
+

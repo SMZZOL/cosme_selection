@@ -105,7 +105,9 @@ public class NoticeCont {
     mav.setViewName("/notice/list_all"); // /WEB-INF/views/notice/list_all.jsp
   
     ArrayList<NoticeVO> list = this.noticeProc.list_all();
-    mav.addObject("list", list);   
+    mav.addObject("list", list); 
+    
+    mav.setViewName("/notice/list_all"); // /webapp/WEB-INF/views/notice/list_all.jsp
 
     return mav;
   }
@@ -120,7 +122,6 @@ public class NoticeCont {
     ModelAndView mav = new ModelAndView();
 
     NoticeVO noticeVO = this.noticeProc.read(noticeno);
-    mav.addObject("noticeVO", noticeVO);
     
     String title = noticeVO.getNtitle();
     String content = noticeVO.getNcontent();
