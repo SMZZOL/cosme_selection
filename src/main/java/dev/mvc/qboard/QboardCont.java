@@ -3,6 +3,7 @@ package dev.mvc.qboard;
 import java.util.ArrayList;
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public ModelAndView create(HttpSession session) {
    return mav;
  }
  
-//http://localhost:9091/cate/list_all.do
+//http://localhost:9093/qboard/list_all.do
 @RequestMapping(value="/qboard/list_all.do", method=RequestMethod.GET)
 public ModelAndView list_all() {
   ModelAndView mav = new ModelAndView();
@@ -88,6 +89,8 @@ public ModelAndView list_all() {
   
   return mav;
 }
+
+ 
 
 
 }

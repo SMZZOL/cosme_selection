@@ -12,15 +12,11 @@
       <i class="fa fa-caret-down"></i>
 		</button>
 		<div class="dropdown-content">
-<<<<<<< HEAD
+
 
 			<a href="/notice/list_all.do">공지사항</a>
 			<a href="/qboard/list_all.do">질문 게시판</a>
 
-=======
-			<a href="/notice/list_all.do">공지사항</a>
-			<a href="/qboard/create.do">질문 게시판</a>
->>>>>>> 2d966367ff5d57bb67ddaaf7dc7c8900e2cd7b4a
 			<a href="#">자유 게시판</a>
 		</div>
 	</div> 
@@ -84,12 +80,6 @@
   </form>
 </div>    --> 
 
-<<<<<<< HEAD
-      
-
-
-=======
->>>>>>> 2d966367ff5d57bb67ddaaf7dc7c8900e2cd7b4a
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
 
              <!-- 회원 로그인/로그아웃 -->
@@ -123,15 +113,6 @@
       }
       %> 
 
-<<<<<<< HEAD
-
-
-      
-
-    
-
-=======
->>>>>>> 2d966367ff5d57bb67ddaaf7dc7c8900e2cd7b4a
 	<!-- class 에서 right 주면 오른쪽 정렬 안주면 기본 left -->     
 
 

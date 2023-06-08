@@ -21,5 +21,11 @@ public class QboardProc implements QboardProcInter {
     ArrayList<QboardVO>list = this.qboardDAO.list_all();
     return list;
   }
+  
+  @Override
+  public int delete(int qboardno) {
+    int cnt = this.qboardDAO.delete(qboardno);
+    return cnt;
+  }
 
 }
