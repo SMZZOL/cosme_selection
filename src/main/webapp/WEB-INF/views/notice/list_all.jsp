@@ -48,19 +48,9 @@
   <DIV class='menu_line'></DIV>
   
   <table class="class='table table-hover" style='width: 100%;'>
-    <colgroup>
-      <c:choose>
-        <c:when test="${sessionScope.master_id != null }">
           <col style="width: 10%;"></col>
           <col style="width: 80%;"></col>
           <col style="width: 10%;"></col>        
-        </c:when>
-        <c:otherwise>
-          <col style="width: 10%;"></col>
-          <col style="width: 90%;"></col>
-        </c:otherwise>
-      </c:choose>
-    </colgroup>
 
      <thead>
       <tr>
