@@ -74,7 +74,7 @@ SELECT COUNT(*) as cnt FROM master WHERE id='master1' AND passwd='1234';
 DELETE FROM master;
 
 INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master', '121212', '관리자1', sysdate, 1);
+VALUES(master_seq.nextval, 'master@', '121212', '관리자1', sysdate, 1);
 
 commit;
 

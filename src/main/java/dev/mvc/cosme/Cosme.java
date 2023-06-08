@@ -15,7 +15,7 @@ public class Cosme{
     public static synchronized String getUploadDir() {
         String path = "";
         if (File.separator.equals("\\")) { // windows, 개발 환경의 파일 업로드 폴더
-            path="C:\\kd\\deploy\\team2_v1sbm3c\\f_board\\";
+            path="C:\\kd\\deploy\\team2_v1sbm3c\\cosme\\";
             // System.out.println("Windows 10: " + path);
             
         } else { // Linux, AWS, 서비스용 배치 폴더 
