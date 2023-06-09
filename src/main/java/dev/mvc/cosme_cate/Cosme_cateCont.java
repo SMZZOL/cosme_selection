@@ -102,19 +102,21 @@ public ModelAndView create(HttpSession session) {
  
  /**
   * 종류별 리스트
-  * http://localhost:9093/cosme_cate/list_by_cate.do
+  * http://localhost:9093/cosme_cate/list_by_cate.do?cosme_cateno=1
   * @return
   */
- // http://localhost:9093/cosme_cate/list_all.do
- @RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
- public ModelAndView list_by_cate() {
-   ModelAndView mav = new ModelAndView();
-   
-        mav.setViewName("/cosme_cate/list_by_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
-        
-        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate();
-        mav.addObject("list", list);   
-
-   return mav;
- }
+@RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
+public ModelAndView list_by_cateno(int cosme_cateno) {
+ ModelAndView mav = new ModelAndView();
+ 
+ Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
+ mav.addObject("cosme_cateVO", cosme_cateVO);
+     
+ ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate(cosme_cateno);
+ mav.addObject("list", list);
+ 
+ mav.setViewName("/cosme_cate/list_by_cate"); // /webapp/WEB-INF/views/contents/list_by_cateno.jsp
+ 
+ return mav;
+}
  }

@@ -20,7 +20,8 @@
   <select id="list_by_cate" resultType="dev.mvc.cosme_cate.Cosme_cateVO">
     SELECT cosme_cateno, cosme_catename
     FROM cosme_cate
-    ORDER BY cosme_cateno ASC
+    FROM cosme_cateno=#{cosme_cateno}
+    ORDER BY cosme_cateno DESC
   </select>
  
 </mapper>
