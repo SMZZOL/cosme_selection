@@ -53,7 +53,6 @@
   <c:forEach var="qboardVO" items="${list}">
   <c:set var="qboardno" value="${qboardVO.qboardno }" />
   <c:set var="qtitle" value="${qboardVO.qtitle }" />        
-  <c:set var="qcontent" value="${qboardVO.qcontent }" />
   <c:set var="rdate" value="${qboardVO.rdate.substring(0, 10) }" />
   
    <tr style="height: 112px;" onclick="location.href='./read.do?qboardno=${qboardno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>

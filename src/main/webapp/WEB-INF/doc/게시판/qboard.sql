@@ -65,7 +65,7 @@ commit;
 
 -- 삭제
 DELETE FROM qboard
-WHERE qboardno = 1;
+WHERE qboardno = 12;
 commit;
 
 DELETE FROM qboard

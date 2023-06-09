@@ -20,24 +20,25 @@
  
 <body>
 <c:import url="../menu/header.jsp" />
+
+ <DIV class='content_body'>
  
 <DIV class='title_line'>
 <A href="./read.do" class='title_link'>질문게시판</A></DIV>
 
-<DIV class='content_body'>
+
   <ASIDE class="aside_right">
   
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
       http://localhost:9093/qboard/create.do?qboardno=1
-      http://localhost:9093/notice/create.do?noticeno=2
-      http://localhost:9093/notice/create.do?noticeno=3
       --%>
     
       <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
     <span class='menu_divide' >│</span>  
     </c:if>
+    <br>
      <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
@@ -53,6 +54,7 @@
         <DIV style="width: 100%;">
 
           <span style="font-size: 1.5em; font-weight: bold;">${qtitle }</span><br>
+            <br>
             ${qcontent }
         </DIV>
       </li>
