@@ -151,6 +151,7 @@
 <div class="navbar">
 <a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
   </div>
+
  <!-- ******************** Modal 알림창 시작 ******************** -->
   <div id="modal_panel" class="modal fade"  role="dialog">
     <div class="modal-dialog">
@@ -173,6 +174,8 @@
   
    <!-- ******************** Modal 알림창 종료 ******************** -->
   <br>
+  <br>
+
   <br>
   <div style="width: 60%; margin: 0px auto ">
   <FORM name='frm' id='frm' method='POST' action='./create.do' class="">
