@@ -15,20 +15,19 @@
 <title>공지사항</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
 </head> 
  
 <body>
 <c:import url="../menu/header.jsp" />
- 
+
+<DIV class='content_body'>
+
 <DIV class='title_line'>
 <A href="./read.do" class='title_link'>공지사항</A></DIV>
 
-<DIV class='content_body'>
   <ASIDE class="aside_right">
-  
+  <br>
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
@@ -36,6 +35,7 @@
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
+      
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
@@ -45,18 +45,20 @@
     </c:if>
 
     <A href="javascript:location.reload();">새로고침</A>
+    <span class='menu_divide' >│</span>     
+    <A href="/notice/list_all.do">목록</A>
   
   </ASIDE> 
-  
   
   <DIV class='menu_line'></DIV>
 
   <fieldset class="fieldset_basic">
     <ul>
       <li class="li_none">
-        <DIV style="width: 100%;">
+        <DIV style="width: 100%; word-break: break-all;">
 
           <span style="font-size: 1.5em; font-weight: bold;">${ntitle }</span><br>
+          <div style="font-size: 1em;">${mname } ${rdate }</div><br>
           ${ncontent }
         </DIV>
       </li>
@@ -66,7 +68,7 @@
 
 </DIV>
  
-<jsp:include page="../menu/footer.jsp" flush='false' />
+<jsp:include page="../menu/footer.jsp"  />
 </body>
  
 </html>

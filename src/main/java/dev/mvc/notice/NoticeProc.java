@@ -53,4 +53,24 @@ public class NoticeProc implements NoticeProcInter{
 		return noticeVO;
 	}
 
+  /**
+   *  패스워드 일치 검사
+   * http://localhost:9093/notice/password_check.do?noticeno=1&passwd=1234
+   * @return
+   */
+@Override
+public int password_check(NoticeVO noticeVO) {
+	int cnt = this.noticeDAO.password_check(noticeVO);
+	return cnt;
+	}
+
+	/**
+	 * 글 수정
+	 */
+@Override
+public int update(NoticeVO noticeVO) {
+	int cnt = this.noticeDAO.update(noticeVO);
+	return cnt;
+	}
+
 }

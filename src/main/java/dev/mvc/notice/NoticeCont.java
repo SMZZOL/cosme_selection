@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.master.MasterProcInter;
 import dev.mvc.master.MasterVO;
+import dev.mvc.member.MemberProcInter;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -21,6 +23,10 @@ public class NoticeCont {
   @Autowired
   @Qualifier("dev.mvc.master.MasterProc") 
   private MasterProcInter masterProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
   
   @Autowired
   @Qualifier("dev.mvc.notice.NoticeProc") 
@@ -118,9 +124,10 @@ public class NoticeCont {
    * @return
    */
   @RequestMapping(value="/notice/read.do", method=RequestMethod.GET )
-  public ModelAndView read(int noticeno) {
+  public ModelAndView read(int noticeno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
+    
     NoticeVO noticeVO = this.noticeProc.read(noticeno);
     
     String title = noticeVO.getNtitle();
@@ -139,8 +146,80 @@ public class NoticeCont {
     mav.addObject("mname", mname);
 
     mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
+    
+    return mav;
+  }
+  
+  /**
+   * 패스워드 일치 검사
+   * http://localhost:9093/notice/password_check.do?noticeno=1&passwd=1234
+   * @return
+   */
+  @RequestMapping(value="/notice/password_check.do", method=RequestMethod.GET )
+  public ModelAndView password_check(NoticeVO noticeVO) {
+    ModelAndView mav = new ModelAndView();
+
+    int cnt = this.noticeProc.password_check(noticeVO);
+    System.out.println("-> cnt: " + cnt);
+    
+    if (cnt == 0) {
+      mav.setViewName("/notice/passwd_check"); // /WEB-INF/views/notice/passwd_check.jsp
+    }
         
     return mav;
+  }
+  
+  /**
+   * 수정 폼
+   * http://localhost:9093/notice/update.do?noticeno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/notice/update.do", method = RequestMethod.GET)
+  public ModelAndView update(int noticeno) {
+    ModelAndView mav = new ModelAndView();
+    
+    NoticeVO noticeVO = this.noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);   
+    
+    mav.setViewName("/notice/update"); // /WEB-INF/views/notice/update.jsp
+
+    return mav; // forward
+  }
+  
+  /**
+   * 수정 처리
+   * http://localhost:9093/notice/update.do?noticeno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/notice/update.do", method = RequestMethod.POST)
+  public ModelAndView update(HttpSession session, NoticeVO noticeVO) {
+    ModelAndView mav = new ModelAndView();
+    //System.out.println("title: " + noticeVO.getNtitle());   
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+      this.noticeProc.update(noticeVO);  
+      
+      mav.addObject("noticeno", noticeVO.getNoticeno());
+      mav.setViewName("redirect:/notice/read.do");
+      
+    } else { // 정상적인 로그인이 아닌 경우
+      if (this.noticeProc.password_check(noticeVO) == 1) {
+        this.noticeProc.update(noticeVO);  
+         
+        // mav 객체 이용
+        mav.addObject("noticeno", noticeVO.getNoticeno());
+        mav.setViewName("redirect:/notice/read.do");
+        
+      } else {
+        mav.addObject("url", "/notice/passwd_check"); // /WEB-INF/views/notice/passwd_check.jsp
+        mav.setViewName("redirect:/notice/list_all.do");  // POST -> GET -> JSP 출력
+      }    
+    }
+    
+    
+    return mav; // forward
   }
 
 }

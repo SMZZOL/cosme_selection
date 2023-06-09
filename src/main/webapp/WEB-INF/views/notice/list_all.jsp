@@ -65,11 +65,11 @@
   
    <tr style="height: 112px;" onclick="location.href='./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
           <td style='vertical-align: middle; text-align: center; '>
-            <IMG src="/notice/images/url8.png" style="width: 15px; height: 15px;">          
+            <IMG src="/notice/images/check.png" style="width: 15px; height: 15px;">          
           </td>  
           
           <td style='vertical-align: middle;'>
-            <div style='font-weight: bold;'>${ntitle }</div>
+            <div style='font-weight: bold;'><a href="./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page }">${ntitle }</a></div>
 
           </td>
           
