@@ -18,23 +18,14 @@
 		</div>
 	</div> 
   
-      <div class="dropdown">
-    <button class="dropbtn">성분 검색 <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="/cosme/list_by_type.do">컨텐츠1 </a>
-      <a href="">컨텐츠2 </a>
-      <a href="">컨텐츠3 </a>
-    </div>
-  </div>
-  
+      <a class="dropdown-item" href=''>성분검색</a>   
     <div class="dropdown">
     <button class="dropbtn">타입별 추천 <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/cosmetype/list_all.do">컨텐츠1 </a>
-      <a href="">컨텐츠2 </a>
-      <a href="">컨텐츠3 </a>
+      <a href="/cosmetype/list_all.do">카테고리별 </a>
+      <a href="">종류별 </a>
+      <a href="">성분별 </a>
     </div>
   </div>
          
@@ -45,8 +36,7 @@
       String master_id = (String)session.getAttribute("master_id");
 
       if (master_id == null) { // 로그인 안된 경우
-      %>
-      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+      %>    
         <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
        
                  
@@ -91,8 +81,7 @@
               
       <%  
       } else { // 로그인 한 경우
-      %>
-      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+      %>    
           <div class="dropdown">
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
