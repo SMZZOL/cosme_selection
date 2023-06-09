@@ -72,7 +72,7 @@ public class CosmeCont {
 //	 * @return
 //	 */
 	  @RequestMapping(value="/cosme/create.do", method = RequestMethod.GET)
-	  public ModelAndView create() {
+	  public ModelAndView create(HttpSession session) {
   	  ModelAndView mav = new ModelAndView();
      
   	  ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
@@ -84,49 +84,21 @@ public class CosmeCont {
   	  mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
       mav.setViewName("/cosme/create"); // create.jsp
       
+      if (this.masterProc.isMaster(session) == true) {
+        mav.setViewName("/cosme/create");
+      } else {
+          mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+        }
+      
       return mav;
 	  }
- 
-//    /**
-//     * 등록 처리
-//     * http://localhost:9093/cosme/create.do
-//     * @return
-//     */
-//    @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-//    public ModelAndView create(CosmeVO cosmeVO, HttpSession session) {
-//
-//      ModelAndView mav = new ModelAndView();
-//      mav.setViewName("/cosme/msg");
-// 
-//      if (this.masterProc.isMaster(session) == true) {
-//        int cnt = this.cosmeProc.create(cosmeVO);
-//          if (cnt == 1) {
-//            // request.setAttribute("code", "create_success"); // 고전적인 jsp 방법 
-//            // mav.addObject("code", "create_success");
-//            mav.setViewName("redirect:/cosme/list_all.do");     // 목록으로 자동 이동
-//            
-//          } else {
-//            // request.setAttribute("code", "create_fail");
-//            mav.addObject("code", "create_fail");
-//            mav.setViewName("/cosme/msg"); // /WEB-INF/views/cate/msg.jsp // 등록 실패 메시지 출력
-//
-//          }
-//          
-//          // request.setAttribute("cnt", cnt);
-//          mav.addObject("cnt", cnt);
-//      } else {
-//          mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
-//        }
-//      
-//      return mav;
-//    }
     
 //    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
 	 @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-    public ModelAndView create(HttpServletRequest request, HttpSession session, CosmeVO cosmeVO) {
+    public ModelAndView create(CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
       ModelAndView mav = new ModelAndView();
       
-      if (masterProc.isMaster(session)) { // 관리자로 로그인한경우
+      if (masterProc.isMaster(session) == true) { // 관리자로 로그인한경우
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 시작
         // ------------------------------------------------------------------------------
@@ -180,8 +152,10 @@ public class CosmeCont {
         if (cnt == 1) {
          // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
           mav.addObject("code", "create_success");
+          mav.setViewName("/cosme/msg");
         } else {
           mav.addObject("code", "create_fail");
+          mav.setViewName("/cosme/msg");
         }
         mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
         
@@ -189,11 +163,11 @@ public class CosmeCont {
         mav.addObject("cosmeno", cosmeVO.getCosmeno()); // redirect parameter 적용
         
         mav.addObject("url", "/contents/msg"); // msg.jsp, redirect parameter 적용
-        mav.setViewName("redirect:/contents/msg.do"); 
+        mav.setViewName("redirect:/cosme/msg.do"); 
 
       } else {
         mav.addObject("url", "/master/login_need"); // /WEB-INF/views/master/login_need.jsp
-        mav.setViewName("redirect:/contents/msg.do"); 
+        mav.setViewName("redirect:/cosme/msg.do"); 
       }
       
       return mav; // forward
@@ -277,6 +251,14 @@ public class CosmeCont {
       
       mav.setViewName("/cosme/list_by_type"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
       
+      return mav;
+    }
+    
+    // http://localhost:9093/cosme/msg.do?code=create_success
+    @RequestMapping(value = "/cosme/msg.do", method = RequestMethod.GET)
+    public ModelAndView msg() {
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("/cosme/msg");
       return mav;
     }
     

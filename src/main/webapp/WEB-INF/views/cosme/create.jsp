@@ -10,7 +10,7 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
 <title>화장품 등록</title>
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
-<link href="/css/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
+<link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
@@ -52,21 +52,20 @@
           </c:forEach>
         </select>
     </div>
-     <div>
+    <div>
         <label>화장품 타입</label>
-        <select>
-          <c:forEach items="${cosmetype}" var="item">
-            <option value="${item.cosmetypeno}">${item.cosmetypename}</option>
-          </c:forEach>
-        </select>
+        <c:forEach items="${cosmetype}" var="item">
+            <input type="radio" name="cosmetype" value="${item.cosmetypeno}" id="cosmetype_${item.cosmetypeno}" />
+            <label for="cosmetype_${item.cosmetypeno}">${item.cosmetypename}</label>
+        </c:forEach>
     </div>
-     <div>
+    
+    <div>
         <label>화장품 성분</label>
-        <select>
-          <c:forEach items="${ingred}" var="item">
-            <option value="${item.ingredno}">${item.ingredname}</option>
-          </c:forEach>
-        </select>
+        <c:forEach items="${ingred}" var="item">
+            <input type="radio" name="ingred" value="${item.ingredno}" id="ingred_${item.ingredno}" />
+            <label for="ingred_${item.ingredno}">${item.ingredname}</label>
+        </c:forEach>
     </div>
 
     <div class="content_body_bottom">
