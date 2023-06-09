@@ -30,7 +30,7 @@
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
-      http://localhost:9093/notice/create.do?noticeno=1
+      http://localhost:9093/qboard/create.do?qboardno=1
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
@@ -38,7 +38,7 @@
       <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
     <span class='menu_divide' >│</span>  
     </c:if>
-     <A href="./create.do">답변</A>
+     <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
   

@@ -26,7 +26,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM qboard
     WHERE qboardno = #{qboardno}
   </select>
-
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM qboard
+    WHERE qboardno=#{qboardno}
+  </delete>
 
 
          
