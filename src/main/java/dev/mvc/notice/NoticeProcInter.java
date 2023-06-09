@@ -39,5 +39,12 @@ public interface NoticeProcInter {
    * @return 변경된 레코드 갯수
    */
   public int update(NoticeVO noticeVO);
+  
+  /**
+   * 삭제
+   * @param noticeno
+   * @return 삭제된 레코드 갯수를 리턴
+   */
+  public int delete(int noticeno);
 
 }

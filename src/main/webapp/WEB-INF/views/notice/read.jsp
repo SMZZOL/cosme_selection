@@ -43,10 +43,7 @@
       <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
     <span class='menu_divide' >│</span>  
     </c:if>
-
     <A href="javascript:location.reload();">새로고침</A>
-    <span class='menu_divide' >│</span>     
-    <A href="/notice/list_all.do">목록</A>
   
   </ASIDE> 
   
@@ -58,13 +55,18 @@
         <DIV style="width: 100%; word-break: break-all;">
 
           <span style="font-size: 1.5em; font-weight: bold;">${ntitle }</span><br>
-          <div style="font-size: 1em;">${mname } ${rdate }</div><br>
-          ${ncontent }
+          <br>
+          <div style="font-size: 1em;">${mname } ${rdate }</div><br><br>
+          <div style="font-size: 1.2em;">${ncontent }</div>
         </DIV>
       </li>
 
     </ul>
   </fieldset>
+  
+    <div class="content_body_bottom">  
+    <button type="button" onclick="location.href='/notice/list_all.do'" class="my-btn btn">목록</button>
+  </div>
 
 </DIV>
  

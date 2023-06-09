@@ -6,7 +6,7 @@ DROP TABLE notice;
 CREATE TABLE notice(
         noticeno            NUMBER(10)     NOT NULL         PRIMARY KEY,
         masterno            NUMBER(10)     NOT NULL , -- FK
-        ntitle             VARCHAR(50)    NOT NULL,
+        ntitle             VARCHAR2(50)    NOT NULL,
         ncontent           CLOB    NOT NULL,
         passwd              VARCHAR2(15)	 NOT NULL,
         rdate               DATE           NOT NULL,
@@ -100,7 +100,7 @@ WHERE noticeno = 1;
 
 -- 삭제
 DELETE FROM notice
-WHERE noticeno = 4;
+WHERE noticeno = 2;
 
 commit;
 

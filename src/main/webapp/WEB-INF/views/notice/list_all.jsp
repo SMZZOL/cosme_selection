@@ -50,10 +50,9 @@
 
 
       <tr>
-        <th style='text-align: center;'>번호</th>
+        <th style='text-align: center;'>구분</th>
         <th style='text-align: left;'>제목</th>
         <th style='text-align: center;'>등록일</th>
-        <th style='text-align: center;'>수정/삭제</th>
       </tr>
 
 <tbody>
@@ -80,6 +79,7 @@
           <c:choose>
             <c:when test="${sessionScope.master_id != null }"> 
               <td style='vertical-align: middle; text-align: center;'>
+              
                 <A href="/notice/update.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/notice/images/update.png" class="icon"></A>
                 <A href="/notice/delete.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/notice/images/delete.png" class="icon"></A>
               </td>

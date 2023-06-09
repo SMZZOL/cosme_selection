@@ -39,4 +39,10 @@
     WHERE noticeno = #{noticeno}
   </update>
   
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM notice
+    WHERE noticeno =#{noticeno}
+  </delete>
+  
     </mapper>
