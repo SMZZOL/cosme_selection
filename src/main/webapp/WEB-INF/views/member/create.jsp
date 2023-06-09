@@ -15,7 +15,7 @@
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
     // jQuery ajax 요청
@@ -151,6 +151,7 @@
 <div class="navbar">
 <a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
   </div>
+
  <!-- ******************** Modal 알림창 시작 ******************** -->
   <div id="modal_panel" class="modal fade"  role="dialog">
     <div class="modal-dialog">
@@ -174,6 +175,8 @@
    <!-- ******************** Modal 알림창 종료 ******************** -->
   <br>
   <br>
+
+  <br>
   <div style="width: 60%; margin: 0px auto ">
   <FORM name='frm' id='frm' method='POST' action='./create.do' class="">
   
@@ -181,7 +184,7 @@
       <label>아이디*:
         <input type='text' class="form-control form-control-sm" name='id' id='id' value='user1@gmail.com' required="required" placeholder="아이디" autofocus="autofocus">
       </label>
-      <button type='button' id="btn_checkID" onclick="checkID()" class="btn btn-info btn-sm">중복확인</button>
+      <button type='button' id="btn_checkID" onclick="checkID()" class="my-btns btn-sm">중복확인</button>
     </div>   
                 
     <div class="form-group"> <%-- label의 크기에따라 input 태그의 크기가 지정되는 형태 --%>
@@ -213,7 +216,7 @@
       <label>우편 번호:
         <input type='text' class="form-control form-control-sm" name='zipcode' id='zipcode' value='' placeholder="우편번호">
       </label>
-      <button type="button" id="btn_DaumPostcode" onclick="DaumPostcode()" class="btn btn-info btn-sm">우편번호 찾기</button>
+      <button type="button" id="btn_DaumPostcode" onclick="DaumPostcode()" class="my-btns btn-sm">우편번호 찾기</button>
     </div>  
 
     <div class="form-group">
@@ -319,8 +322,8 @@
     </div>
     
     <div class="form_input">
-      <button type="button" id='btn_send' onclick="send()" class="btn btn-info btn-sm">가입</button>
-      <button type="button" onclick="history.back()" class="btn btn-info btn-sm">취소</button>
+      <button type="button" id='btn_send' onclick="send()" class="my-btns btn-sm">가입</button>
+      <button type="button" onclick="history.back()" class="my-btns btn-sm">취소</button>
     </div>   
   </FORM>
   </DIV>

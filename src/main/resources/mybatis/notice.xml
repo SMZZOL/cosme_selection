@@ -25,4 +25,24 @@
     WHERE noticeno = #{noticeno}
   </select> 
   
+  <!-- 패스워드 검사 -->
+  <select id="password_check" resultType="int" parameterType="dev.mvc.notice.NoticeVO">
+    SELECT COUNT(*) as cnt 
+    FROM notice 
+    WHERE masterno=#{masterno} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 글 수정 -->
+  <update id="update" parameterType="dev.mvc.notice.NoticeVO">
+    UPDATE notice
+    SET ntitle=#{ntitle}, ncontent=#{ncontent}
+    WHERE noticeno = #{noticeno}
+  </update>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM notice
+    WHERE noticeno =#{noticeno}
+  </delete>
+  
     </mapper>

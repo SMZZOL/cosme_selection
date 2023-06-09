@@ -2,6 +2,7 @@ package dev.mvc.notice;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.master.MasterProcInter;
 import dev.mvc.master.MasterVO;
+import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -21,6 +24,10 @@ public class NoticeCont {
   @Autowired
   @Qualifier("dev.mvc.master.MasterProc") 
   private MasterProcInter masterProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.member.MemberProc")
+  private MemberProcInter memberProc;
   
   @Autowired
   @Qualifier("dev.mvc.notice.NoticeProc") 
@@ -35,8 +42,6 @@ public class NoticeCont {
   @RequestMapping(value="/notice/create.do", method = RequestMethod.GET)
   public ModelAndView create(HttpSession session) {
     ModelAndView mav = new ModelAndView();
-    
- 
     
     if (this.masterProc.isMaster(session) == true) {
     	
@@ -58,8 +63,7 @@ public class NoticeCont {
   public ModelAndView create(HttpServletRequest request, HttpSession session, NoticeVO noticeVO) {
     ModelAndView mav = new ModelAndView();
     
-    if (masterProc.isMaster(session)) { // 관리자로 로그인한 경우
-        
+    if (masterProc.isMaster(session)) { // 관리자로 로그인한 경우        
         // Call By Reference: 메모리 공유, Hashcode 전달
         int masterno = (int)session.getAttribute("masterno"); // masterno FK
         noticeVO.setMasterno(masterno);
@@ -118,9 +122,10 @@ public class NoticeCont {
    * @return
    */
   @RequestMapping(value="/notice/read.do", method=RequestMethod.GET )
-  public ModelAndView read(int noticeno) {
+  public ModelAndView read(int noticeno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
+    if (masterProc.isMaster(session)) { // 관리자로 로그인한 경우        
     NoticeVO noticeVO = this.noticeProc.read(noticeno);
     
     String title = noticeVO.getNtitle();
@@ -139,8 +144,155 @@ public class NoticeCont {
     mav.addObject("mname", mname);
 
     mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
+    } else{ // 정상적인 로그인이 아닌 경우
+    	mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    }
+    
+    if (this.memberProc.isMember(session) == true) {   
+    NoticeVO noticeVO = this.noticeProc.read(noticeno);
+    
+    String title = noticeVO.getNtitle();
+    String content = noticeVO.getNcontent();
+    
+    title = Tool.convertChar(title);  // 특수 문자 처리
+    content = Tool.convertChar(content); 
+    
+    noticeVO.setNtitle(title);
+    noticeVO.setNcontent(content);  
+    
+    mav.addObject("noticeVO", noticeVO); // request.setAttribute("noticeVO", noticeVO);
+
+    // 관리자 번호: masterno -> MasterVO -> mname
+    String mname = this.masterProc.read(noticeVO.getMasterno()).getMname();
+    mav.addObject("mname", mname);
+
+    mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
+    } else{ // 정상적인 로그인이 아닌 경우
+    	 mav.setViewName("/member/login_need");
+    }
+    
+    return mav;
+  }
+  
+  /**
+   * 패스워드 일치 검사
+   * http://localhost:9093/notice/password_check.do?noticeno=1&passwd=1234
+   * @return
+   */
+  @RequestMapping(value="/notice/password_check.do", method=RequestMethod.GET )
+  public ModelAndView password_check(NoticeVO noticeVO) {
+    ModelAndView mav = new ModelAndView();
+
+    int cnt = this.noticeProc.password_check(noticeVO);
+    System.out.println("-> cnt: " + cnt);
+    
+    if (cnt == 0) {
+      mav.setViewName("/notice/passwd_check"); // /WEB-INF/views/notice/passwd_check.jsp
+    }
         
     return mav;
   }
+  
+  /**
+   * 수정 폼
+   * http://localhost:9093/notice/update.do?noticeno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/notice/update.do", method = RequestMethod.GET)
+  public ModelAndView update(HttpSession session, int noticeno) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+    NoticeVO noticeVO = this.noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);   
+    
+    mav.setViewName("/notice/update"); // /WEB-INF/views/notice/update.jsp
+    }else { // 정상적인 로그인이 아닌 경우
+    	mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    }
+
+    return mav; // forward
+  }
+  
+  /**
+   * 수정 처리
+   * http://localhost:9093/notice/update.do?noticeno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/notice/update.do", method = RequestMethod.POST)
+  public ModelAndView update(HttpSession session, NoticeVO noticeVO) {
+    ModelAndView mav = new ModelAndView();
+    //System.out.println("title: " + noticeVO.getNtitle());   
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+      this.noticeProc.update(noticeVO);  
+      
+      mav.addObject("noticeno", noticeVO.getNoticeno());
+      mav.setViewName("redirect:/notice/read.do");
+      
+    } else { // 정상적인 로그인이 아닌 경우
+      if (this.noticeProc.password_check(noticeVO) == 1) {
+        this.noticeProc.update(noticeVO);  
+         
+        // mav 객체 이용
+        mav.addObject("noticeno", noticeVO.getNoticeno());
+        mav.setViewName("redirect:/notice/read.do");
+        
+      } else {
+        mav.addObject("url", "/notice/passwd_check"); // /WEB-INF/views/notice/passwd_check.jsp
+        mav.setViewName("redirect:/notice/list_all.do");  // POST -> GET -> JSP 출력
+      }    
+    }
+    
+    return mav; // forward
+  }
+  
+  /**
+   * 삭제 폼
+   * @param noticeno
+   * @return
+   */
+  @RequestMapping(value="/notice/delete.do", method=RequestMethod.GET )
+  public ModelAndView delete(HttpSession session, int noticeno) { 
+    ModelAndView mav = new  ModelAndView();
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+    // 삭제할 정보를 조회하여 확인
+    NoticeVO noticeVO = this.noticeProc.read(noticeno);
+    mav.addObject("noticeVO", noticeVO);
+    
+    mav.setViewName("/notice/delete");  // /webapp/WEB-INF/views/notice/delete.jsp
+    
+    }else {
+    	mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    }
+    
+    return mav; 
+  }
+  
+  /**
+   * 삭제 처리 http://localhost:9093/notice/delete.do
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/notice/delete.do", method = RequestMethod.POST)
+  public ModelAndView delete(HttpSession session, NoticeVO noticeVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    //NoticeVO noticeVO_read = this.noticeProc.read(noticeVO.getNoticeno()); 
+
+    this.noticeProc.delete(noticeVO.getNoticeno()); // DBMS 삭제
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+    mav.setViewName("redirect:/notice/list_all.do");
+    
+    }else {
+    	mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    }
+    
+    return mav;
+  }   
 
 }

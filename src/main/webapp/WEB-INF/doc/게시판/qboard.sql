@@ -33,17 +33,17 @@ VALUES(qboard_seq.nextval,'질문', '있어요', sysdate);
 commit;     
 
 -- 등록 화면 유형 1: 커뮤니티(공지사항, 게시판, 자료실, 갤러리,  Q/A...)글 등록
-INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
-VALUES(qboard_seq.nextval, 1, '질문', '궁금합니다', sysdate);
+INSERT INTO qboard(qboardno, qtitle, qcontent, rdate)
+VALUES(qboard_seq.nextval, '질문', '궁금합니다', sysdate);
             
-INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
-VALUES(qboard_seq.nextval, 1, '질문', '이 제품 성분이,,,', sysdate);
+INSERT INTO qboard(qboardno, qtitle, qcontent, rdate)
+VALUES(qboard_seq.nextval, '질문', '이 제품 성분이,,,', sysdate);
             
-INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
-VALUES(qboard_seq.nextval, 1, '질문', '써 보신 분 있나요', sysdate);
+INSERT INTO qboard(qboardno, qtitle, qcontent, rdate)
+VALUES(qboard_seq.nextval,  '질문', '써 보신 분 있나요', sysdate);
 
 -- 유형 1 전체 목록
-SELECT qboardno, memberno, qtitle, qcontent, rdate
+SELECT qboardno, qtitle, qcontent, rdate
 FROM qboard
 ORDER BY qboardno ASC;
          
@@ -65,7 +65,7 @@ commit;
 
 -- 삭제
 DELETE FROM qboard
-WHERE qboardno = 1;
+WHERE qboardno = 12;
 commit;
 
 DELETE FROM qboard
@@ -76,7 +76,7 @@ commit;
 -- ----------------------------------------------------------------------------
 -- 조회
 -- ----------------------------------------------------------------------------
-SELECT qboardno, memberno, qtitle, qcontent, rdate
+SELECT qboardno,qtitle, qcontent, rdate
 FROM qboard
 WHERE qboardno = 3;
 

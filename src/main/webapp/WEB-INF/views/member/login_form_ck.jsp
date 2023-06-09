@@ -1,19 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
+
 
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>Resort world</title>
+<title>로그인</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
- 
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
@@ -38,11 +38,16 @@
 </head> 
  
 <body>
-<div class="navbar">
-<a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
-</div>
+<c:import url="../menu/header.jsp" />
+
+
+
 
   <DIV class='content_body'> 
+      <br>
+  <DIV class='title_line'>로그인</DIV>
+  <br>
+  <br>
     <DIV style='width: 40%; margin: 0px auto;'>
       <FORM name='frm' method='POST' action='./login.do'>
       <br>
@@ -54,6 +59,7 @@
             <input type='checkbox' name='id_save' value='Y' ${ck_id_save == 'Y' ? "checked='checked'" : "" }> 저장
           </Label>    
         </div>   
+     <br>
      
         <div class="form_input">
           <input type='password' class="form-control" name='passwd' id='passwd' 
@@ -64,9 +70,9 @@
         </div>   
      
         <div class="form_input">
-          <button type="submit" class="btn btn-info btn-sm">로그인</button>
-          <button type='button' id='btn_create' class="btn btn-info btn-sm">회원가입</button>
-          <button type='button' id='btn_loadDefault' class="btn btn-info btn-sm">테스트 계정</button>
+          <button type="submit" class="my-btn btn">로그인</button>
+          <button type='button' id='btn_create' class="my-btn btn">회원가입</button>
+          <button type='button' id='btn_loadDefault' class="my-btn btn">테스트 계정</button>
         </div>   
         
       </FORM>

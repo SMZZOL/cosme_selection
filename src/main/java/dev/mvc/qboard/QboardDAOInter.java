@@ -20,10 +20,17 @@ public interface QboardDAOInter {
   public ArrayList<QboardVO>list_all();
   
   /**
-   * 삭제
-   * @param contentsno
-   * @return 삭제된 레코드 갯수
+   * 조회
+   * @param qboardno
+   * @return
    */
-  public int delete(int qboardno);
+ public QboardVO read(int qboardno);
+ 
+ /**
+  * 삭제
+  * @param qboardno
+  * @return
+  */
+ public int delete(int qboardno);
 
 }

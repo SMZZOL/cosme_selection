@@ -6,8 +6,8 @@ DROP TABLE notice;
 CREATE TABLE notice(
         noticeno            NUMBER(10)     NOT NULL         PRIMARY KEY,
         masterno            NUMBER(10)     NOT NULL , -- FK
-        ntitle             VARCHAR(50)    NOT NULL,
-        ncontent           VARCHAR(50)    NOT NULL,
+        ntitle             VARCHAR2(50)    NOT NULL,
+        ncontent           CLOB    NOT NULL,
         passwd              VARCHAR2(15)	 NOT NULL,
         rdate               DATE           NOT NULL,
         FOREIGN KEY (masterno) REFERENCES master (masterno)
@@ -88,15 +88,6 @@ UPDATE notice
 SET ntitle='필독!!', ncontent='~~'
 WHERE noticeno = 1;
 
--- ERROR
-UPDATE notice
-SET ntitle='필독!!', ncontent="우 '리' 규칙"
-WHERE noticeno = 1;
--- ERROR
-UPDATE notice
-SET ntitle='필독!!', ncontent='우 \'리\' 규칙'
-WHERE noticeno = 1;
-
 -- SUCCESS
 UPDATE notice
 SET ntitle='필독!!', ncontent='우 ''리'' 규칙'
@@ -109,14 +100,14 @@ WHERE noticeno = 1;
 
 -- 삭제
 DELETE FROM notice
-WHERE noticeno = 4;
+WHERE noticeno = 2;
 
 commit;
 
 -- 특정 관리자에 속한 레코드 갯수 산출
 SELECT COUNT(*) as cnt 
 FROM notice 
-WHERE masterno=1;
+WHERE masterno=1 AND passwd='1234';
 
 -- 특정 관리자에 속한 레코드 모두 삭제
 DELETE FROM notice

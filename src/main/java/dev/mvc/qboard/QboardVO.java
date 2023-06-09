@@ -11,6 +11,10 @@ public class QboardVO {
   private String qcontent = "";
   
   private String rdate = "";
+  
+  private String question;
+  
+  private String answer;
 
   public int getQboardno() {
     return qboardno;
@@ -51,8 +55,23 @@ public class QboardVO {
   public void setRdate(String rdate) {
     this.rdate = rdate;
   }
-  
-  
+
+  public String getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(String question) {
+    this.question = question;
+  }
+
+  public String getAnswer() {
+    return answer;
+  }
+
+  public void setAnswer(String answer) {
+    this.answer = answer;
+  }
+
   
 
 }

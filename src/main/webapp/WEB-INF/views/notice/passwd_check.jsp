@@ -7,31 +7,22 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>team2</title>
+<title>패스워드 불일치</title>
   
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
-
    
 </head> 
  
 <body>
 <c:import url="../menu/header.jsp" />
-
- 
-    <br>
-
-<DIV class='content_body'>
  
   <DIV class='message'>
-    <H4>회원 로그인이 필요한 페이지입니다.</H4>
+    <H4>패스워드가 일치하지 않습니다.</H4>
     <BR><BR>
-    <button type='button' onclick="location.href='/member/login.do'" class="my-btn btn">로그인</button>       
-  </DIV>
+    <button type='button' onclick="history.back()" class="my-btn btn">다시 시도</button>       
   </DIV>
  
 <jsp:include page="../menu/footer.jsp" flush='false' />
 </body>
  
 </html>
-
-
