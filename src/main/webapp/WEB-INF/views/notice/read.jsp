@@ -57,7 +57,7 @@
           <span style="font-size: 1.5em; font-weight: bold;">${ntitle }</span><br>
           <br>
           <div style="font-size: 1em;">${mname } ${rdate }</div><br><br>
-          <div style="font-size: 1.2em;">${ncontent }</div>
+          <div style="font-size: 1.1em;">${ncontent }</div>
         </DIV>
       </li>
 
