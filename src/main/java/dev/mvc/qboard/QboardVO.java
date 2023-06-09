@@ -51,8 +51,5 @@ public class QboardVO {
   public void setRdate(String rdate) {
     this.rdate = rdate;
   }
-  
-  
-  
 
 }

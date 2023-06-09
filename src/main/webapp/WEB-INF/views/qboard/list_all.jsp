@@ -8,77 +8,83 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
+<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>질문게시판</title>
-
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
     
 </head> 
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
+ 
 <body>
-    <c:import url="../menu/header.jsp" />
+<c:import url="../menu/header.jsp" />
 
- <DIV class='content_body'>
- <Br>
+<DIV class='content_body'>
 <DIV class='title_line'>질문게시판</DIV>
-<br>
-  <ASIDE class="aside_right">
 
-  
-    <%-- 관리자로그인 해야 보이는 것들 --%>
-      <c:if test="${sessionScope.master_id != null }">
-      <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
+
+  <ASIDE class="aside_right">
+  <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
+    <c:if test="${sessionScope.master_id != null }">
     </c:if>
-        <A href="./create.do">등록</A>
-      <span class='menu_divide' >│</span>
+    <br>
+     <A href="./create.do">등록</A>
+     <span class='menu_divide' >│</span>     
     <A href="javascript:location.reload();">새로고침</A>
 
   </ASIDE>
 
-    <DIV class='menu_line'></DIV>
+  <DIV class='menu_line'></DIV>
+  
+  <table class="class='table table-hover" style='width: 100%;'>
+          <col style="width: 10%;"></col>
+          <col style="width: 80%;"></col>
+          <col style="width: 10%;"></col>        
+
+
+      <tr>
+        <th style='text-align: center;'>순서</th>
+        <th style='text-align: center;'>제목</th>
+        <th style='text-align: left;'>작성일</th>
+      </tr>
     
-   <TABLE class='table table-hover'>
-    <colgroup>
-      <col style='width: 10%;'/>
-      <col style='width: 50%;'/>
-      <col style='width: 10%;'/>    
-      <col style='width: 20%;'/>
-      <col style='width: 10%;'/>
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">질문 번호</TH>
-      <TH class="th_bs">질문 제목</TH>
-      <TH class="th_bs">질문 내용</TH>
-      <TH class="th_bs">등록일</TH>
-    </TR>
-    </thead>
+
     
-    <tbody>
-    <%
-    ArrayList<QboardVO> list = (ArrayList<QboardVO>)request.getAttribute("list");
-    
-    for (int i=0; i < list.size(); i++) {
-      QboardVO qboardVO = list.get(i);
-    %>
-      <TR>
-        <TD class='td_bs'><%= qboardVO.getQboardno() %></TD>
-        <TD class='td_bs'><%= qboardVO.getQtitle() %></TD>
-        <TD class='td_bs'><%= qboardVO.getQcontent() %></TD>
-        <TD class='td_bs'><%=qboardVO.getRdate().substring(0, 10) %></TD>
-        <TD>
-         
-        </TD>
-      </TR>
-    <%  
-    }
-    %>
+<tbody>
+  <c:forEach var="qboardVO" items="${list}">
+  <c:set var="qboardno" value="${qboardVO.qboardno }" />
+  <c:set var="qtitle" value="${qboardVO.qtitle }" />        
+  <c:set var="qcontent" value="${qboardVO.qcontent }" />
+  <c:set var="rdate" value="${qboardVO.rdate.substring(0, 10) }" />
+  
+   <tr style="height: 112px;" onclick="location.href='./read.do?qboardno=${qboardno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
+          <td style='vertical-align: middle; text-align: center; '>
+            <IMG src="/qboard/images/show.png" style="width: 15px; height: 15px;">          
+          </td>  
+          
+          <td style='vertical-align: middle; text-align: center;'>
+            <div style='font-weight: bold;'>${qtitle }</div>
+          </td>
+          
+          <td style='vertical-align: middle; text-align: left;'>
+            <div style='font-weight: bold;'>${rdate }</div>
+          </td>
+          
+          <c:choose>
+            <c:when test="${sessionScope.master_id != null }"> 
+              <td style='vertical-align: middle; text-align: center;'>
+               <A href="/qboard/delete.do?qboardno=${qboardno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/qboard/images/delete.png" class="icon"></A>
+              </td>
+            </c:when>
+            <c:otherwise>
+            
+            </c:otherwise>
+          </c:choose>
+                    
+        </tr>
+        
+      </c:forEach>
     </tbody>
-   
-  </TABLE>
+  </table>
 </DIV>
 
  
@@ -86,3 +92,4 @@
 </body>
  
 </html>
+

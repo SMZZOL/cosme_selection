@@ -20,10 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY qboardno ASC
   </select>
   
-  <delete id="delete" parameterType="int">
-    DELETE FROM qboard
-    WHERE qboardno=#{qboardno}
-  </delete>
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.qboard.QboardVO" parameterType="int">
+    SELECT qboardno, qtitle, qcontent,  rdate
+    FROM qboard
+    WHERE qboardno = #{qboardno}
+  </select>
+
 
 
          

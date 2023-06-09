@@ -37,9 +37,7 @@
 </head> 
  
 <body>
-<div class="navbar">
-<a href="/" style="all: unset;"><IMG src='/images/logo2.gif' style="width: 50px"></a>
-  </div>
+<c:import url="/menu/header.do" />
 
   <DIV class='content_body'> 
     <DIV style='width: 40%; margin: 0px auto;'>
