@@ -44,33 +44,37 @@
   <DIV class='menu_line'></DIV>
   
   <table class="class='table table-hover" style='width: 100%;'>
-          <col style="width: 10%;"></col>
-          <col style="width: 80%;"></col>
-          <col style="width: 10%;"></col>        
+          <col style="width: 20%;"></col>
+          <col style="width: 40%;"></col>
+          <col style="width: 20%;"></col>        
 
-<!--      <thead> 
+
       <tr>
         <th style='text-align: center;'>번호</th>
-        <th style='text-align: center;'>제목</th>
+        <th style='text-align: left;'>제목</th>
         <th style='text-align: center;'>등록일</th>
+        <th style='text-align: center;'>수정/삭제</th>
       </tr>
-    
-    </thead> -->
-    
+
 <tbody>
   <c:forEach var="noticeVO" items="${list}">
   <c:set var="noticeno" value="${noticeVO.noticeno }" />
   <c:set var="ntitle" value="${noticeVO.ntitle }" />        
   <c:set var="ncontent" value="${noticeVO.ncontent }" />
+    <c:set var="rdate" value="${noticeVO.rdate.substring(0, 10) }" />
   
    <tr style="height: 112px;" onclick="location.href='./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
           <td style='vertical-align: middle; text-align: center; '>
             <IMG src="/notice/images/check.png" style="width: 15px; height: 15px;">          
           </td>  
           
-          <td style='vertical-align: middle;'>
+          <td style='vertical-align: middle; '>
             <div style='font-weight: bold;'><a href="./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page }">${ntitle }</a></div>
 
+          </td>
+          
+            <td style='vertical-align: middle; text-align: center;'>
+            <div style='font-weight: bold;'>${rdate }</div>
           </td>
           
           <c:choose>
