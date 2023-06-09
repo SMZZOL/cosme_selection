@@ -27,11 +27,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE qboardno = #{qboardno}
   </select>
   
+  <!-- 글삭제-->
   <delete id="delete" parameterType="int">
     DELETE FROM qboard
     WHERE qboardno=#{qboardno}
   </delete>
-
+ 
+  <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.qboard.QboardVO">
+    UPDATE qboard
+    SET qtitle=#{qtitle}, qcontent=#{qcontent},  word=#{word}
+    WHERE qboardno = #{qboardno}
+  </update>
 
          
 </mapper> 
