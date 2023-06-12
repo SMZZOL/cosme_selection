@@ -12,8 +12,11 @@
       <i class="fa fa-caret-down"></i>
 		</button>
 		<div class="dropdown-content">
+
+
+
 			<a href="/notice/list_all.do">공지사항</a>
-			<a href="/qboard/create.do">질문 게시판</a>
+			<a href="/qboard/list_all.do">질문 게시판</a>
 			<a href="#">자유 게시판</a>
 		</div>
 	</div> 
@@ -24,10 +27,21 @@
     </button>
     <div class="dropdown-content">
       <a href="/cosmetype/list_all.do">카테고리별 </a>
-      <a href="">종류별 </a>
+      <a href="/cosme/list_by_type.do">타입별 </a>
       <a href="">성분별 </a>
     </div>
   </div>
+  
+  <div class="dropdown">
+    <button class="dropbtn">종류별 추천 <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/cosme_cate/list_by_cate.do">컨텐츠1 </a>
+      <a href="">컨텐츠2 </a>
+      <a href="">컨텐츠3 </a>
+    </div>
+  </div>
+  
          
   
 <!-- 관리자 로그인 -->

@@ -43,7 +43,8 @@
               if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("전송 성공");
                 var response = xhr.responseText; // 처리된 결과 문자열을 받음
-                var div = document.getElementById("grid");
+                console.log("받은 결과 문자열: " + response);
+                var div = document.getElementById("panel");
                 div.innerHTML = response;
               }else{
                   console.log("전송 실패");
@@ -62,14 +63,52 @@
 <body>
   <c:import url="../menu/header.jsp" />
 <div id="buttondiv">
-		<c:forEach items="${type_list}" var="type_list">
-		<button class="btn_type" onclick="buttonchange(this)" value="${type_list.cosmetypeno}" style="color: lightgray;">${type_list.cosmetypename}</button>
-		</c:forEach>
+  <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">수분/진정</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">수딩/미백</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="3" style="color: lightgray;">주름 개선</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">열감</button>
   <!--라디오 버튼 (인기순 등)-->
 </div>
+<h1 id="panel">여기랑게</h1>
 <!-- sdf -->
 <div id="grid">
-
+  <div class="product-grid">
+    <div class="product-item">
+      <img class="img-90" src="" alt="상품 1 이미지">
+      <h3>상품 1</h3>
+      <p>상품 1 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="" alt="상품 2 이미지">
+      <h3>상품 2</h3>
+      <p>상품 2 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
+      <h3>상품 3</h3>
+      <p>상품 3 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="" alt="상품 4이미지">
+      <h3>상품 4</h3>
+      <p>상품 4 설명</p>
+    </div>
+</div>
 </div>
 <Br>
 <Br>

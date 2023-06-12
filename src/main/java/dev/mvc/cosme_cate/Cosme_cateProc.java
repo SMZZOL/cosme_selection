@@ -26,6 +26,12 @@ import org.springframework.stereotype.Component;
       return list;
     }
 
+    // 종류별 리스트
+    public ArrayList<Cosme_cateVO> list_by_cate() {
+      ArrayList<Cosme_cateVO> list = this.cosme_cateDAO.list_by_cate();
+      
+      return list;
+    }
   }
 
     

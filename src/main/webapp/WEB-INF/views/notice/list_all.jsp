@@ -8,85 +8,92 @@
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
+<meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>공지사항</title>
-
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
     
 </head> 
- <link href="/css/style.css" rel="Stylesheet" type="text/css">
-<body>
-    <c:import url="../menu/header.jsp" />
  
- <DIV class='content_body'>
- <Br>
-<DIV class='title_line'>공지사항</DIV>
-<br>
+<body>
+<c:import url="../menu/header.jsp" />
+
+<DIV class='content_body'>
+<DIV class='title_line'>
+  공지사항
+ 
+</DIV>
+
+
   <ASIDE class="aside_right">
-  
-    <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
+  <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
       http://localhost:9093/notice/create.do?noticeno=1
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
-         
+         <br>
       <A href="./create.do">등록</A>
-      <span class='menu_divide' >│</span>
-      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
-      <span class='menu_divide' >│</span>
-      <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
+      <span class='menu_divide' >│</span>     
+    <A href="javascript:location.reload();">새로고침</A>
     </c:if>
 
   </ASIDE>
 
-    <DIV class='menu_line'></DIV>
-    
-  <table class="table table-striped" style='width: 100%;'>
-    <colgroup>
-      <c:choose>
-        <c:when test="${sessionScope.master_id != null }">
-          <col style="width: 10%;"></col>
-          <col style="width: 80%;"></col>
-          <col style="width: 10%;"></col>        
-        </c:when>
-        <c:otherwise>
-          <col style="width: 10%;"></col>
-          <col style="width: 90%;"></col>
-        </c:otherwise>
-      </c:choose>
-    </colgroup>
-   
-    <thead>  
-    <TR>
-      <TH class="th_bs">번호</TH>
-      <TH class="th_bs">제목</TH>
-      <TH class="th_bs">등록일</TH>
-    </TR>
-    </thead> 
-    
-    <tbody>
-      <%
-      ArrayList<NoticeVO> list = (ArrayList<NoticeVO>)request.getAttribute("list");
-    
-    for (int i=0; i < list.size(); i++) {
-    	NoticeVO noticeVO = list.get(i);
-    %>
-      <TR>
-        <TD class='td_bs'><%= noticeVO.getNoticeno() %></TD>
-        <TD class='td_bs'><%=noticeVO.getNtitle() %></TD>
-        <TD class='td_bs'><%=noticeVO.getRdate().substring(0, 10) %></TD>
+  <DIV class='menu_line'></DIV>
   
-      </TR>
-    <%  
-    }
-    %>
+  <table class="class='table table-hover" style='width: 100%;'>
+          <col style="width: 20%;"></col>
+          <col style="width: 40%;"></col>
+          <col style="width: 20%;"></col>        
+
+
+      <tr>
+        <th style='text-align: center;'>번호</th>
+        <th style='text-align: left;'>제목</th>
+        <th style='text-align: center;'>등록일</th>
+        <th style='text-align: center;'>수정/삭제</th>
+      </tr>
+
+<tbody>
+  <c:forEach var="noticeVO" items="${list}">
+  <c:set var="noticeno" value="${noticeVO.noticeno }" />
+  <c:set var="ntitle" value="${noticeVO.ntitle }" />        
+  <c:set var="ncontent" value="${noticeVO.ncontent }" />
+    <c:set var="rdate" value="${noticeVO.rdate.substring(0, 10) }" />
+  
+   <tr style="height: 112px;" onclick="location.href='./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
+          <td style='vertical-align: middle; text-align: center; '>
+            <IMG src="/notice/images/check.png" style="width: 15px; height: 15px;">          
+          </td>  
+          
+          <td style='vertical-align: middle; '>
+            <div style='font-weight: bold;'><a href="./read.do?noticeno=${noticeno }&now_page=${param.now_page == null ? 1 : param.now_page }">${ntitle }</a></div>
+
+          </td>
+          
+            <td style='vertical-align: middle; text-align: center;'>
+            <div style='font-weight: bold;'>${rdate }</div>
+          </td>
+          
+          <c:choose>
+            <c:when test="${sessionScope.master_id != null }"> 
+              <td style='vertical-align: middle; text-align: center;'>
+                <A href="/notice/update.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/notice/images/update.png" class="icon"></A>
+                <A href="/notice/delete.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/notice/images/delete.png" class="icon"></A>
+              </td>
+            </c:when>
+            <c:otherwise>
+            
+            </c:otherwise>
+          </c:choose>
+                    
+        </tr>
+        
+      </c:forEach>
     </tbody>
-   
-  </TABLE>
+  </table>
 </DIV>
 
  
@@ -94,3 +101,4 @@
 </body>
  
 </html>
+

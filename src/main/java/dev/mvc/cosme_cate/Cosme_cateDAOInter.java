@@ -18,5 +18,9 @@ public interface Cosme_cateDAOInter {
    */
   public ArrayList<Cosme_cateVO>list_all();
  
-  
+  /**
+   *종류별 리스트
+   * @return
+   */
+  public ArrayList<Cosme_cateVO>list_by_cate();
 }

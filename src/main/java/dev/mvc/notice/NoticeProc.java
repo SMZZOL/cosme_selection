@@ -1,7 +1,6 @@
 package dev.mvc.notice;
 
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +11,9 @@ public class NoticeProc implements NoticeProcInter{
 	@Autowired
 	private NoticeDAOInter noticeDAO;
 	
+  /**
+   * 등록
+   */
 	@Override
 	public int create(NoticeVO noticeVO) {
 		int cnt = this.noticeDAO.create(noticeVO);
@@ -19,6 +21,9 @@ public class NoticeProc implements NoticeProcInter{
 		return cnt;
 	}
 
+  /**
+   * 목록
+   */
 	@Override
 	public ArrayList<NoticeVO> list_all() {
 		ArrayList<NoticeVO> list = this.noticeDAO.list_all();
@@ -38,10 +43,33 @@ public class NoticeProc implements NoticeProcInter{
 		return list;
 	}
 
+  /**
+   * 조회
+   */
 	@Override
 	public NoticeVO read(int noticeno) {
 		NoticeVO noticeVO = this.noticeDAO.read(noticeno);
 		return noticeVO;
+	}
+
+  /**
+   *  패스워드 일치 검사
+   * http://localhost:9093/notice/password_check.do?noticeno=1&passwd=1234
+   * @return
+   */
+@Override
+public int password_check(NoticeVO noticeVO) {
+	int cnt = this.noticeDAO.password_check(noticeVO);
+	return cnt;
+	}
+
+	/**
+	 * 글 수정
+	 */
+@Override
+public int update(NoticeVO noticeVO) {
+	int cnt = this.noticeDAO.update(noticeVO);
+	return cnt;
 	}
 
 }

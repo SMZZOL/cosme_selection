@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="dev.mvc.cosme_cate.Cosme_cateVO" %>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,7 @@
               }
             }
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/cosmetype/list_all.do", true);
+            xhr.open("POST", "/cosme_cate/list_by_cate.do", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
@@ -60,15 +61,38 @@
 </style>
 <body>
   <c:import url="../menu/header.jsp" />
+  <style>
+    .btn_type {
+      color: lightgray;
+    }
+    .active {
+      color: black;
+    }
+  </style>
+  <script>
+    function buttonchange(button) {
+      if (!button.classList.contains('active')) {
+        var buttons = document.getElementsByClassName('btn_type');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove('active');
+          buttons[i].style.color = 'lightgray';
+        }
+        button.classList.add('active');
+        button.style.color = 'black';
+      }
+    }
+  </script>
+</head>
+<body>
 <div id="buttondiv">
-  <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">수분/진정</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">수딩/미백</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="3" style="color: lightgray;">주름 개선</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">열감</button>
-  <!--라디오 버튼 (인기순 등)-->
+  <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">Skin/Toner</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">Lotion</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="3" style="color: lightgray;">Cream</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">Oil/balm</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="5" style="color: lightgray;">Ampoule/Serum</button>
 </div>
-
-
+</body>
+</html>
 <!-- sdf -->
 <div id="grid">
   <div class="product-grid">

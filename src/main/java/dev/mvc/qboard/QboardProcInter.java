@@ -16,5 +16,12 @@ public interface QboardProcInter {
    * @return
    */
   public ArrayList<QboardVO>list_all();
+  
+  /**
+   * 조회
+   * @param qboardno
+   * @return
+   */
+ public QboardVO read(int qboardno);
 
 }

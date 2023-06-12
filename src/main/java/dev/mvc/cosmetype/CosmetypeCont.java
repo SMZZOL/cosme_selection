@@ -65,7 +65,7 @@ public ModelAndView create(HttpSession session) {
      int cnt = this.cosmetypeProc.create(cosmetypeVO);
        if (cnt == 1) {
 
-         mav.setViewName("redirect:/cosmetype/list_all.do"); 
+         mav.setViewName("redirect:/"); 
          
        } else {
          mav.addObject("code", "create_fail");

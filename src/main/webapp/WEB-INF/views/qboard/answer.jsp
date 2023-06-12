@@ -7,7 +7,7 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
-<title>질문 게시판</title>
+<title>답변 게시판</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
     
@@ -18,7 +18,7 @@
 
 <DIV class='content_body'>
 
-<DIV class='title_line'>질문 게시판 등록</DIV>
+<DIV class='title_line'>답변 게시판 등록</DIV>
 
 <DIV class='content_body'>
   <ASIDE class="aside_right">
@@ -28,7 +28,7 @@
   
   <DIV class='menu_line'></DIV>
   
-  <FORM name='frm' method='POST' action='/qboard/create.do'>
+  <FORM name='frm' method='POST' action='/qboard/answer.do'>
     <br>
     
     <div>

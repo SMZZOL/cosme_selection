@@ -76,6 +76,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM cosme_cate 
     ORDER BY cosme_cateno ASC
   </select>
+  
+  
 </mapper> 
 
 

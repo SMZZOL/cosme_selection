@@ -7,18 +7,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.qboard.QboardDAOInter">
   <!-- 등록한 레코드 갯수 1 리턴 -->
   <insert id="create" parameterType="dev.mvc.qboard.QboardDAOInter">
-    INSERT INTO qboard(qboardno, memberno, qtitle, qcontent, rdate)
-    VALUES(qboard_seq.nextval, #{memberno}, #{qtitle}, #{qcontent}, sysdate)
+    INSERT INTO qboard(qboardno, qtitle, qcontent, rdate)
+    VALUES(qboard_seq.nextval,  #{qtitle}, #{qcontent}, sysdate)
 
   </insert>
   
   <!-- 모든 카테고리의 등록된 글목록 -->
   <!-- 질문 게시판 글목록 -->
   <select id="list_all" resultType="dev.mvc.qboard.QboardVO">
-    SELECT qboardno, memberno, qtitle, qcontent, rdate 
+    SELECT qboardno, qtitle, qcontent, rdate 
     FROM qboard 
     ORDER BY qboardno ASC
   </select>
+  
+  <!-- 일반적인 조회 -->
+  <select id="read" resultType="dev.mvc.qboard.QboardVO" parameterType="int">
+    SELECT qboardno, qtitle, qcontent,  rdate
+    FROM qboard
+    WHERE qboardno = #{qboardno}
+  </select>
+
 
 
          
