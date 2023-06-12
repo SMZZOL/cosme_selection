@@ -7,12 +7,13 @@ CREATE TABLE fboard(
         fboardno            NUMBER(10)     NOT NULL         PRIMARY KEY,
         memberno            NUMBER(10)     NOT NULL , -- FK
         ftitle             VARCHAR(50)    NOT NULL,
-        fcontent           VARCHAR(50)    NOT NULL,
+        fcontent           CLOB    NOT NULL,
         rdate               DATE           NOT NULL,
         file1                VARCHAR(100)          NULL,  -- 원본 파일명 image
         file1saved            VARCHAR(100)          NULL,  -- 저장된 파일명, image
         thumb1                VARCHAR(100)          NULL,   -- preview image
         size1                 NUMBER(10)      DEFAULT 0 NULL,  -- 파일 사이즈
+        youtube               VARCHAR2(1000)            NULL,
         FOREIGN KEY (memberno) REFERENCES member (memberno)
 );
 

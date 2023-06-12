@@ -23,9 +23,9 @@
   공지사항
  
 </DIV>
-
-
+<br>
   <ASIDE class="aside_right">
+  
   <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
@@ -33,12 +33,12 @@
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
-         <br>
+         
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>     
-    <A href="javascript:location.reload();">새로고침</A>
     </c:if>
-
+    
+    <A href="javascript:location.reload();">새로고침</A>
   </ASIDE>
 
   <DIV class='menu_line'></DIV>
@@ -47,7 +47,6 @@
           <col style="width: 20%;"></col>
           <col style="width: 40%;"></col>
           <col style="width: 20%;"></col>        
-
 
       <tr>
         <th style='text-align: center;'>구분</th>
