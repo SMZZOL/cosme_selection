@@ -23,9 +23,9 @@
   공지사항
  
 </DIV>
-
-
+<br>
   <ASIDE class="aside_right">
+  
   <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
@@ -33,12 +33,12 @@
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
-         <br>
+         
       <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>     
-    <A href="javascript:location.reload();">새로고침</A>
     </c:if>
-
+    
+    <A href="javascript:location.reload();">새로고침</A>
   </ASIDE>
 
   <DIV class='menu_line'></DIV>
@@ -48,12 +48,10 @@
           <col style="width: 40%;"></col>
           <col style="width: 20%;"></col>        
 
-
       <tr>
-        <th style='text-align: center;'>번호</th>
+        <th style='text-align: center;'>구분</th>
         <th style='text-align: left;'>제목</th>
         <th style='text-align: center;'>등록일</th>
-        <th style='text-align: center;'>수정/삭제</th>
       </tr>
 
 <tbody>
@@ -80,6 +78,7 @@
           <c:choose>
             <c:when test="${sessionScope.master_id != null }"> 
               <td style='vertical-align: middle; text-align: center;'>
+              
                 <A href="/notice/update.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/notice/images/update.png" class="icon"></A>
                 <A href="/notice/delete.do?noticeno=${noticeno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/notice/images/delete.png" class="icon"></A>
               </td>

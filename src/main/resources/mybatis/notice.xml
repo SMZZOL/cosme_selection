@@ -15,7 +15,7 @@
   <select id="list_all" resultType="dev.mvc.notice.NoticeVO">
     SELECT noticeno, masterno, ntitle, ncontent, passwd, rdate
     FROM notice
-    ORDER BY noticeno ASC
+    ORDER BY noticeno DESC
   </select> 
      
   <!-- 공지사항 조회 -->
@@ -38,5 +38,11 @@
     SET ntitle=#{ntitle}, ncontent=#{ncontent}
     WHERE noticeno = #{noticeno}
   </update>
+  
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="int">
+    DELETE FROM notice
+    WHERE noticeno =#{noticeno}
+  </delete>
   
     </mapper>

@@ -625,6 +625,15 @@ button,input,optgroup,select,textarea{
   background-color: rgb(68, 67, 67);
   color: white;
 }
+.my-btns{
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  position: relative;
+  top: -1px
+}
 
 /* ==========================================TOP ===============================================*/
 .navbar {
@@ -833,7 +842,7 @@ h3{
   font-size:20px;
   margin:10px;
 }
-    
+
     /*================list_by_type css end===========================*/
 
 

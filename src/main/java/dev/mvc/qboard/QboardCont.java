@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.mvc.master.MasterProcInter;
 import dev.mvc.master.MasterVO;
 import dev.mvc.member.MemberProcInter;
+import dev.mvc.notice.NoticeVO;
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -127,7 +128,54 @@ public ModelAndView read(int qboardno) {
       
   return mav;
 }
- 
+
+/**
+ * 삭제 폼
+ * @param qboardno
+ * @return
+ */
+@RequestMapping(value="/qboard/delete.do", method=RequestMethod.GET )
+public ModelAndView delete(HttpSession session, int qboardno) { 
+  ModelAndView mav = new  ModelAndView();
+  
+  if (this.masterProc.isMaster(session)) { // 관리자 로그인
+  // 삭제할 정보를 조회하여 확인
+  QboardVO qboardVO = this.qboardProc.read(qboardno);
+  mav.addObject("qboardVO", qboardVO);
+  
+  mav.setViewName("/qboard/delete");  // /webapp/WEB-INF/views/notice/delete.jsp
+  
+  }else {
+    mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+  }
+  
+  return mav; 
+}
+
+/**
+ * 삭제 처리 http://localhost:9093/qboard/delete.do
+ * 
+ * @return
+ */
+@RequestMapping(value = "/qboard/delete.do", method = RequestMethod.POST)
+public ModelAndView delete(HttpSession session, QboardVO qboardVO) {
+  ModelAndView mav = new ModelAndView();
+  
+  //NoticeVO noticeVO_read = this.noticeProc.read(noticeVO.getNoticeno()); 
+
+  this.qboardProc.delete(qboardVO.getQboardno()); // DBMS 삭제
+  
+  if (this.masterProc.isMaster(session)) { // 관리자 로그인
+  mav.setViewName("redirect:/qboard/list_all.do");
+  
+  }else {
+    mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+  }
+  
+  return mav;
+}   
+
+
 
 
 }

@@ -25,5 +25,12 @@ public interface QboardDAOInter {
    * @return
    */
  public QboardVO read(int qboardno);
+ 
+ /**
+  * 삭제
+  * @param qboardno
+  * @return
+  */
+public int delete(int qboardno);
 
 }

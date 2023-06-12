@@ -94,8 +94,8 @@ public class MasterCont {
     ModelAndView mav = new ModelAndView();
    
     int cnt = masterProc.login(masterVO);
-    System.out.println(masterVO.getId());
-    System.out.println(masterVO.getPasswd());
+    //System.out.println(masterVO.getId());
+    //System.out.println(masterVO.getPasswd());
 
     
     if (cnt == 1) { // 로그인 성공

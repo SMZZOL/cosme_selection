@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="qoticeno" value="${qboardVO.qboardno }" />
+<c:set var="qboardno" value="${qboardVO.qboardno }" />
 <c:set var="qtitle" value="${qboardVO.qtitle }" />        
 <c:set var="qcontent" value="${qboardVO.qcontent }" />
-<c:set var="rdate" value="${noticeVO.rdate.substring(0, 16) }" />
+<c:set var="rdate" value="${qboardVO.rdate.substring(0, 16) }" />
 
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -20,49 +20,53 @@
  
 <body>
 <c:import url="../menu/header.jsp" />
- 
+
+<DIV class='content_body'>
+
 <DIV class='title_line'>
 <A href="./read.do" class='title_link'>질문게시판</A></DIV>
 
-<DIV class='content_body'>
   <ASIDE class="aside_right">
-  
+  <br>
     <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
       <%--
-      http://localhost:9093/notice/create.do?noticeno=1
-      http://localhost:9093/notice/create.do?noticeno=2
-      http://localhost:9093/notice/create.do?noticeno=3
+      http://localhost:9093/qboard/create.do?qboardno=1
       --%>
-    
+      
+
       <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
     <span class='menu_divide' >│</span>  
     </c:if>
-     <A href="./create.do">답변</A>
+          <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>
     <A href="javascript:location.reload();">새로고침</A>
   
   </ASIDE> 
-  
   
   <DIV class='menu_line'></DIV>
 
   <fieldset class="fieldset_basic">
     <ul>
       <li class="li_none">
-        <DIV style="width: 100%;">
+        <DIV style="width: 100%; word-break: break-all;">
 
           <span style="font-size: 1.5em; font-weight: bold;">${qtitle }</span><br>
-            ${qcontent }
+          <br>
+          <div style="font-size: 1.1em;">${qcontent }</div>
         </DIV>
       </li>
 
     </ul>
   </fieldset>
+  
+    <div class="content_body_bottom">  
+    <button type="button" onclick="location.href='/qboard/list_all.do'" class="my-btn btn">목록</button>
+  </div>
 
 </DIV>
  
-<jsp:include page="../menu/footer.jsp" flush='false' />
+<jsp:include page="../menu/footer.jsp"  />
 </body>
  
 </html>

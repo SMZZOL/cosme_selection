@@ -21,7 +21,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 
 @MapperScan(basePackages= {"dev.mvc.member, dev.mvc.master, dev.mvc.cosme_cate","dev.mvc.ingred, dev.mvc.cosme, dev.mvc.cosmetype",
-										"dev.mvc.notice", "dev.mvc.qboard"})
+										"dev.mvc.notice", "dev.mvc.qboard", "dev.mvc.fboard"})
 
 public class DatabaseConfiguration {
     

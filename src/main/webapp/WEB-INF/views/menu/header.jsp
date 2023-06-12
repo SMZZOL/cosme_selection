@@ -17,7 +17,7 @@
 
 			<a href="/notice/list_all.do">공지사항</a>
 			<a href="/qboard/list_all.do">질문 게시판</a>
-			<a href="#">자유 게시판</a>
+			<a href="/fboard/list_all.do">자유 게시판</a>
 		</div>
 	</div> 
   
@@ -104,7 +104,6 @@
         <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-        <a href="/notice/create.do">공지사항 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         </div>
       </div>
  
