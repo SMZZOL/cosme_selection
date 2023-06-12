@@ -31,13 +31,6 @@ public interface QboardDAOInter {
   * @param qboardno
   * @return
   */
- public int delete(int qboardno);
- 
- /**
-  * 글 정보 수정
-  * @param qboardVO
-  * @return
-  */
- public int update_text(QboardVO qboardVO);
+public int delete(int qboardno);
 
 }
