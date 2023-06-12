@@ -86,7 +86,7 @@ public ModelAndView create(HttpSession session) {
  
  /**
   * 목록
-  * http://localhost:9093/cosmetype/list.all
+  * http://localhost:9093/cosmetype/list_all.do
   * @return
   */
 //@RequestMapping(value="/cosmetype/list_all.do", method=RequestMethod.GET)

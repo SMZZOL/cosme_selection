@@ -127,6 +127,7 @@ public ModelAndView create(HttpSession session) {
      mav.setViewName("/cosme_cate/list_by_cate"); // /webapp/WEB-INF/views/contents/list_by_cateno.jsp
 
      return mav;
+
  }
 
  }
