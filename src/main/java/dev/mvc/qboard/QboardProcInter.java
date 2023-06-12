@@ -30,5 +30,13 @@ public interface QboardProcInter {
   * @return
   */
  public int delete(int qboardno);
+ 
+ /**
+  * 글 정보 수정
+  * @param qboardVO
+  * @return
+  */
+ public int update_text(QboardVO qboardVO);
+
 
 }

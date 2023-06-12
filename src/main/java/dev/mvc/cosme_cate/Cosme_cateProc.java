@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dev.mvc.tool.Tool;
+
 
   @Component("dev.mvc.cosme_cate.Cosme_cateProc") // Controller가 사용하는 이름
   public class Cosme_cateProc implements Cosme_cateProcInter {
@@ -27,10 +29,25 @@ import org.springframework.stereotype.Component;
     }
 
     // 종류별 리스트
-    public ArrayList<Cosme_cateVO> list_by_cate() {
-      ArrayList<Cosme_cateVO> list = this.cosme_cateDAO.list_by_cate();
+    @Override
+    public ArrayList<Cosme_cateVO> list_by_cate(int cosme_cateno) {
+      ArrayList<Cosme_cateVO> list = this.cosme_cateDAO.list_by_cate(cosme_cateno);
+      
+      for(Cosme_cateVO cosme_cateVO : list) {
+        String cosme_catename = cosme_cateVO.getCosme_catename();
+        
+        cosme_catename = Tool.convertChar(cosme_catename);
+        
+        cosme_cateVO.setCosme_catename(cosme_catename);
+      }
       
       return list;
+    }
+
+    @Override
+    public Cosme_cateVO read(int cosme_cateno) {
+      Cosme_cateVO cosme_cateVO = this.cosme_cateDAO.read(cosme_cateno);
+      return cosme_cateVO;
     }
   }
 
