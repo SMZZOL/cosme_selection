@@ -10,9 +10,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cosme.CosmeVO;
 import dev.mvc.master.MasterProcInter;
+import dev.mvc.tool.Tool;
 
 
 @Controller
@@ -24,6 +27,10 @@ public class Cosme_cateCont {
   @Autowired
   @Qualifier("dev.mvc.cosme_cate.Cosme_cateProc")
   private Cosme_cateProcInter cosme_cateProc;
+  
+  public Cosme_cateCont() {
+    System.out.println("-> Cosme_cateCont created.");
+  }
 
   
 
@@ -105,18 +112,48 @@ public ModelAndView create(HttpSession session) {
   * http://localhost:9093/cosme_cate/list_by_cate.do?cosme_cateno=1
   * @return
   */
-@RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
-public ModelAndView list_by_cateno(int cosme_cateno) {
- ModelAndView mav = new ModelAndView();
+ @RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
+ public ModelAndView list_by_cateno(@RequestParam(value = "cosme_cateno", required = false) Integer cosme_cateno) {
+     ModelAndView mav = new ModelAndView();
+
+     if (cosme_cateno != null) {
+         Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
+         mav.addObject("cosme_cateVO", cosme_cateVO);
+
+         ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate(cosme_cateno);
+         mav.addObject("list", list);
+     }
+
+     mav.setViewName("/cosme_cate/list_by_cate"); // /webapp/WEB-INF/views/contents/list_by_cateno.jsp
+
+     return mav;
+ }
+
+
+
+
  
- Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
- mav.addObject("cosme_cateVO", cosme_cateVO);
-     
- ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate(cosme_cateno);
- mav.addObject("list", list);
- 
- mav.setViewName("/cosme_cate/list_by_cate"); // /webapp/WEB-INF/views/contents/list_by_cateno.jsp
- 
- return mav;
-}
+ /**
+  * 조회
+  * @return
+  */
+ @RequestMapping(value="/cosme_cate/read.do", method=RequestMethod.GET )
+ public ModelAndView read(int cosme_cateno) {
+   ModelAndView mav = new ModelAndView();
+
+   Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
+   
+   String cosme_catename = cosme_cateVO.getCosme_catename();
+   
+   cosme_catename = Tool.convertChar(cosme_catename);  // 특수 문자 처리
+   
+   cosme_cateVO.setCosme_catename(cosme_catename);
+   
+  mav.addObject("cosme_cateVO", cosme_cateVO);
+   
+   mav.setViewName("/cosme_cate/read"); // /WEB-INF/views/contents/read.jsp
+       
+   return mav;
+ }
+
  }

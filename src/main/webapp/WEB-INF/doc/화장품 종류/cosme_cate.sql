@@ -44,7 +44,11 @@ grant select, update, insert, delete on cosme_cate to team2;
 SELECT cosme_cateno, cosme_catename
 FROM cosme_cate
 WHERE cosme_cateno = 1
-ORDER BY cosme_cateno DESC
+ORDER BY cosme_cateno DESC;
+
+SELECT cosme_cateno, cosme_catename
+FROM cosme_cate
+WHERE cosme_cateno = 1;
 
 
 commit;

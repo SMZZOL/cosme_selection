@@ -43,6 +43,12 @@ import dev.mvc.tool.Tool;
       
       return list;
     }
+
+    @Override
+    public Cosme_cateVO read(int cosme_cateno) {
+      Cosme_cateVO cosme_cateVO = this.cosme_cateDAO.read(cosme_cateno);
+      return cosme_cateVO;
+    }
   }
 
     

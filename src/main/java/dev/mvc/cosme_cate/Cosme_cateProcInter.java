@@ -22,4 +22,11 @@ public interface Cosme_cateProcInter {
    * @return
    */
   public ArrayList<Cosme_cateVO>list_by_cate(int cosme_cateno);
+  
+  /**
+   * 조회
+   * @param cosme_cateno
+   * @return
+   */
+  public Cosme_cateVO read(int cosme_cateno);
 }
