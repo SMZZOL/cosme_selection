@@ -61,6 +61,10 @@
 
     </ul>
   </fieldset>
+  
+  <div class="content_body_bottom">  
+    <button type="button" onclick="location.href='/qboard/list_all.do'" class="my-btn btn">목록</button>
+  </div>
 
 </DIV>
  
