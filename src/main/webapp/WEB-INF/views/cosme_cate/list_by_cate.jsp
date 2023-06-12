@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="dev.mvc.cosme_cate.Cosme_cateVO" %>
+
+
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
@@ -84,6 +86,9 @@
   </script>
 </head>
 <body>
+<%
+Cosme_cateVO cosme_cateVO = new Cosme_cateVO(); 
+%>
 <div id="buttondiv">
   <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">Skin/Toner</button>
   <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">Lotion</button>
@@ -91,6 +96,14 @@
   <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">Oil/balm</button>
   <button class="btn_type" onclick="buttonchange(this)" value="5" style="color: lightgray;">Ampoule/Serum</button>
 </div>
+<script>
+function buttonchange(button) {
+  var cosme_cateno = button.value; 
+  var link = "list_by_cate.do?cosme_cateno=" + cosme_cateno;
+  window.location.href = link; 
+}
+</script>
+
 </body>
 </html>
 <!-- sdf -->
