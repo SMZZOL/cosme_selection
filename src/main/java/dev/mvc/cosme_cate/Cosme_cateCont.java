@@ -129,31 +129,4 @@ public ModelAndView create(HttpSession session) {
      return mav;
  }
 
-
-
-
- 
- /**
-  * 조회
-  * @return
-  */
- @RequestMapping(value="/cosme_cate/read.do", method=RequestMethod.GET )
- public ModelAndView read(int cosme_cateno) {
-   ModelAndView mav = new ModelAndView();
-
-   Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
-   
-   String cosme_catename = cosme_cateVO.getCosme_catename();
-   
-   cosme_catename = Tool.convertChar(cosme_catename);  // 특수 문자 처리
-   
-   cosme_cateVO.setCosme_catename(cosme_catename);
-   
-  mav.addObject("cosme_cateVO", cosme_cateVO);
-   
-   mav.setViewName("/cosme_cate/read"); // /WEB-INF/views/contents/read.jsp
-       
-   return mav;
- }
-
  }
