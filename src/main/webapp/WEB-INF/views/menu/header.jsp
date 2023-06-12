@@ -26,8 +26,8 @@
     <button class="dropbtn">타입별 추천 <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/cosmetype/list_all.do">카테고리별 </a>
-      <a href="/cosme/list_by_type.do">타입별 </a>
+      <a href="/cosme/cosme_by_cate.do">종류별 </a>
+      <a href="/cosme/list_by_type.do">타입별(효과별)</a>
       <a href="">성분별 </a>
     </div>
   </div>
@@ -82,7 +82,6 @@
 </div>    --> 
 
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
-
              <!-- 회원 로그인/로그아웃 -->
           <c:choose>
              <c:when test="${sessionScope.id == null}">

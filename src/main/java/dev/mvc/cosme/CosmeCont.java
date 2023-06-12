@@ -316,5 +316,33 @@ public class CosmeCont {
       return mav;
     }
     
+    @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.GET)
+    public ModelAndView cosme_by_cate() {
+    	   ModelAndView mav = new ModelAndView();
+    	   
+    	        mav.setViewName("/cosme/list_by_cosme_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
+    	        
+    	        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all();
+    	        mav.addObject("list", list);   
+    	        
 
+    	   return mav;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.POST)
+    public String cosme_by_cate_sort(@RequestBody Map<String, Object> request) {
+    	String cosme_cateno = (String)request.get("value");
+    	System.out.println(cosme_cateno);
+    	String str = "";
+    	ArrayList<CosmeVO> list = this.cosmeProc.list_by_cate(cosme_cateno);
+    	for (CosmeVO cosmevo: list) {
+    		str +="    <div class=\"product-item\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    				+ "    </div>";
+    	}
+    	
+    	return str;
+    }
 }

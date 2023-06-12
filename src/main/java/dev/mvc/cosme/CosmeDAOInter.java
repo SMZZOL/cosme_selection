@@ -66,5 +66,6 @@ public interface CosmeDAOInter {
   
   public ArrayList<CosmeVO>list_by_type(String cosmetype);
   
+  public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
   
 }
