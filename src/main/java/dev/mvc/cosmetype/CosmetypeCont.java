@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cosme_cate.Cosme_cateProcInter;
+import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.master.MasterProcInter;
 
 
@@ -24,6 +26,10 @@ public class CosmetypeCont {
   @Autowired
   @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
   private CosmetypeProcInter cosmetypeProc;
+  
+  @Autowired
+  @Qualifier("dev.mvc.cosme_cate.Cosme_cateProc") 
+  private Cosme_cateProcInter cosme_cateProc;
 
   public CosmetypeCont() {
     System.out.println("-> CosmetypeCont created.");
@@ -64,9 +70,7 @@ public ModelAndView create(HttpSession session) {
    if (this.masterProc.isMaster(session) == true) {
      int cnt = this.cosmetypeProc.create(cosmetypeVO);
        if (cnt == 1) {
-
-         mav.setViewName("redirect:/cosmetype/list_all.do"); 
-         
+         mav.setViewName("redirect:/"); 
        } else {
          mav.addObject("code", "create_fail");
          mav.setViewName("/cosmetype/msg");
@@ -82,20 +86,21 @@ public ModelAndView create(HttpSession session) {
  
  /**
   * 목록
-  * http://localhost:9093/cosmetype/list.all
+  * http://localhost:9093/cosmetype/list_all.do
   * @return
   */
- @RequestMapping(value="/cosmetype/list_all.do", method=RequestMethod.GET)
- public ModelAndView list_all() {
-   ModelAndView mav = new ModelAndView();
-   
-        mav.setViewName("/cosmetype/list_all"); // /WEB-INF/views/cosme_cate/list_all.jsp
-        
-        ArrayList<CosmetypeVO> list = this.cosmetypeProc.list_all();
-        mav.addObject("list", list);   
-
-   return mav;
- }
+//@RequestMapping(value="/cosmetype/list_all.do", method=RequestMethod.GET)
+// public ModelAndView list_all() {
+//   ModelAndView mav = new ModelAndView();
+//   
+//        mav.setViewName("/cosmetype/list_all"); // /WEB-INF/views/cosme_cate/list_all.jsp
+//        
+//        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all();
+//        mav.addObject("list", list);   
+//        
+//
+//   return mav;
+//}
  
  
  

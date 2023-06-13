@@ -10,9 +10,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.cosme.CosmeVO;
 import dev.mvc.master.MasterProcInter;
+import dev.mvc.tool.Tool;
 
 
 @Controller
@@ -24,6 +27,10 @@ public class Cosme_cateCont {
   @Autowired
   @Qualifier("dev.mvc.cosme_cate.Cosme_cateProc")
   private Cosme_cateProcInter cosme_cateProc;
+  
+  public Cosme_cateCont() {
+    System.out.println("-> Cosme_cateCont created.");
+  }
 
   
 
@@ -102,19 +109,25 @@ public ModelAndView create(HttpSession session) {
  
  /**
   * 종류별 리스트
-  * http://localhost:9093/cosme_cate/list_by_cate.do
+  * http://localhost:9093/cosme_cate/list_by_cate.do?cosme_cateno=1
   * @return
   */
- // http://localhost:9093/cosme_cate/list_all.do
  @RequestMapping(value="/cosme_cate/list_by_cate.do", method=RequestMethod.GET)
- public ModelAndView list_by_cate() {
-   ModelAndView mav = new ModelAndView();
-   
-        mav.setViewName("/cosme_cate/list_by_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
-        
-        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate();
-        mav.addObject("list", list);   
+ public ModelAndView list_by_cateno(@RequestParam(value = "cosme_cateno", required = false) Integer cosme_cateno) {
+     ModelAndView mav = new ModelAndView();
 
-   return mav;
+     if (cosme_cateno != null) {
+         Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
+         mav.addObject("cosme_cateVO", cosme_cateVO);
+
+         ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate(cosme_cateno);
+         mav.addObject("list", list);
+     }
+
+     mav.setViewName("/cosme_cate/list_by_cate"); // /webapp/WEB-INF/views/contents/list_by_cateno.jsp
+
+     return mav;
+
  }
+
  }

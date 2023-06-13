@@ -92,5 +92,17 @@ public class CosmeProc implements CosmeProcInter {
     return list;
   }
   
+  
+  public ArrayList<CosmeVO>list_by_type(String cosmetype){
+	  ArrayList<CosmeVO> list = this.cosmeDAO.list_by_type(cosmetype);
+	  
+	  return list;
+  }
+  
+  public ArrayList<CosmeVO>list_by_cate(String cosme_cateno){
+	  ArrayList<CosmeVO> list = this.cosmeDAO.list_by_cate(cosme_cateno);
+	  
+	  return list;
+  }
 
 }

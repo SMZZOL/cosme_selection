@@ -31,6 +31,6 @@ public interface QboardDAOInter {
   * @param qboardno
   * @return
   */
- public int delete(int qboardno);
+public int delete(int qboardno);
 
 }

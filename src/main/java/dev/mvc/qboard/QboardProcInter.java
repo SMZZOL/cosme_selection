@@ -29,6 +29,7 @@ public interface QboardProcInter {
   * @param qboardno
   * @return
   */
- public int delete(int qboardno);
+public int delete(int qboardno);
+
 
 }

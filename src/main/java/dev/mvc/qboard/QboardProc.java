@@ -1,6 +1,7 @@
 package dev.mvc.qboard;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,12 +48,11 @@ public class QboardProc implements QboardProcInter {
     return qboardVO;
   }
   
-  /**
-   * 삭제
-   */
-  @Override
-  public int delete(int qboardno) {
-    int cnt = this.qboardDAO.delete(qboardno);
-    return cnt;
-  }
+ 
+@Override
+public int delete(int qboardno) {
+  int cnt = this.qboardDAO.delete(qboardno);
+  return cnt;
+}
+  
 }

@@ -15,7 +15,7 @@
   <select id="list_all" resultType="dev.mvc.notice.NoticeVO">
     SELECT noticeno, masterno, ntitle, ncontent, passwd, rdate
     FROM notice
-    ORDER BY noticeno ASC
+    ORDER BY noticeno DESC
   </select> 
      
   <!-- 공지사항 조회 -->

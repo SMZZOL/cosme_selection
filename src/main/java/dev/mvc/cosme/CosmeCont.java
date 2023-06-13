@@ -25,6 +25,8 @@ import dev.mvc.tool.Tool;
 import dev.mvc.tool.Upload;
 import dev.mvc.master.*;
 import dev.mvc.cosme_cate.*;
+import dev.mvc.cosmetype.CosmetypeProcInter;
+import dev.mvc.cosmetype.CosmetypeVO;
 import dev.mvc.ingred.*;
 
 @Controller
@@ -41,10 +43,23 @@ public class CosmeCont {
   @Qualifier("dev.mvc.master.MasterProc")
   private MasterProcInter masterProc;
   
+  @Autowired
+  @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
+  private CosmetypeProcInter cosmetypeproc;
+  
+  
+  
   public CosmeCont() {
     System.out.println("-> CosmeCont created.");
   }
 	
+//	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.GET)
+//	public ModelAndView list_by_type() {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/cosme/list_by_type");
+//		
+//		return mav;
+//	}
 	// http://localhost:9093/cosme/list_by_type.do 404
 	//	@PostMapping("/cosme/list_by_type.do")
 	@ResponseBody
@@ -62,7 +77,43 @@ public class CosmeCont {
 //		System.out.println("들어와따!");
 		
 		
-		return "성공이요";
+		return "  <div class=\"product-grid\">\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 1 이미지\">\r\n"
+				+ "      <h3>상품 1</h3>\r\n"
+				+ "      <p>상품 1 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 2 이미지\">\r\n"
+				+ "      <h3>상품 2</h3>\r\n"
+				+ "      <p>상품 2 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
+				+ "      <h3>상품 3</h3>\r\n"
+				+ "      <p>상품 3 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
+				+ "      <h3>상품 3</h3>\r\n"
+				+ "      <p>상품 3 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
+				+ "      <h3>상품 3</h3>\r\n"
+				+ "      <p>상품 3 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
+				+ "      <h3>상품 3</h3>\r\n"
+				+ "      <p>상품 3 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "    <div class=\"product-item\">\r\n"
+				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 4이미지\">\r\n"
+				+ "      <h3>상품 4</h3>\r\n"
+				+ "      <p>상품 4 설명</p>\r\n"
+				+ "    </div>\r\n"
+				+ "</div>";
 	}
 	
 //	/**
@@ -349,8 +400,11 @@ public class CosmeCont {
     public ModelAndView cosme_all() {
       ModelAndView mav = new ModelAndView();
       
-      ArrayList<CosmeVO> list = this.cosmeProc.cosme_all();
-      mav.addObject("list", list);
+      ArrayList<CosmeVO> cosme_list = this.cosmeProc.cosme_all();
+      mav.addObject("cosme_list", cosme_list);
+      
+      ArrayList<CosmetypeVO> type_list = this.cosmetypeproc.list_all();
+      mav.addObject("type_list", type_list);
       
       mav.setViewName("/cosme/list_by_type"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
       
@@ -365,5 +419,33 @@ public class CosmeCont {
       return mav;
     }
     
+    @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.GET)
+    public ModelAndView cosme_by_cate() {
+    	   ModelAndView mav = new ModelAndView();
+    	   
+    	        mav.setViewName("/cosme/list_by_cosme_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
+    	        
+    	        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all();
+    	        mav.addObject("list", list);   
+    	        
 
+    	   return mav;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.POST)
+    public String cosme_by_cate_sort(@RequestBody Map<String, Object> request) {
+    	String cosme_cateno = (String)request.get("value");
+    	System.out.println(cosme_cateno);
+    	String str = "";
+    	ArrayList<CosmeVO> list = this.cosmeProc.list_by_cate(cosme_cateno);
+    	for (CosmeVO cosmevo: list) {
+    		str +="    <div class=\"product-item\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    				+ "    </div>";
+    	}
+    	
+    	return str;
+    }
 }

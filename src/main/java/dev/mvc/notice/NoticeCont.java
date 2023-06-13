@@ -12,11 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import dev.mvc.cosme_cate.Cosme_cateVO;
 import dev.mvc.master.MasterProcInter;
-import dev.mvc.master.MasterVO;
+
 import dev.mvc.member.MemberProcInter;
-import dev.mvc.member.MemberVO;
+
 import dev.mvc.tool.Tool;
 
 @Controller
@@ -89,8 +88,7 @@ public class NoticeCont {
  
         
     } else {
-        mav.setViewName("/master/login_need");
-        mav.setViewName("redirect:/notice/msg.do"); 
+        mav.setViewName("/master/login_need"); 
       }
     
     return mav;
@@ -125,7 +123,7 @@ public class NoticeCont {
   public ModelAndView read(int noticeno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
-    if (masterProc.isMaster(session)) { // 관리자로 로그인한 경우        
+    if (masterProc.isMaster(session) || memberProc.isMember(session)) { // 관리자로 로그인한 경우        
     NoticeVO noticeVO = this.noticeProc.read(noticeno);
     
     String title = noticeVO.getNtitle();
@@ -145,30 +143,7 @@ public class NoticeCont {
 
     mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
     } else{ // 정상적인 로그인이 아닌 경우
-    	mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
-    }
-    
-    if (this.memberProc.isMember(session) == true) {   
-    NoticeVO noticeVO = this.noticeProc.read(noticeno);
-    
-    String title = noticeVO.getNtitle();
-    String content = noticeVO.getNcontent();
-    
-    title = Tool.convertChar(title);  // 특수 문자 처리
-    content = Tool.convertChar(content); 
-    
-    noticeVO.setNtitle(title);
-    noticeVO.setNcontent(content);  
-    
-    mav.addObject("noticeVO", noticeVO); // request.setAttribute("noticeVO", noticeVO);
-
-    // 관리자 번호: masterno -> MasterVO -> mname
-    String mname = this.masterProc.read(noticeVO.getMasterno()).getMname();
-    mav.addObject("mname", mname);
-
-    mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
-    } else{ // 정상적인 로그인이 아닌 경우
-    	 mav.setViewName("/member/login_need");
+    	mav.setViewName("/member/login_need"); // /WEB-INF/views/master/login_need.jsp
     }
     
     return mav;

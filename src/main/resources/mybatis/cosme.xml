@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY cosmeno DESC
   </select> 
   
-  <select id= "cosme_cate_all" resultType="dev.mvc.cosme.CosmeVO">
+  <select id= "list_by_cate" resultType="dev.mvc.cosme.CosmeVO">
      SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file, 
                cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
      FROM cosme
@@ -84,6 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM cosme_cate 
     ORDER BY cosme_cateno ASC
   </select>
+  
+  
 </mapper> 
 
 

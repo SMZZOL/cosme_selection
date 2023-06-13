@@ -17,27 +17,18 @@
 
 			<a href="/notice/list_all.do">공지사항</a>
 			<a href="/qboard/list_all.do">질문 게시판</a>
-			<a href="#">자유 게시판</a>
+			<a href="/fboard/list_all.do">자유 게시판</a>
 		</div>
 	</div> 
   
-      <div class="dropdown">
-    <button class="dropbtn">성분 검색 <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="/cosme/list_by_type.do">컨텐츠1 </a>
-      <a href="">컨텐츠2 </a>
-      <a href="">컨텐츠3 </a>
-    </div>
-  </div>
-  
+      <a class="dropdown-item" href=''>성분검색</a>   
     <div class="dropdown">
     <button class="dropbtn">타입별 추천 <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="/cosmetype/list_all.do">컨텐츠1 </a>
-      <a href="">컨텐츠2 </a>
-      <a href="">컨텐츠3 </a>
+      <a href="/cosme/cosme_by_cate.do">종류별 </a>
+      <a href="/cosme/list_by_type.do">타입별(효과별)</a>
+      <a href="">성분별 </a>
     </div>
   </div>
   
@@ -59,8 +50,7 @@
       String master_id = (String)session.getAttribute("master_id");
 
       if (master_id == null) { // 로그인 안된 경우
-      %>
-      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+      %>    
         <a href="/member/create.do" class="right btn btn-primary">회원 가입</a> 
        
                  
@@ -92,7 +82,6 @@
 </div>    --> 
 
 <a href="/master/login.do" class="menu_link" style="float:right;">M</a><span class='top_menu_sep'> </span>
-
              <!-- 회원 로그인/로그아웃 -->
           <c:choose>
              <c:when test="${sessionScope.id == null}">
@@ -105,8 +94,7 @@
               
       <%  
       } else { // 로그인 한 경우
-      %>
-      <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
+      %>    
           <div class="dropdown">
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
@@ -115,7 +103,6 @@
         <a href="/cosme/create.do">화장품 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/ingred/create.do">성분 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
       <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
-        <a href="/notice/create.do">공지사항 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         </div>
       </div>
  

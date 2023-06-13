@@ -2,10 +2,12 @@
 /* Table Name: 화장품 종류 */
 /**********************************/
 DROP TABLE cosme_cate;
-
 --자식 테이블이 있어도 무시하고 테이블 삭제
+select * from cosme;
+ INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
+    VALUES(cosme_seq.nextval, '12', '12', sysdate, '2', '2');
 DROP TABLE cosme_cate CASCADE CONSTRAINTS;
-
+select * from cosme_cate;
 CREATE TABLE cosme_cate(
     cosme_cateno                      NUMBER(10)     NOT NULL    PRIMARY KEY,
     cosme_catename                    VARCHAR2(20)     NOT NULL
@@ -66,6 +68,7 @@ DROP TABLE cosme;
 --자식 테이블이 있어도 무시하고 테이블 삭제
 DROP TABLE cosme CASCADE CONSTRAINTS;
 
+select * from cosme;
 CREATE TABLE COSME(
     COSMENO                           NUMBER(10)     NOT NULL    PRIMARY KEY,
     BRAND                             VARCHAR2(15)     NOT NULL,
@@ -96,7 +99,7 @@ COMMENT ON COLUMN COSME.cosme_file_size is '화장품 사진 크기';
 COMMENT ON COLUMN COSME.cosme_youtube is '화장품 유튜브 영상';
 
 DROP SEQUENCE cosme_seq;
-
+commit;
 CREATE SEQUENCE cosme_seq
   START WITH 1                -- 시작 번호
   INCREMENT BY 1            -- 증가값
