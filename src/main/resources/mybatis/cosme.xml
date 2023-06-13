@@ -26,6 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE cosme_cateno=#{cosme_cateno}  
   </select>
   
+    <!-- 일반적인 조회 -->
+  <select id="cosme_read" resultType="dev.mvc.cosme.CosmeVO" parameterType="int">
+    SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file, 
+              cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
+    FROM cosme
+    WHERE cosmeno = #{cosmeno}
+  </select>
+  
   <!-- 전체 수정 -->
   <update id="update_all_cosme" parameterType="dev.mvc.cosme.CosmeVO">
     UPDATE cosme

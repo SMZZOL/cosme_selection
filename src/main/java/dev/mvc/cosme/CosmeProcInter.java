@@ -31,6 +31,13 @@ public interface CosmeProcInter {
   public ArrayList<CosmeVO> cosme_cate_all();
   
   /**
+   * 조회
+   * @param cosmeno
+   * @return
+   */
+  public CosmeVO cosme_read(int cosmeno);
+  
+  /**
    * 전체 수정
    * @param cosmeVO
    * @return 수정된 레코드 갯수를 리턴
