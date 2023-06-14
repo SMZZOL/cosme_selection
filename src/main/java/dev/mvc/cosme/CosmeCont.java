@@ -291,7 +291,7 @@ public class CosmeCont {
    }
    
    /**
-    * 파일 수정 처리 http://localhost:9093/cosme/update.do
+    * 파일 수정 처리 http://localhost:9093/cosme/update_file.do
     * 
     * @return
     */
@@ -368,10 +368,10 @@ public class CosmeCont {
        // ------------------------------------------------------------------------------
        if (cnt == 1) {
         // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
-         mav.addObject("code", "create_success");
+         mav.addObject("code", "updatee_success");
          mav.setViewName("/cosme/msg");
        } else {
-         mav.addObject("code", "create_fail");
+         mav.addObject("code", "update_fail");
          mav.setViewName("/cosme/msg");
        }
        mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
