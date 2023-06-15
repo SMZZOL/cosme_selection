@@ -94,14 +94,12 @@
               
       <%  
       } else { // 로그인 한 경우
-<<<<<<< HEAD
+
       %>
       <a class="dropdown-item" href='/cosme_cate/list_all.do'>화장품 종류 목록</a>      
      <div class="dropdown">
-=======
-      %>    
+
           <div class="dropdown">
->>>>>>> 7dbe98d767c5be2dab811a229a9412eb843256ad
     <button class="dropbtn">등록<i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
@@ -111,25 +109,19 @@
       <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         </div>
       </div>
-<<<<<<< HEAD
+       </div>
+
       
       <div class="dropdown">
       <button class="dropbtn">목록<i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
         <A class="dropdown-item"  href='/master/list.do'>관리자 목록</A>
+        <a class="dropdown-item"  href="/member/list.do">회원 목록</a>
          </div>
       </div>
-=======
-            
-      <div class="dropdown">
-    <button class="dropbtn">관리자전용 <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="/member/list.do">회원</a>
-    </div>
-  </div>
->>>>>>> 7dbe98d767c5be2dab811a229a9412eb843256ad
+
+
  
       <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
       <%  
