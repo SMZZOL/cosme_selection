@@ -42,7 +42,7 @@ INSERT INTO master(managerno, id, passwd, mname, mdate, grade)
 VALUES(master_seq.nextval, 'master3', '1234', '관리자3', sysdate, 1);
 
 INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master2@gmail.com', '1234', '관리자2', sysdate, 1);
+VALUES(master_seq.nextval, 'master2@gmail.com', '1234', '관리자2', sysdate, 2);
 
 INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
 VALUES(master_seq.nextval, 'master3@gmail.com', '1234', '관리자3', sysdate, 1);
@@ -74,7 +74,7 @@ SELECT COUNT(*) as cnt FROM master WHERE id='master1' AND passwd='1234';
 DELETE FROM master;
 
 INSERT INTO master(masterno, id, passwd, mname, mdate, grade)
-VALUES(master_seq.nextval, 'master@', '121212', '관리자1', sysdate, 1);
+VALUES(master_seq.nextval, 'master@', '121212', '관리자2', sysdate, 1);
 
 commit;
 

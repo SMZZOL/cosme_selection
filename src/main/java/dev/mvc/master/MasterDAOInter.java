@@ -1,5 +1,7 @@
 package dev.mvc.master;
 
+import java.util.ArrayList;
+
 public interface MasterDAOInter {
 
   /**
@@ -23,5 +25,11 @@ public interface MasterDAOInter {
    */
   public MasterVO read(int masterno);
   
+  /**
+   *  목록
+   *  spring framework이 JDBC 관련 코드를 모두 생성해줌
+   * @return
+   */
+  public ArrayList<MasterVO> list();
 
 }

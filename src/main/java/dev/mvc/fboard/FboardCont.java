@@ -90,7 +90,7 @@ public class FboardCont {
         file1saved = Upload.saveFileSpring(mf, upDir); 
         
         if (Tool.isImage(file1saved)) { // 이미지인지 검사
-          // thumb 이미지 생성후 파일명 리턴됨, width: 200, height: 150
+          // thumb 이미지 생성 후 파일명 리턴됨, width: 200, height: 150
           thumb1 = Tool.preview(upDir, file1saved, 200, 150); 
         }
         
@@ -98,7 +98,7 @@ public class FboardCont {
       
       fboardVO.setFile1(file1);   // 순수 원본 파일명
       fboardVO.setFile1saved(file1saved); // 저장된 파일명(파일명 중복 처리)
-      fboardVO.setThumb1(thumb1);      // 원본이미지 축소판
+      fboardVO.setThumb1(thumb1);      // 원본 이미지 축소판
       fboardVO.setSize1(size1);  // 파일 크기
       // ------------------------------------------------------------------------------
       // 파일 전송 코드 종료

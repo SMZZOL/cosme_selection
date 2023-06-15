@@ -1,5 +1,6 @@
 package dev.mvc.master;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
@@ -195,6 +196,22 @@ public class MasterCont {
      System.out.println("-> mname: " + this.masterProc.read(masterno).getMname());
      return "";
    
+   }
+   
+   /**
+    * 모든 카테고리의 등록된 글목록, http://localhost:9093/master/list_all.do
+    * @return
+    */
+   @RequestMapping(value="/master/list.do", method=RequestMethod.GET)
+   public ModelAndView list_all() {
+     ModelAndView mav = new ModelAndView();
+     
+     ArrayList<MasterVO> list = this.masterProc.list();
+     mav.addObject("list", list);
+     
+     mav.setViewName("/master/list"); // /webapp/WEB-INF/views/master/list.jsp
+     
+     return mav;
    }
   
 }

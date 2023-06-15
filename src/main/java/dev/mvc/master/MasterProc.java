@@ -1,9 +1,13 @@
 package dev.mvc.master;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.master.MasterProc")
 public class MasterProc implements MasterProcInter{
@@ -43,6 +47,24 @@ public class MasterProc implements MasterProcInter{
     MasterVO masterVO = this.masterDAO.read(masterno);
     return masterVO;
   }
+
+@Override
+public ArrayList<MasterVO> list() {
+	ArrayList<MasterVO> list = this.masterDAO.list();
+	
+    // for문을 사용하여 객체를 추출, Call By Reference 기반의 원본 객체 값 변경
+    for (MasterVO masterVO : list) {
+      String mname = masterVO.getMname();
+      int grade = masterVO.getGrade();
+      
+      mname = Tool.convertChar(mname);  // 특수 문자 처리
+      
+      masterVO.setMname(mname);
+      masterVO.setGrade(grade);  
+
+    }
+	return list;
+}
   
 
 }

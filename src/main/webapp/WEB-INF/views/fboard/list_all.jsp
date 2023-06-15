@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dev.mvc.fboard.FboardVO" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -48,7 +47,8 @@
   <c:set var="fboardno" value="${fboardVO.fboardno }" />
   <c:set var="ftitle" value="${fboardVO.ftitle }" />        
   <c:set var="fcontent" value="${fboardVO.fcontent }" />
-    <c:set var="rdate" value="${fboardVO.rdate.substring(0, 10) }" />
+  <c:set var="thumb1" value="${fboardVO.thumb1 }" />
+  <c:set var="rdate" value="${fboardVO.rdate.substring(0, 10) }" />
   
    <tr style="height: 112px;" onclick="location.href='./read.do?fboardno=${fboardno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
           <td style='vertical-align: middle; text-align: center; '>
@@ -66,11 +66,11 @@
           <td style='vertical-align: middle; '>
             <div style='font-weight: bold;'><a href="./read.do?fboardno=${fboardno }&now_page=${param.now_page == null ? 1 : param.now_page }">${ftitle }</a></div>
               <c:choose> 
-              <c:when test="${fcontent.length() > 160 }"> <%-- 160자 이상이면 160자만 출력 --%>
-                  <a href="./read.do?fboardno=${fboardno }&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }">${fcontent.substring(0, 160)}.....</a>
+              <c:when test="${fcontent.length() > 50 }"> <%-- 50자 이상이면 50자만 출력 --%>
+                  ${fcontent.substring(0, 50)}.....
               </c:when>
-              <c:when test="${fcontent.length() <= 160 }">
-                  <a href="./read.do?fboardno=${fboardno }&word=${param.word }&now_page=${param.now_page == null ? 1 : param.now_page }">${fcontent}</a>
+              <c:when test="${fcontent.length() <= 50 }">
+                  ${fcontent}
               </c:when>
             </c:choose>
           </td>
@@ -81,8 +81,7 @@
           
           <c:choose>
             <c:when test="${sessionScope.master_id != null }"> 
-              <td style='vertical-align: middle; text-align: center;'>
-              
+              <td style='vertical-align: middle; text-align: center;'>              
                 <A href="/delete/update.do?fboardno=${fboardno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/fboard/images/delete.png" class="icon"></A>
               </td>
             </c:when>
