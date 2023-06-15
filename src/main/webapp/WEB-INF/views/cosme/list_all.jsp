@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/cosme/list_all.jsp
+=======
 <%@ page import="dev.mvc.cosme_cate.Cosme_cateVO" %>
+
+
+>>>>>>> 5b46a4cd8427fdeed9b35ed64cc0701dae260735:src/main/webapp/WEB-INF/views/cosme_cate/list_by_cate.jsp
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
@@ -38,13 +43,15 @@
               }
             }
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/cosme_cate/list_by_cate.do", true);
+            xhr.open("POST", "/cosme/list_by_type.do", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
               if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log("전송 성공");
                 var response = xhr.responseText; // 처리된 결과 문자열을 받음
                 console.log("받은 결과 문자열: " + response);
+                var div = document.getElementById("panel");
+                div.innerHTML = response;
               }else{
                   console.log("전송 실패");
                   } 
@@ -61,6 +68,8 @@
 </style>
 <body>
   <c:import url="../menu/header.jsp" />
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/cosme/list_all.jsp
+=======
   <style>
     .btn_type {
       color: lightgray;
@@ -84,25 +93,41 @@
   </script>
 </head>
 <body>
+<%
+Cosme_cateVO cosme_cateVO = new Cosme_cateVO(); 
+%>
+>>>>>>> 5b46a4cd8427fdeed9b35ed64cc0701dae260735:src/main/webapp/WEB-INF/views/cosme_cate/list_by_cate.jsp
 <div id="buttondiv">
-  <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">Skin/Toner</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">Lotion</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="3" style="color: lightgray;">Cream</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">Oil/balm</button>
-  <button class="btn_type" onclick="buttonchange(this)" value="5" style="color: lightgray;">Ampoule/Serum</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="1" style="color: lightgray;">수분/진정</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="2" style="color: lightgray;">수딩/미백</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="3" style="color: lightgray;">주름 개선</button>
+  <button class="btn_type" onclick="buttonchange(this)" value="4" style="color: lightgray;">열감</button>
+  <!--라디오 버튼 (인기순 등)-->
 </div>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/views/cosme/list_all.jsp
+<h1 id="panel">여기랑게</h1>
+=======
+<script>
+function buttonchange(button) {
+  var cosme_cateno = button.value; 
+  var link = "list_by_cate.do?cosme_cateno=" + cosme_cateno;
+  window.location.href = link; 
+}
+</script>
+
 </body>
 </html>
+>>>>>>> 5b46a4cd8427fdeed9b35ed64cc0701dae260735:src/main/webapp/WEB-INF/views/cosme_cate/list_by_cate.jsp
 <!-- sdf -->
 <div id="grid">
   <div class="product-grid">
     <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 1 이미지">
+      <img class="img-90" src="" alt="상품 1 이미지">
       <h3>상품 1</h3>
       <p>상품 1 설명</p>
     </div>
     <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 2 이미지">
+      <img class="img-90" src="" alt="상품 2 이미지">
       <h3>상품 2</h3>
       <p>상품 2 설명</p>
     </div>
@@ -127,7 +152,7 @@
       <p>상품 3 설명</p>
     </div>
     <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 4이미지">
+      <img class="img-90" src="" alt="상품 4이미지">
       <h3>상품 4</h3>
       <p>상품 4 설명</p>
     </div>

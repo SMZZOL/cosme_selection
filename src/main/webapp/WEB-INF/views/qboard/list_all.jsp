@@ -36,15 +36,15 @@
   <DIV class='menu_line'></DIV>
   
   <table class="class='table table-hover" style='width: 100%;'>
-          <col style="width: 10%;"></col>
-          <col style="width: 80%;"></col>
-          <col style="width: 10%;"></col>        
+          <col style="width: 20%;"></col>
+          <col style="width: 40%;"></col>
+          <col style="width: 20%;"></col>        
 
 
       <tr>
         <th style='text-align: center;'>순서</th>
-        <th style='text-align: center;'>제목</th>
-        <th style='text-align: left;'>작성일</th>
+        <th style='text-align: left;'>제목</th>
+        <th style='text-align: center;'>작성일</th>
       </tr>
     
 
@@ -60,11 +60,11 @@
             <IMG src="/qboard/images/show.png" style="width: 15px; height: 15px;">          
           </td>  
           
-          <td style='vertical-align: middle; text-align: center;'>
+          <td style='vertical-align: middle;'>
             <div style='font-weight: bold;'>${qtitle }</div>
           </td>
           
-          <td style='vertical-align: middle; text-align: left;'>
+          <td style='vertical-align: middle; text-align: center;'>
             <div style='font-weight: bold;'>${rdate }</div>
           </td>
           

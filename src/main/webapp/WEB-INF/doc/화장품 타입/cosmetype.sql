@@ -2,6 +2,7 @@
 /* Table Name: 화장품/타입 릴레이션 */
 /**********************************/
 DROP TABLE cosmetype;
+select * from cosmetype;
 
 CREATE TABLE cosmetype(
 		cosmetypeno NUMBER(10) NOT NULL PRIMARY KEY,

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -10,14 +11,11 @@
 <%-- /static/css/style.css --%> 
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
 </head> 
 <body>
-<c:import url="/menu/top.do" />
+<c:import url="../menu/header.jsp" />
 
+<div class='content_body'>
 <DIV class='title_line'>알림</DIV>
 
 <DIV class='message'>
@@ -31,7 +29,7 @@
           <LI class='li_none'>
             <button type='button' 
                          onclick="location.href='./login.do?id=${param.id}'"
-                         class="btn btn-info btn-sm">로그인</button>
+                         class="my-btn btn">로그인</button>
           </LI> 
         </c:when>
         
@@ -122,7 +120,7 @@
   </fieldset>
 
 </DIV>
-
+</div>
 <jsp:include page="../menu/footer.jsp" flush='false' />
 </body>
 

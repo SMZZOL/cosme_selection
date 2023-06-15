@@ -129,9 +129,9 @@ public class MemberCont {
       mav.setViewName("/member/list"); // /webapp/WEB-INF/views/member/list.jsp
 
     } else {
-      mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
+      mav.setViewName("/master/login_need"); // /WEB-INF/views/admin/login_need.jsp
     }
-        
+     
     return mav;
   }  
  

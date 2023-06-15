@@ -30,6 +30,13 @@ public interface CosmeDAOInter {
   public ArrayList<CosmeVO> cosme_cate_all();
   
   /**
+   * 조회
+   * @param cosmeno
+   * @return
+   */
+  public CosmeVO cosme_read(int cosmeno);
+  
+  /**
    * 전체 수정
    * @param cosmeVO
    * @return 수정된 레코드 갯수를 리턴
@@ -63,5 +70,9 @@ public interface CosmeDAOInter {
    */
   public ArrayList<CosmeVO>cate_all();
   
+  
+  public ArrayList<CosmeVO>list_by_type(String cosmetype);
+  
+  public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
   
 }

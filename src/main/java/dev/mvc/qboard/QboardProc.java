@@ -48,21 +48,11 @@ public class QboardProc implements QboardProcInter {
     return qboardVO;
   }
   
-  /**
-   * 삭제
-   */
-  @Override
-  public int delete(int qboardno) {
-    int cnt = this.qboardDAO.delete(qboardno);
-    return cnt;
-  }
-  /**
-   * 글 수정
-   */
-  @Override
-  public int update_text(QboardVO qboardVO) {
-    int cnt = this.qboardDAO.update_text(qboardVO);
-    return cnt;
-  }
+ 
+@Override
+public int delete(int qboardno) {
+  int cnt = this.qboardDAO.delete(qboardno);
+  return cnt;
+}
   
 }
