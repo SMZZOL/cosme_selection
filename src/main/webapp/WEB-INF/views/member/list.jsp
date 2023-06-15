@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -14,7 +14,6 @@
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
 <script type="text/javascript">
@@ -25,21 +24,21 @@
 </head> 
  
 <body>
-<c:import url="/menu/top.do" />
- 
+<c:import url="../menu/header.jsp" />
+
+    <DIV class='content_body'>
+   
   <DIV class='title_line'>
     회원(관리자 전용)
   </DIV>
 
-  <DIV class='content_body'>
-
     <ASIDE class="aside_right">
+     <br>
       <A href="javascript:location.reload();">새로고침</A>
       <span class='menu_divide' >│</span> 
       <A href='./create.do'>회원 가입</A>
-      <span class='menu_divide' >│</span> 
-      <A href='./list.do'>목록</A>
-    </ASIDE> 
+
+</ASIDE> 
    
     <div class='menu_line'></div>
     
@@ -108,8 +107,8 @@
   </TABLE>
    
   <DIV class='bottom_menu'>
-    <button type='button' onclick="location.href='./create.do'" class="btn btn-info">등록</button>
-    <button type='button' onclick="location.reload();" class="btn btn-info">새로 고침</button>
+    <button type='button' onclick="location.href='./create.do'" class="my-btn btn">등록</button>
+    <button type='button' onclick="location.reload();" class="my-btn btn">새로 고침</button>
   </DIV>
 </DIV>
  

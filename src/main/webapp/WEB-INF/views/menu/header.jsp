@@ -105,6 +105,14 @@
       <a href="/cosmetype/create.do">화장품 타입 등록 </a> <!--  관리자 로그인시에만 보이는 메뉴 -->
         </div>
       </div>
+            
+      <div class="dropdown">
+    <button class="dropbtn">관리자전용 <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/member/list.do">회원</a>
+    </div>
+  </div>
  
       <a href="/master/logout.do" class="menu_link" style="float: right;">M <%=master_id %> 로그아웃</a><span class='top_menu_sep'> </span>
       <%  
