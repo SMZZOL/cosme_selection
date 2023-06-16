@@ -24,18 +24,20 @@ public interface CosmeProcInter {
   public  ArrayList<CosmeVO> cosme_all();
   
   /**
+   * 조회
+   * spring framework이 JDBC 관련 코드를 모두 생성해줌
+   * @param cosmeno
+   * @return
+   */
+  public CosmeVO cosme_read(int cosmeno);
+  
+  /**
    * 화장품 리스트별 글목록
    * spring framework이 JDBC 관련 코드를 모두 생성해줌
    * @return
    */
   public ArrayList<CosmeVO> cosme_cate_all();
   
-  /**
-   * 조회
-   * @param cosmeno
-   * @return
-   */
-  public CosmeVO cosme_read(int cosmeno);
   
   /**
    * 전체 수정
@@ -43,6 +45,20 @@ public interface CosmeProcInter {
    * @return 수정된 레코드 갯수를 리턴
    */
   public int update_all_cosme(CosmeVO cosmeVO);
+  
+  /**
+   * 파일 제외 수정
+   * @param cosmeVO
+   * @return 수정된 레코드 갯수를 리턴
+   */
+  public int update_cosme(CosmeVO cosmeVO);
+  
+  /**
+   * 파일 수정
+   * @param cosmeVO
+   * @return 수정된 레코드 갯수를 리턴
+   */
+  public int update_file_cosme(CosmeVO cosmeVO);
   
   /**
    * 삭제

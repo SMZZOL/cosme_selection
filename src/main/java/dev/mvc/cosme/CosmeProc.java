@@ -66,6 +66,20 @@ public class CosmeProc implements CosmeProcInter {
   }
   
   @Override
+  public int update_cosme(CosmeVO cosmeVO) {
+    int cnt = this.cosmeDAO.update_cosme(cosmeVO);
+    
+    return cnt;
+  }
+  
+  @Override
+  public int update_file_cosme(CosmeVO cosmeVO) {
+    int cnt = this.cosmeDAO.update_file_cosme(cosmeVO);
+    
+    return cnt;
+  }
+  
+  @Override
   public int delete(int cosmeno) {
     int cnt = this.cosmeDAO.delete(cosmeno);
     

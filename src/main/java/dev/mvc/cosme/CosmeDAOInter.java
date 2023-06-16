@@ -44,6 +44,20 @@ public interface CosmeDAOInter {
   public int update_all_cosme(CosmeVO cosmeVO);
   
   /**
+   * 파일 제외 수정
+   * @param cosmeVO
+   * @return 수정된 레코드 갯수를 리턴
+   */
+  public int update_cosme(CosmeVO cosmeVO);
+  
+  /**
+   * 파일 수정
+   * @param cosmeVO
+   * @return 수정된 레코드 갯수를 리턴
+   */
+  public int update_file_cosme(CosmeVO cosmeVO);
+  
+  /**
    * 삭제
    * @param cosmeno
    * @return 삭제된 레코드 갯수를 리턴

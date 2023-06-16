@@ -20,9 +20,9 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
-  <DIV class='title_line'>화장품 등록</DIV>
+  <DIV class='title_line'>화장품 수정</DIV>
   
-  <FORM name='frm' method='POST' action='/cosme/create.do' enctype="multipart/form-data">
+  <FORM name='frm' method='POST' action='/cosme/update.do' enctype="multipart/form-data">
     <input type="hidden" name="cosmeno" value="${param.cosmeno }">
     
     <div>
@@ -41,11 +41,6 @@
        <input type='text' name='cosme_youtube' value='${cosme_youtube }' 
                  class="form-control" style='width: 100%;'>
     </div>
-    <div>
-       <label>이미지</label>
-       <input type='file' class="form-control" name='file1MF' id='file1MF' 
-                 value='${file1MF }' placeholder="파일 선택">
-    </div>   
     <div>
         <label>화장품 카테고리</label>
         <select name='cosme_cateno' >
