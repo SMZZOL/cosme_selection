@@ -62,7 +62,7 @@ public interface CosmeDAOInter {
    * @param cosmeno
    * @return 삭제된 레코드 갯수를 리턴
    */
-  public int delete(int csomeno);
+  public int cosme_delete(int csomeno);
   
   /**
    * 글수 증가 

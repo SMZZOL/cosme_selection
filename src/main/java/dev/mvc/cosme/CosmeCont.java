@@ -514,4 +514,37 @@ public class CosmeCont {
     	
     	return str;
     }
+    
+    /**
+     * 삭제 처리 http://localhost:9093/cosme/delete.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/cosme/delete.do", method = RequestMethod.POST)
+    public ModelAndView cosme_delete(CosmeVO cosmeVO) {
+      ModelAndView mav = new ModelAndView();
+      
+      // -------------------------------------------------------------------
+      // 파일 삭제 시작
+      // -------------------------------------------------------------------
+      // 삭제할 파일 정보를 읽어옴.
+      CosmeVO cosmeVO_read = cosmeProc.cosme_read(cosmeVO.getCosmeno());
+      
+      String cosme_file_saved = cosmeVO.getCosme_file_saved();
+      String cosme_file_preview = cosmeVO.getCosme_file_preview();
+      
+      String uploadDir = Cosme.getUploadDir();
+      Tool.deleteFile(uploadDir, cosme_file_saved); // 실제 저장된 파일삭제
+      Tool.deleteFile(uploadDir, cosme_file_preview); // preview 이미지 삭제
+      // -------------------------------------------------------------------------
+      // 파일 삭제 종료
+      // -------------------------------------------------------------------------
+      
+      this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); // DBMS 삭제
+     
+      mav.addObject("cosmeno", cosmeVO.getCosmeno());
+      mav.setViewName("redirect:/cosme/list_all.do");
+      
+      return mav;
+    }
 }
