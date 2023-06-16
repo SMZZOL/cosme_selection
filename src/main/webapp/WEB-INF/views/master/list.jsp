@@ -43,7 +43,7 @@
         <th class='th_bs' style='text-align: center;'>구분</th>
         <th class='th_bs' style='text-align: left;'>아이디</th>
         <th class='th_bs' style='text-align: left;'>이름</th>
-        <th class='th_bs' style='text-align: center;'>등급</th>
+        <th class='th_bs' style='text-align: center;'>등록일</th>
       </tr>
 
 <tbody>
@@ -51,7 +51,7 @@
   <c:set var="masterno" value="${masterVO.masterno }" />
     <c:set var="id" value="${masterVO.id }" /> 
   <c:set var="mname" value="${masterVO.mname }" />        
-  <c:set var="grade" value="${masterVO.grade }" />
+  <c:set var="mdate" value="${masterVO.mdate.substring(0, 10) }" />
   
         <tr style="height: 112px;">
           <td style='vertical-align: middle; text-align: center; '>
@@ -70,7 +70,7 @@
           
           
             <td style='vertical-align: middle; text-align: center;'>
-            <div style='font-weight: bold;'>${grade }</div>
+            <div style='font-weight: bold;'>${mdate }</div>
           </td>
           
 
