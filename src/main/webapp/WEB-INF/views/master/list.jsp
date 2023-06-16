@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="java.util.ArrayList" %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -11,6 +10,11 @@
 <title>관리자 목록</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
+
+<script type="text/JavaScript"
+          src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
 </head> 
  
@@ -36,10 +40,10 @@
           <col style="width: 20%;"></col>       
 
       <tr>
-        <th style='text-align: center;'>구분</th>
-        <th style='text-align: left;'>아이디</th>
-        <th style='text-align: left;'>이름</th>
-        <th style='text-align: center;'>등급</th>
+        <th class='th_bs' style='text-align: center;'>구분</th>
+        <th class='th_bs' style='text-align: left;'>아이디</th>
+        <th class='th_bs' style='text-align: left;'>이름</th>
+        <th class='th_bs' style='text-align: center;'>등급</th>
       </tr>
 
 <tbody>

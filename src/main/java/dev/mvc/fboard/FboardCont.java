@@ -152,5 +152,43 @@ public class FboardCont {
     return mav;
   }
   
+  /**
+   * 조회
+   *  http://localhost:9093/fboard/read.do
+   * @return
+   */
+  @RequestMapping(value="/fboard/read.do", method=RequestMethod.GET )
+  public ModelAndView read(int fboardno, HttpSession session) {
+    ModelAndView mav = new ModelAndView();
+
+    if (masterProc.isMaster(session) || memberProc.isMember(session)) { // 관리자, 회원으로 로그인한 경우        
+    	FboardVO fboardVO = this.fboardProc.read(fboardno);
+    
+    	String title = fboardVO.getFtitle();
+    	String content = fboardVO.getFcontent();
+    
+    	title = Tool.convertChar(title);  // 특수 문자 처리
+    	content = Tool.convertChar(content); 
+    
+    	fboardVO.setFtitle(title);
+    	fboardVO.setFcontent(content);  
+    
+    	long size1 = fboardVO.getSize1();
+    	fboardVO.setSize1_label(Tool.unit(size1)); 
+    
+    	mav.addObject("fboardVO", fboardVO); // request.setAttribute("fboardVO", fboardVO);
+
+    	// 회원 번호: memberno -> MemberVO -> mname
+//    	String mname = this.memberProc.read(fboardVO.getMemberno()).getMname();
+//    	mav.addObject("mname", mname);
+
+    	mav.setViewName("/fboard/read"); // /WEB-INF/views/fboard/read.jsp
+    	} else{ // 정상적인 로그인이 아닌 경우
+    		mav.setViewName("/member/login_need"); // /WEB-INF/views/member/login_need.jsp
+    		}
+    
+    	return mav;
+  }
+  
 
 }
