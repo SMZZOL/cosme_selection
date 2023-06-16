@@ -1,4 +1,5 @@
 DROP TABLE member;
+DROP TABLE member CASCADE CONSTRAINTS;
 /**********************************/
 /* Table Name: 회원 */
 /**********************************/
@@ -89,7 +90,11 @@ COMMIT;
 
 SELECT memberno, id, passwd,email, mname, tel, zipcode, address1, address2, mdate, grade
 FROM member
-ORDER BY grade ASC, id ASC;
+ORDER BY memberno ASC, id ASC;
+
+SELECT memberno, id, passwd,email, mname, tel, zipcode, address1, address2, mdate, grade
+FROM member
+ORDER BY memberno ASC;
 
 3. 조회
  
