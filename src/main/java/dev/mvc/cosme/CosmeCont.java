@@ -47,6 +47,10 @@ public class CosmeCont {
   @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
   private CosmetypeProcInter cosmetypeproc;
   
+  @Autowired
+  @Qualifier("dev.mvc.ingred.IngredProc")
+  private IngredProcInter ingredproc;
+  
   
   
   public CosmeCont() {
@@ -126,13 +130,13 @@ public class CosmeCont {
 	  public ModelAndView create(HttpSession session) {
   	  ModelAndView mav = new ModelAndView();
      
-  	  ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+  	  ArrayList<Cosme_cateVO> cosme_cate_list = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+  	  ArrayList<CosmetypeVO> coseme_type_list= this.cosmetypeproc.list_all();
+  	  ArrayList<IngredVO> ingred_list = this.ingredproc.ingred_list();
   	  
-  	  for (Cosme_cateVO item : list2) {
-//  	    System.out.println("화장품 종류 이름: " + item.getCosme_catename());
-  	  }
-
-  	  mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
+  	  mav.addObject("cosme_cate_list", cosme_cate_list); // 모델에 카테고리 목록 추가
+  	  mav.addObject("coseme_type_list", coseme_type_list); // 모델에 화장품 타입 추가
+  	  mav.addObject("ingred_list", ingred_list); // 모델에 화장품 성분 추가
       mav.setViewName("/cosme/create"); // create.jsp
       
       if (this.masterProc.isMaster(session) == true) {
