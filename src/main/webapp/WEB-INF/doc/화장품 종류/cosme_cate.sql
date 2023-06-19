@@ -37,7 +37,7 @@ SET cosme_catename = '오일, 밤'
 WHERE cosme_cateno = 5;
 
 DELETE FROM cosme_cate
-WHERE cosme_cateno = 5;
+WHERE cosme_cateno = 3;
 
 grant select, update, insert, delete on cosme_cate to team2;
 
