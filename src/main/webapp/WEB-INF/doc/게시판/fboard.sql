@@ -8,6 +8,8 @@ CREATE TABLE fboard(
         memberno            NUMBER(10)     NOT NULL , -- FK
         ftitle             VARCHAR(50)    NOT NULL,
         fcontent           CLOB    NOT NULL,
+        passwd              VARCHAR2(15)         NOT NULL,
+        word                VARCHAR2(100)         NULL ,
         rdate               DATE           NOT NULL,
         file1                VARCHAR(100)          NULL,  -- 원본 파일명 image
         file1saved            VARCHAR(100)          NULL,  -- 저장된 파일명, image
@@ -22,6 +24,8 @@ COMMENT ON COLUMN fboard.noticeno is '자유게시판 번호';
 COMMENT ON COLUMN fboard.memberno is '회원 번호';
 COMMENT ON COLUMN fboard.ftitle is '자유게시판 제목';
 COMMENT ON COLUMN fboard.fcontent is '자유게시판 내용';
+COMMENT ON COLUMN fboard.passwd is '패스워드';
+COMMENT ON COLUMN fboard.word is '검색어';
 COMMENT ON COLUMN fboard.rdate is '등록일';
 COMMENT ON COLUMN fboard.file1 is '메인 이미지';
 COMMENT ON COLUMN fboard.file1saved is '실제 저장된 메인 이미지';
@@ -37,8 +41,8 @@ CREATE SEQUENCE fboard_seq
   CACHE 2                        -- 2번은 메모리에서만 계산
   NOCYCLE;                      -- 다시 1부터 생성되는 것을 방지
 
-INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1)
-VALUES(fboard_seq.nextval, 1, '자유', '아무 글 작성', sysdate, 'cosme.jpg', 'cosme_1.jpg', 'cosme_t.jpg', 1000);
+INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, passwd, word, rdate, file1, file1saved, thumb1, size1)
+VALUES(fboard_seq.nextval, 1, '자유', '아무 글 작성', '123', '드라마,K드라마,넷플릭스', sysdate, 'cosme.jpg', 'cosme_1.jpg', 'cosme_t.jpg', 1000);
 
 commit;     
 

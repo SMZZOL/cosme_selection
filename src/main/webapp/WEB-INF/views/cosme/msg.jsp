@@ -37,6 +37,26 @@
               <span class="span_fail">새로운 화장품 등록에 성공했습니다.</span>
             </LI>                                                                      
           </c:when>
+           <c:when test="${code == 'update_file_success'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 이미지 수정에 성공했습니다.</span>
+            </LI>                                                                      
+          </c:when>
+           <c:when test="${code == 'update_file_fail'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 이미지 수정에 실패했습니다.</span>
+            </LI>                                                                      
+          </c:when>
+          <c:when test="${code == 'update_success'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 수정에 성공했습니다.</span>
+            </LI>                                                                      
+          </c:when>
+           <c:when test="${code == 'update_fail'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 수정에 실패했습니다.</span>
+            </LI>                                                                      
+          </c:when>
         </c:choose>
 
       <LI class='li_none'>
@@ -47,6 +67,7 @@
             </c:when>
         </c:choose>
         
+        <button type='button' onclick="location.href='./update.do?cosmeno=${cosmeno}'" class="btn btn-info btn-sm">기존 화장품 수정</button>
         <button type='button' onclick="location.href='./create.do?cosmeno=${cosmeno}'" class="btn btn-info btn-sm">새로운 화장품 등록</button>
       </LI>
     </UL>

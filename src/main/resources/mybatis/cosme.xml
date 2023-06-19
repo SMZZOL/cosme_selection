@@ -42,6 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE cosmeno = #{cosmeno}
   </update>
   
+    <!-- 파일 제외 수정 -->
+  <update id="update_cosme" parameterType="dev.mvc.cosme.CosmeVO">
+    UPDATE cosme
+    SET brand=#{brand}, cosmename=#{cosmename}, rdate=sysdate, masterno=#{masterno}, cosme_cateno=#{cosme_cateno}, 
+          cosme_youtube=#{cosme_youtube}
+    WHERE cosmeno = #{cosmeno}
+  </update>
+  
+    <!-- 파일 제외 수정 -->
+  <update id="update_file_cosme" parameterType="dev.mvc.cosme.CosmeVO">
+    UPDATE cosme
+    SET cosme_file=#{cosme_file}, cosme_file_saved=#{cosme_file_saved}, cosme_file_preview=#{cosme_file_preview}, cosme_file_size=#{cosme_file_size}
+    WHERE cosmeno = #{cosmeno}
+  </update>
+  
   <!-- 화장품 삭제 -->
   <delete id="cosme_delete" parameterType="int">
     DELETE FROM cosme

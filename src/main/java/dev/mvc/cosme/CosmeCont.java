@@ -148,6 +148,7 @@ public class CosmeCont {
       return mav;
 	  }
     
+	  // 등록 처리
 //    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
 	 @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
     public ModelAndView create(CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
@@ -228,6 +229,35 @@ public class CosmeCont {
       return mav; // forward
     }
     
+	 // http://localhost:9093/cosme/cosme_read.do
+	 /**
+	  * 조회
+	  * @return
+	  */
+	 @RequestMapping(value="/cosme/cosme_read.do", method=RequestMethod.GET)
+	 public ModelAndView comse_read(int cosmeno) {
+	   ModelAndView mav = new ModelAndView();
+	   
+	   CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
+	   
+	   String brand = cosmeVO.getBrand();
+	   String cosmename = cosmeVO.getCosmename();
+	   String cosme_youtube = cosmeVO.getCosme_youtube();
+	   
+	   cosmeVO.setBrand(brand);
+	   cosmeVO.setCosmename(cosmename);
+	   cosmeVO.setCosme_youtube(cosme_youtube);
+	   
+	   long cosme_file_size = cosmeVO.getCosme_file_size();
+	   cosmeVO.setCosme_file_size(cosme_file_size);
+	   
+	   mav.addObject("cosmeVO", cosmeVO); // request.setAttribute("cosmeVO", cosmeVO);
+	   
+	   return mav;
+	   
+	 }
+	 
+	 
 //    /**
 //     * 화장품 등록 창에서 카테고리 목록 표시
 //     * http://localhost:9093/cosme/create.do
@@ -253,7 +283,7 @@ public class CosmeCont {
 //  * @return
 //  */
    @RequestMapping(value="/cosme/update.do", method = RequestMethod.GET)
-   public ModelAndView update_all_cosme(int cosmeno) {
+   public ModelAndView update_cosme(int cosmeno) {
      ModelAndView mav = new ModelAndView();
      
      CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
@@ -277,22 +307,58 @@ public class CosmeCont {
 //    * @return
 //    */
    @RequestMapping(value="/cosme/update.do", method=RequestMethod.POST)
-   public ModelAndView update_all_cosme(HttpSession session, CosmeVO cosmeVO) {
+   public ModelAndView update_cosme(HttpSession session, CosmeVO cosmeVO) {
 
      ModelAndView mav = new ModelAndView();
      mav.setViewName("/cosme/msg");
 
      if (this.masterProc.isMaster(session) == true) {
-       this.cosmeProc.update_all_cosme(cosmeVO);
+       int count = this.cosmeProc.update_cosme(cosmeVO);
        
-       mav.addObject("cosmeno", cosmeVO.getCosmeno());
-       mav.setViewName("/cosme/update");
-     } else {
-         mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+       if (count == 1) {
+         // request.setAttribute("code", "update_success"); // 고전적인 jsp 방법 
+         mav.addObject("code", "update_success");
+         mav.setViewName("/cosme/msg"); // /WEB-INF/views/cosme/msg.jsp
+         
+       } else {
+         // request.setAttribute("code", "update_fail");
+         mav.addObject("code", "update_fail");
+         mav.setViewName("/cosme/msg"); // /WEB-INF/views/cosme/msg.jsp
        }
+
+       mav.addObject("count", count);
+       
+     } else {
+       mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+     }
 
        return mav;
    }
+   
+// /**
+// * 파일 수정 폼
+// * http://localhost:9093/cosme/update_file.do?cosmeno=1
+// * @param cosmeno
+// * @return
+// */
+  @RequestMapping(value="/cosme/update_file.do", method = RequestMethod.GET)
+  public ModelAndView update_file_cosme(int cosmeno) {
+    ModelAndView mav = new ModelAndView();
+    
+    CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
+    mav.addObject("cosmeVO", cosmeVO);
+    
+    ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+    
+   for (Cosme_cateVO item : list2) {
+//      System.out.println("화장품 종류 이름: " + item.getCosme_catename());
+    }
+
+  mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
+  mav.setViewName("/cosme/update_file"); 
+  
+  return mav;
+  }
    
    /**
     * 파일 수정 처리 http://localhost:9093/cosme/update_file.do
@@ -365,17 +431,17 @@ public class CosmeCont {
        // Call By Reference: 메모리 공유, Hashcode 전달
        int masterno = (int)session.getAttribute("masterno"); // masterno FK
        cosmeVO.setMasterno(masterno);
-       int cnt = this.cosmeProc.create(cosmeVO); 
+       int cnt = this.cosmeProc.update_file_cosme(cosmeVO); 
 
        // ------------------------------------------------------------------------------
        // PK의 return
        // ------------------------------------------------------------------------------
        if (cnt == 1) {
         // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
-         mav.addObject("code", "updatee_success");
+         mav.addObject("code", "update_file_success");
          mav.setViewName("/cosme/msg");
        } else {
-         mav.addObject("code", "update_fail");
+         mav.addObject("code", "update_file_fail");
          mav.setViewName("/cosme/msg");
        }
        mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
@@ -451,5 +517,38 @@ public class CosmeCont {
     	}
     	
     	return str;
+    }
+    
+    /**
+     * 삭제 처리 http://localhost:9093/cosme/delete.do
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/cosme/delete.do", method = RequestMethod.POST)
+    public ModelAndView cosme_delete(CosmeVO cosmeVO) {
+      ModelAndView mav = new ModelAndView();
+      
+      // -------------------------------------------------------------------
+      // 파일 삭제 시작
+      // -------------------------------------------------------------------
+      // 삭제할 파일 정보를 읽어옴.
+      CosmeVO cosmeVO_read = cosmeProc.cosme_read(cosmeVO.getCosmeno());
+      
+      String cosme_file_saved = cosmeVO.getCosme_file_saved();
+      String cosme_file_preview = cosmeVO.getCosme_file_preview();
+      
+      String uploadDir = Cosme.getUploadDir();
+      Tool.deleteFile(uploadDir, cosme_file_saved); // 실제 저장된 파일삭제
+      Tool.deleteFile(uploadDir, cosme_file_preview); // preview 이미지 삭제
+      // -------------------------------------------------------------------------
+      // 파일 삭제 종료
+      // -------------------------------------------------------------------------
+      
+      this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); // DBMS 삭제
+     
+      mav.addObject("cosmeno", cosmeVO.getCosmeno());
+      mav.setViewName("redirect:/cosme/list_all.do");
+      
+      return mav;
     }
 }

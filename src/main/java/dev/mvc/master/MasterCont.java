@@ -203,15 +203,19 @@ public class MasterCont {
     * @return
     */
    @RequestMapping(value="/master/list.do", method=RequestMethod.GET)
-   public ModelAndView list_all() {
-     ModelAndView mav = new ModelAndView();
+   public ModelAndView list_all(HttpSession session) {
+	   ModelAndView mav = new ModelAndView();
+	   
+	   if (masterProc.isMaster(session)) {
+		   ArrayList<MasterVO> list = this.masterProc.list();
+		   mav.addObject("list", list);
      
-     ArrayList<MasterVO> list = this.masterProc.list();
-     mav.addObject("list", list);
-     
-     mav.setViewName("/master/list"); // /webapp/WEB-INF/views/master/list.jsp
-     
-     return mav;
+		   mav.setViewName("/master/list"); // /webapp/WEB-INF/views/master/list.jsp
+		   
+	   } else {
+		   mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+	      }    
+		   return mav;
    }
   
 }

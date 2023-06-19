@@ -35,9 +35,7 @@
       http://localhost:9093/notice/create.do?noticeno=2
       http://localhost:9093/notice/create.do?noticeno=3
       --%>
-      
-      <A href="./create.do">등록</A>
-      <span class='menu_divide' >│</span>
+
      <A href="./update.do?noticeno=${noticeno}&now_page=${param.now_page}">글 수정</A>
       <span class='menu_divide' >│</span>
       <A href="./delete.do?noticeno=${noticeno}&now_page=${param.now_page}">삭제</A>  
@@ -56,7 +54,8 @@
 
           <span style="font-size: 1.5em; font-weight: bold;">${ntitle }</span><br>
           <br>
-          <div style="font-size: 1em;">${mname } ${rdate }</div><br><br>
+          <div style="font-size: 1em;"><img src="/master/images/user.png" style="height: 16px"> ${mname } ${rdate }</div>
+          <br><br>
           <div style="font-size: 1.1em;">${ncontent }</div>
         </DIV>
       </li>

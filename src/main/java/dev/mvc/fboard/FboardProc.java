@@ -35,4 +35,10 @@ public class FboardProc implements FboardProcInter{
 		return list;
 	}
 
+	@Override
+	public FboardVO read(int fboardno) {
+		FboardVO fboardVO = this.fboardDAO.read(fboardno);
+		return fboardVO;
+	}
+
 }

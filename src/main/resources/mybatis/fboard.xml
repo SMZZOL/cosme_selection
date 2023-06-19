@@ -6,15 +6,22 @@
 
 <!-- 등록한 레코드 갯수 1 리턴 -->
   <insert id="create" parameterType="dev.mvc.fboard.FboardVO">
-    INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, file1, file1saved, thumb1, size1, rdate)
-    VALUES(fboard_seq.nextval, #{memberno}, #{ftitle}, #{fcontent}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+    INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, passwd, word, file1, file1saved, thumb1, size1, rdate)
+    VALUES(fboard_seq.nextval, #{memberno}, #{ftitle}, #{fcontent}, #{passwd}, #{word}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
   </insert>
   
-  <!-- 모든 카테고리의 등록된 글목록 -->
+  <!-- 자유게시판에 등록된 모든 글 목록 -->
   <select id="list_all" resultType="dev.mvc.fboard.FboardVO">
-    SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1
+    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1
     FROM fboard
     ORDER BY fboardno DESC
+  </select> 
+  
+  <!-- 조회 -->
+  <select id="read" resultType="dev.mvc.fboard.FboardVO" parameterType="int">
+    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1
+    FROM fboard
+    WHERE fboardno = #{fboardno}
   </select> 
   
     </mapper>

@@ -27,14 +27,36 @@
     <A href="./create.do">등록</A>
       <span class='menu_divide' >│</span>    
     <A href="javascript:location.reload();">새로고침</A>
+    
+
   </ASIDE>
+  
+
+        <DIV class="aside_right" style="text-align: right; clear: both;">  
+    <form name='frm' id='frm' method='get' action='./list_all.do'>
+      
+      <c:choose>
+        <c:when test="${param.word != '' }"> <%-- 검색하는 경우 --%>
+          <input type='text' name='word' id='word' value='${param.word }' class='input_word'>
+        </c:when>
+        <c:otherwise> <%-- 검색하지 않는 경우 --%>
+          <input type='text' name='word' id='word' value='' class='input_word'>
+        </c:otherwise>
+      </c:choose>
+      <button type='submit' class='btn btn-info btn-sm'>검색</button>
+      <c:if test="${param.word.length() > 0 }">
+        <button type='button' class='btn btn-info btn-sm' 
+                    onclick="location.href='./list_all.do?fboardno=${fboardVO.fboardno}&word='">검색 취소</button>  
+      </c:if>    
+    </form>
+  </DIV>
 
   <DIV class='menu_line'></DIV>
   
-  <table class="class='table table-hover" style='width: 100%;'>
+  <table style='width: 100%;'>
           <col style="width: 20%;"></col>
           <col style="width: 40%;"></col>
-          <col style="width: 20%;"></col>        
+          <col style="width: 20%;"></col>  
 
       <tr>
         <th style='text-align: center;'></th>
@@ -74,6 +96,7 @@
               </c:when>
             </c:choose>
           </td>
+          
           
             <td style='vertical-align: middle; text-align: center;'>
             <div style='font-weight: bold;'>${rdate }</div>

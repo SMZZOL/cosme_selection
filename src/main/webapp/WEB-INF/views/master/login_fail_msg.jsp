@@ -10,20 +10,14 @@
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 </head> 
  
 <body>
-<c:import url="/menu/header.do" />
+<c:import url="../menu/header.jsp" />
 
- <div class="navbar">
- <a href="/" style="float: left; ">Home</a> 
-  </div>
+
     <br>
 
 <DIV class='content_body'>
@@ -34,8 +28,8 @@
         <li class='li_none'>관리자 로그인에 실패했습니다.</li>
         <li class='li_none'>ID 또는 패스워드가 일치하지 않습니다.</li>
         <li class='li_none'>
-          <button type="button" id="btn_retry" class="btn btn-info" onclick="location.href='./login.do'">로그인 다시 시도</button>
-          <button type="button" id="btn_home" class="btn btn-info" onclick="location.href='/'">확인</button>
+          <button type="button" id="btn_retry" class="my-btn btn" onclick="location.href='./login.do'">로그인 다시 시도</button>
+          <button type="button" id="btn_home" class="my-btn btn" onclick="location.href='/'">확인</button>
         </li>
         
       </ul>
