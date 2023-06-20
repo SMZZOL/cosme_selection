@@ -47,6 +47,10 @@ public class CosmeCont {
   @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
   private CosmetypeProcInter cosmetypeproc;
   
+  @Autowired
+  @Qualifier("dev.mvc.ingred.IngredProc")
+  private IngredProcInter ingredproc;
+  
   
   
   public CosmeCont() {
@@ -126,13 +130,13 @@ public class CosmeCont {
 	  public ModelAndView create(HttpSession session) {
   	  ModelAndView mav = new ModelAndView();
      
-  	  ArrayList<Cosme_cateVO> list2 = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+  	  ArrayList<Cosme_cateVO> cosme_cate_list = this.cosme_cateProc.list_all(); // 카테고리 목록 가져오기
+  	  ArrayList<CosmetypeVO> coseme_type_list= this.cosmetypeproc.list_all();
+  	  ArrayList<IngredVO> ingred_list = this.ingredproc.ingred_list();
   	  
-  	  for (Cosme_cateVO item : list2) {
-//  	    System.out.println("화장품 종류 이름: " + item.getCosme_catename());
-  	  }
-
-  	  mav.addObject("list2", list2); // 모델에 카테고리 목록 추가
+  	  mav.addObject("cosme_cate_list", cosme_cate_list); // 모델에 카테고리 목록 추가
+  	  mav.addObject("coseme_type_list", coseme_type_list); // 모델에 화장품 타입 추가
+  	  mav.addObject("ingred_list", ingred_list); // 모델에 화장품 성분 추가
       mav.setViewName("/cosme/create"); // create.jsp
       
       if (this.masterProc.isMaster(session) == true) {
@@ -516,6 +520,24 @@ public class CosmeCont {
     }
     
     /**
+     * 삭제 폼
+     * param cosmeno
+     * return
+     */
+    @RequestMapping(value="/cosme/delete.do", method=RequestMethod.GET)
+    public ModelAndView delete(int cosmeno) {
+      ModelAndView mav = new ModelAndView();
+      
+      // 삭제할 정보를 조회하여 확인
+      CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
+      mav.addObject("cosmeVO", cosmeVO);
+
+      mav.setViewName("/cosme/delete"); // /webapp/WEB-INF/views/cosme/delete.jsp
+      
+      return mav;
+    }
+    
+    /**
      * 삭제 처리 http://localhost:9093/cosme/delete.do
      * 
      * @return
@@ -539,11 +561,19 @@ public class CosmeCont {
       // -------------------------------------------------------------------------
       // 파일 삭제 종료
       // -------------------------------------------------------------------------
-      
-      this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); // DBMS 삭제
      
       mav.addObject("cosmeno", cosmeVO.getCosmeno());
-      mav.setViewName("redirect:/cosme/list_all.do");
+      int cnt = this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); 
+
+      if (cnt == 1) {
+       // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
+        mav.addObject("code", "cosme_delete_success");
+        mav.setViewName("/cosme/msg");
+      } else {
+        mav.addObject("code", "cosme_delete_fail");
+        mav.setViewName("/cosme/msg");
+      }
+      mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
       
       return mav;
     }

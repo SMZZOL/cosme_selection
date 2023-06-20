@@ -29,4 +29,18 @@ public interface Cosme_cateProcInter {
    * @return
    */
   public Cosme_cateVO read(int cosme_cateno);
+  
+  /**
+   * 수정
+   * @param Cosme_cateVO
+   * @return 수정된 레코드 갯수를 리턴
+   */
+  public int update(Cosme_cateVO cosme_cateVO);
+  
+  /**
+   * 삭제
+   * @param cosme_cateno
+   * @return 삭제된 레코드 갯수를 리턴
+   */
+  public int delete(int cosme_cateno);
 }

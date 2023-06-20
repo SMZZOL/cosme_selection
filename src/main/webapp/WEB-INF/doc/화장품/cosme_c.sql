@@ -2,10 +2,21 @@
 /* Table Name: 화장품 종류 */
 /**********************************/
 DROP TABLE cosme_cate;
+select * from cosme_cate;
 --자식 테이블이 있어도 무시하고 테이블 삭제
 select * from cosme;
  INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
-    VALUES(cosme_seq.nextval, '12', '12', sysdate, '2', '2');
+    VALUES(cosme_seq.nextval, '2', '2', sysdate, '2', '2');
+     INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
+    VALUES(cosme_seq.nextval, '1', '1', sysdate, '1', '1');
+         INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
+    VALUES(cosme_seq.nextval, '3', '3', sysdate, '3', '3');
+             INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
+    VALUES(cosme_seq.nextval, '32', '32', sysdate, '3', '3');
+             INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno)
+    VALUES(cosme_seq.nextval, '33', '33', sysdate, '3', '3');
+    commit;
+    
 DROP TABLE cosme_cate CASCADE CONSTRAINTS;
 select * from cosme_cate;
 CREATE TABLE cosme_cate(

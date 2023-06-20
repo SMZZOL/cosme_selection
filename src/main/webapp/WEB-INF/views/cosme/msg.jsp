@@ -57,6 +57,16 @@
               <span class="span_fail">기존 화장품 수정에 실패했습니다.</span>
             </LI>                                                                      
           </c:when>
+           <c:when test="${code == 'cosme_delete_success'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 삭제에 성공했습니다.</span>
+            </LI>                                                                      
+          </c:when>
+           <c:when test="${code == 'cosme_delete_fail'}"> <%-- Java if --%>
+            <LI class='li_none'>
+              <span class="span_fail">기존 화장품 삭제에 실패했습니다.</span>
+            </LI>                                                                      
+          </c:when>
         </c:choose>
 
       <LI class='li_none'>

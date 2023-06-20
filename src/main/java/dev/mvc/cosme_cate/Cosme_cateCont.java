@@ -129,5 +129,124 @@ public ModelAndView create(HttpSession session) {
      return mav;
 
  }
+ // 수정폼
+ // http://localhost:9093/cosme_cate/read_update.do?cosme_cate=1
+ // http://localhost:9093/cosme_cate/read_update.do?cosme_cate=2
+ // http://localhost:9093/cosme_cate/read_update.do?cosme_cate=3
+ @RequestMapping(value="/cosme_cate/read_update.do", method=RequestMethod.GET)
+ public ModelAndView read_update(HttpSession session, int cosme_cateno) {
+   ModelAndView mav = new ModelAndView();
+   
+   if (this.masterProc.isMaster(session) == true) {
+     mav.setViewName("/cosme_cate/read_update"); // /WEB-INF/views/cate/read_update.jsp
+     
+     Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno); // 수정용 데이터
+     mav.addObject("cosme_cateVO", cosme_cateVO);
+     
+     ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all(); // 목록 출력용 데이터
+     mav.addObject("list", list);
+     
+   } else {
+     mav.setViewName("/master/login_need"); // /WEB-INF/views/admin/login_need.jsp
+     
+   }
+   
+   return mav;
+ }
+ 
+ // 수정 처리
+ @RequestMapping(value="/cosme_cate/update.do", method=RequestMethod.POST)
+ public ModelAndView update(HttpSession session, Cosme_cateVO cosme_cateVO) { 
+   
+   ModelAndView mav = new ModelAndView();
 
+   if (this.masterProc.isMaster(session) == true) {
+     int cnt = this.cosme_cateProc.update(cosme_cateVO);
+     
+     if (cnt == 1) {
+       // request.setAttribute("code", "update_success");
+       // mav.addObject("code", "update_success");
+       mav.setViewName("redirect:/cosme_cate/list_all.do");  
+       
+     } else {
+       // request.setAttribute("code", "update_fail");
+       mav.addObject("code", "update_fail");
+       mav.setViewName("/cosme_cate/msg"); 
+     }
+     
+     mav.addObject("cnt", cnt);
+     
+   } else {
+     mav.setViewName("/master/login_need"); 
+   }
+   
+   return mav;
+ }
+
+ // 삭제폼, 수정폼을 복사하여 개발 
+ // http://localhost:9091/cosme_cate/read_delete.do?cosme_cateno=1
+ @RequestMapping(value="/cosme_cate/read_delete.do", method=RequestMethod.GET)
+ public ModelAndView read_delete(HttpSession session, int cosme_cateno) {
+   ModelAndView mav = new ModelAndView();
+   
+   if (this.masterProc.isMaster(session) == true) {
+     Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno); // 수정용 데이터
+     mav.addObject("cosme_cateVO", cosme_cateVO);
+     
+     ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all(); // 목록 출력용 데이터
+     mav.addObject("list", list);
+     
+     mav.setViewName("/cosme_cate/read_delete");
+     
+   } else {
+     mav.setViewName("/master/login_need"); 
+   }
+   
+   return mav;
+ }
+ 
+ // 삭제 처리, 수정 처리를 복사하여 개발
+ @RequestMapping(value="/cosme_cate/delete.do", method=RequestMethod.POST)
+ public ModelAndView delete(HttpSession session, int cosme_cateno) { 
+
+   ModelAndView mav = new ModelAndView();
+   
+   if (this.masterProc.isMaster(session) == true) {
+     ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_by_cate(cosme_cateno); 
+           
+     int cnt = this.cosme_cateProc.delete(cosme_cateno); // 카테고리 삭제
+     
+     if (cnt == 1) {
+       mav.setViewName("redirect:/cosme_cate/list_all.do");       // 자동 주소 이동, Spring 재호출
+       
+     } else {
+       mav.addObject("code", "delete_fail");
+       mav.setViewName("/cosme_cate/msg"); 
+     }
+     
+     mav.addObject("cnt", cnt);
+     
+   } else {
+     mav.setViewName("/master/login_need"); 
+   }
+   
+   return mav;
+ }
+ 
+ // http://localhost:9093/cosme_cate/read.do?cosme_cateno=1
+ @RequestMapping(value="/cosme_cate/read.do", method=RequestMethod.GET)
+ public ModelAndView read(HttpSession session, int cosme_cateno) {
+   ModelAndView mav = new ModelAndView();
+   
+   if (this.masterProc.isMaster(session) == true) {
+     mav.setViewName("/cosme_cate/read"); 
+     
+     Cosme_cateVO cosme_cateVO = this.cosme_cateProc.read(cosme_cateno);
+     mav.addObject("cosme_cateVO", cosme_cateVO);
+   } else {
+     mav.setViewName("/master/login_need"); 
+   }
+   
+   return mav;
+ }
  }
