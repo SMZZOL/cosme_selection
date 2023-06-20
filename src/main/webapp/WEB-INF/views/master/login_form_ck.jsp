@@ -10,6 +10,26 @@
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, width=device-width" /> 
 <title>관리자 로그인</title>
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(function() { // click 이벤트 핸들러 등록
+    $('#btn_create').on('click', create); // 회원 가입
+    $('#btn_loadDefault').on('click', loadDefault); // 기본 로그인 정보 설정
+  });
+
+  // 회원 가입  
+  function create() {
+    location.href="./create.do";
+  }
+
+  // 테스트용 기본값 로딩
+  function loadDefault() {
+    $('#id').val('master1');
+    $('#passwd').val('1234');
+  }
+    
+</script> 
 
 </head> 
  
@@ -47,6 +67,7 @@
      
         <div class="form_input">
           <button type="submit" class="my-btn btn">로그인</button>
+          <button type='button' id='btn_loadDefault' class="my-btn btn">테스트 계정</button>
         </div>   
         
       </FORM>

@@ -53,7 +53,7 @@
   <c:set var="mname" value="${masterVO.mname }" />        
   <c:set var="mdate" value="${masterVO.mdate.substring(0, 10) }" />
   
-        <tr style="height: 112px;">
+        <tr style="height: 112px;" onclick="location.href='./read.do?masterno=${masterno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
           <td style='vertical-align: middle; text-align: center; '>
             <IMG src="/master/images/check.png" style="width: 15px; height: 15px;">          
           </td>  
@@ -74,9 +74,8 @@
           </td>
           
 
-              <td style='vertical-align: middle; text-align: center;'>
-              
-
+              <td style='vertical-align: middle; text-align: center;'>              
+                <A href="/master/passwd_update.do?masterno=${masterno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/matser/images/update.png" class="icon"></A>
               </td>
         </tr>
       </c:forEach>

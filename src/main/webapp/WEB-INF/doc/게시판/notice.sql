@@ -9,6 +9,7 @@ CREATE TABLE notice(
         ntitle             VARCHAR2(50)    NOT NULL,
         ncontent           CLOB    NOT NULL,
         passwd              VARCHAR2(15)	 NOT NULL,
+        views                NUMBER(10)     NOT NULL,
         rdate               DATE           NOT NULL,
         FOREIGN KEY (masterno) REFERENCES master (masterno)
 );

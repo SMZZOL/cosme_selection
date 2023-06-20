@@ -1,6 +1,7 @@
 package dev.mvc.master;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,8 +16,8 @@ public class MasterProc implements MasterProcInter{
   public MasterDAOInter masterDAO;
   
   @Override
-  public int login(MasterVO masterVO) {
-    int cnt = this.masterDAO.login(masterVO);
+  public int login(HashMap<String, Object> map) {
+    int cnt = this.masterDAO.login(map);
     System.out.println(cnt);
     return cnt;
   }
@@ -64,6 +65,18 @@ public ArrayList<MasterVO> list() {
 
     }
 	return list;
+}
+
+@Override
+public int passwd_check(HashMap<Object, Object> map) {
+	int cnt = this.masterDAO.passwd_check(map);
+	return cnt;
+}
+
+@Override
+public int passwd_update(HashMap<Object, Object> map) {
+	int cnt = this.masterDAO.passwd_update(map);
+	return cnt;
 }
   
 

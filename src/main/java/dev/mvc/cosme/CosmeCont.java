@@ -528,6 +528,24 @@ public class CosmeCont {
     }
     
     /**
+     * 삭제 폼
+     * param cosmeno
+     * return
+     */
+    @RequestMapping(value="/cosme/delete.do", method=RequestMethod.GET)
+    public ModelAndView delete(int cosmeno) {
+      ModelAndView mav = new ModelAndView();
+      
+      // 삭제할 정보를 조회하여 확인
+      CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
+      mav.addObject("cosmeVO", cosmeVO);
+
+      mav.setViewName("/cosme/delete"); // /webapp/WEB-INF/views/cosme/delete.jsp
+      
+      return mav;
+    }
+    
+    /**
      * 삭제 처리 http://localhost:9093/cosme/delete.do
      * 
      * @return
@@ -551,11 +569,19 @@ public class CosmeCont {
       // -------------------------------------------------------------------------
       // 파일 삭제 종료
       // -------------------------------------------------------------------------
-      
-      this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); // DBMS 삭제
      
       mav.addObject("cosmeno", cosmeVO.getCosmeno());
-      mav.setViewName("redirect:/cosme/list_all.do");
+      int cnt = this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); 
+
+      if (cnt == 1) {
+       // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
+        mav.addObject("code", "cosme_delete_success");
+        mav.setViewName("/cosme/msg");
+      } else {
+        mav.addObject("code", "cosme_delete_fail");
+        mav.setViewName("/cosme/msg");
+      }
+      mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
       
       return mav;
     }

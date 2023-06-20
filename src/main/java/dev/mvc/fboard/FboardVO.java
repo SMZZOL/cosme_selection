@@ -9,6 +9,7 @@ public class FboardVO {
 	private String fcontent="";
 	private String rdate="";
 	private String passwd="";
+	/** 검색어 */
 	private String word="";
 	
     /** 메인 이미지 */
