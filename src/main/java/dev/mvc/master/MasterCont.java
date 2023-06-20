@@ -193,13 +193,13 @@ public class MasterCont {
     return mav; // forward
   }  
   
-   // http://localhost:9093/master/read.do?masterno=1
-   @RequestMapping(value = "/master/read.do", method = RequestMethod.GET)
-   public String read(int masterno) {
-     System.out.println("-> mname: " + this.masterProc.read(masterno).getMname());
-     return "";
-   
-   }
+//   // http://localhost:9093/master/read.do?masterno=1
+//   @RequestMapping(value = "/master/read.do", method = RequestMethod.GET)
+//   public String read(int masterno) {
+//     System.out.println("-> mname: " + this.masterProc.read(masterno).getMname());
+//     return "";
+//   
+//   }
    
    /**
     * 모든 카테고리의 등록된 글목록, http://localhost:9093/master/list_all.do
@@ -222,7 +222,7 @@ public class MasterCont {
    }
    
    /**
-    * 패스워드를 변경
+    * 패스워드 변경
     * @param masterno
     * @return
     */
@@ -280,9 +280,82 @@ public class MasterCont {
      
      return mav;
    }
+     
+ /**
+  * 패스워드 체크 폼
+  * @param masterno
+  * @return
+  */
+ @RequestMapping(value="/master/passwd_check.do", method=RequestMethod.GET)
+ public ModelAndView passwd_check(){
+   ModelAndView mav = new ModelAndView();
+   mav.setViewName("/master/passwd_check"); // passwd_check.jsp
    
+   return mav; // forward
+ }
+ 
+ /**
+  * 패스워드 체크 폼
+  * @param masterno
+  * @return
+  */
+ @RequestMapping(value="/master/passwd_check.do", method=RequestMethod.POST)
+ public ModelAndView passwd_check(int masterno, String current_passwd){
+   ModelAndView mav = new ModelAndView();
+   
+   MasterVO masterVO = this.masterProc.read(masterno); // 패스워드를 변경하려는 관리자 정보를 읽음
+   mav.addObject("mname", masterVO.getMname());  
+   mav.addObject("id", masterVO.getId());
+   
+   // 현재 패스워드 검사용 데이터
+   HashMap<Object, Object> map = new HashMap<Object, Object>();
+   map.put("masterno", masterno);
+   map.put("passwd", current_passwd);
+   
+   int cnt = masterProc.passwd_check(map); // 현재 패스워드 검사
+   
+   if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+  	  mav.setViewName("/master/read"); // /master/read.jsp
+  	  
+   } else {
+     mav.addObject("code", "passwd_fail"); // 패스워드가 일치하지 않는 경우
+   }
+
+   mav.addObject("cnt", cnt); // 패스워드 일치 여부
+   mav.addObject("url", "/master/msg");  // /member/msg -> /member/msg.jsp
+   
+   mav.setViewName("redirect:/master/msg.do");
+   
+   return mav;
+ }
+   
+   /**
+    * 조회
+    * 관리자만 가능
+    * @param masterno
+    * @return
+    */
+   @RequestMapping(value="/master/read.do", method=RequestMethod.GET)
+   public ModelAndView read(HttpSession session, HttpServletRequest request){
+     ModelAndView mav = new ModelAndView();
      
+     int masterno = 0;
+     if (this.masterProc.isMaster(session)) { 
+         
+       MasterVO masterVO = this.masterProc.read(masterno);
+       mav.addObject("masterVO", masterVO);
+       
+       //패스워드를 검사하기 위한 페이지로 이동
+       mav.setViewName("/master/read"); // /master/read.jsp
+       
+     } else {
+       // 로그인을 하지 않은 경우
+       mav.setViewName("/master/login_need"); // /webapp/WEB-INF/views/master/login_need.jsp
+     }
      
+     return mav; // forward
+   }
+
    
   
 }

@@ -14,7 +14,6 @@
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
 <script type="text/javascript">
   $(function() { // 자동 실행, 동적 이벤트 설정: 여러 상황에따라 버튼이 실행하는 함수 변경 가능한 패턴
     $('#btn_send').on('click', send); // id가 'btn_send'인 태그가 클릭되면 'send' 함수 실행 설정 
@@ -25,7 +24,7 @@
 
   function send() {
     if ($('#new_passwd').val() != $('#new_passwd2').val()) { // 새로 입력되는 2개의 패스워드 비교
-      $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
+      $('#modal_title').html('패스워드 일치 여부 확인'); // 제목 
 
       $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경  
         msg = '· 입력된 패스워드가 일치하지 않습니다.<br>';
@@ -53,10 +52,6 @@
  
 <body>
 <c:import url="../menu/header.jsp" />
- 
-  
- 
-  
 
   <DIV class='content_body'>
   <DIV class='title_line'>

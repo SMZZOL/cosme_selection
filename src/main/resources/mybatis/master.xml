@@ -10,14 +10,14 @@
     WHERE id=#{id} AND passwd=#{passwd} 
   </select>
   
-  <!-- 관리자 정보 -->
+  <!-- id로 관리자 정보 조회-->
   <select id="read_by_id" resultType="dev.mvc.master.MasterVO" parameterType ="String" >
 		SELECT masterno, id, passwd, mname, mdate, grade 
 		FROM master 
     WHERE id=#{id}
   </select>
   
-    <!-- masterno를 통한 관리자 정보 -->
+    <!-- masterno를 통한 관리자 정보 조회-->
   <select id="read" resultType="dev.mvc.master.MasterVO" parameterType ="int" >
     SELECT masterno, id, passwd, mname, mdate, grade 
     FROM master 

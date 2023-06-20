@@ -14,7 +14,6 @@
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -55,26 +54,6 @@
  
 <body>
 <c:import url="../menu/header.jsp" />
- 
-  <!-- ---------- Modal ---------- -->
-  <div class="modal fade" id="modal_panel" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id='modal_title'></h4><%-- 제목 --%>
-          <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        <div class="modal-body">
-          <p id='modal_content'></p>  <%-- 내용 --%>
-        </div>
-        <div class="modal-footer"> <%-- data-focus="": 캐럿(커서)을 보낼 태그의 id --%>
-          <button type="button" id="btn_close" data-focus=""
-                     class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div> <!-- ---------- Modal END ---------- -->
 
   <DIV class='content_body'>
     <DIV class='title_line'>
@@ -90,19 +69,21 @@
     
     <div style='width: 40%; margin: 0px auto;'>  
     <FORM name='frm' id='frm' method='POST' action='./passwd_update.do'>
-      <input type='hidden' name='memberno' id='memberno' value='${param.masterno }'>       
+      <input type='hidden' name='masterno' id='masterno' value='${param.masterno }'>       
   
       <div class="form-group">
         <label>현재 패스워드</label>    
         <input type='password' class="form-control" name='current_passwd' 
                     id='current_passwd' value='' required="required" style='width: 70%;' placeholder="현재 패스워드">
       </div>   
-                      
+      <br>
+                    
       <div class="form-group">
         <label>새로운 패스워드</label>    
         <input type='password' class="form-control" name='new_passwd' 
                   id='new_passwd' value='' required="required" style='width: 70%;' placeholder="새로운 패스워드">
       </div>   
+      <br>
    
       <div class="form-group">
         <label>새로운 패스워드 확인</label>    

@@ -78,8 +78,10 @@ VALUES(master_seq.nextval, 'master@', '121212', '관리자2', sysdate, 1);
 
 commit;
 
-SELECT masterno, id, passwd, mname, mdate, grade FROM master ORDER BY masterno ASC;
+--masterno로 master1 정보 보기
+SELECT masterno, id, passwd, mname, mdate, grade FROM master WHERE masterno=1;
 
+--id로 master1 정보 보기
 SELECT  masterno, id, passwd, mname, mdate, grade
 FROM master
 WHERE id='master';

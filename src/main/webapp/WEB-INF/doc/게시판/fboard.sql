@@ -27,6 +27,7 @@ COMMENT ON COLUMN fboard.ftitle is '자유게시판 제목';
 COMMENT ON COLUMN fboard.fcontent is '자유게시판 내용';
 COMMENT ON COLUMN fboard.passwd is '패스워드';
 COMMENT ON COLUMN fboard.word is '검색어';
+COMMENT ON COLUMN fboard.view is '조회수';
 COMMENT ON COLUMN fboard.rdate is '등록일';
 COMMENT ON COLUMN fboard.file1 is '메인 이미지';
 COMMENT ON COLUMN fboard.file1saved is '실제 저장된 메인 이미지';

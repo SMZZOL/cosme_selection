@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -11,13 +12,14 @@
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </head> 
 <body>
-<c:import url="/menu/header.do" />
+<c:import url="../menu/header.jsp" />
 
+  <DIV class='content_body'>
 <DIV class='title_line'>알림</DIV>
 
 <DIV class='message'>
@@ -35,7 +37,7 @@
                          class="btn btn-info btn-sm">시작 화면</button>
             <button type='button' 
                          onclick="location.href='/master/list.do'"
-                         class="btn btn-info btn-sm">회원 목록</button>                   
+                         class="btn btn-info btn-sm">관리자 목록</button>                   
           </LI>                                                                       
         </c:when>
                 
@@ -68,8 +70,7 @@
           </LI>   
           <LI class='li_none'>
             <button type='button' 
-                         onclick="location.href='/'"
-                         class="my-btn btn">확인</button>
+                         onclick="location.href='/master/list.do'" class="my-btn btn">확인</button>
           </LI>                                                                     
         </c:when>   
         
@@ -86,6 +87,7 @@
           <LI class='li_none_left'>
             <span class="span_fail">다시 시도해주세요.</span>
           </LI>
+          
         </c:otherwise>
         
       </c:choose>
@@ -105,6 +107,7 @@
     </UL>
   </fieldset>
 
+</DIV>
 </DIV>
 
 <jsp:include page="../menu/footer.jsp" flush='false' />
