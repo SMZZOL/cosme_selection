@@ -24,4 +24,22 @@ public class CosmetypeProc implements CosmetypeProcInter{
     return list;
   }
 
+  @Override
+  public CosmetypeVO read(int cosmetypeno) {
+    CosmetypeVO cosmetypeVO = this.cosmetypeDAO.read(cosmetypeno);
+    return cosmetypeVO;
+  }
+
+  @Override
+  public int update(CosmetypeVO cosmetypeVO) {
+    int cnt = this.cosmetypeDAO.update(cosmetypeVO);
+    return cnt;
+  }
+
+  @Override
+  public int delete(int cosmetypeno) {
+    int cnt = this.cosmetypeDAO.delete(cosmetypeno);
+    return cnt;
+  }
+
 }

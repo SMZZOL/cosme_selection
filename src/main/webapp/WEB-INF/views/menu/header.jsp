@@ -100,9 +100,17 @@
       </div>
        </div>
 
-      
       <div class="dropdown">
       <button class="dropbtn">목록<i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <A class="dropdown-item"  href='/cosme_cate/list_all.do'>화장품 종류 목록</A>
+        <a class="dropdown-item"  href="/cosmetype/list_all.do">화장품 타입 목록</a>
+         </div>
+      </div>
+      
+      <div class="dropdown">
+      <button class="dropbtn">M목록<i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
         <A class="dropdown-item"  href='/master/list.do'>관리자 목록</A>

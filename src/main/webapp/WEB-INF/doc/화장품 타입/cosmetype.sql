@@ -39,3 +39,10 @@ WHERE cosmetypeno = 5;
 
 DELETE FROM cosmetype
 WHERE cosmetypeno = 5;
+
+SELECT cosmetypeno, cosmetypename
+FROM cosmetype
+WHERE cosmetypeno = 1;
+
+commit;
+
