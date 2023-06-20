@@ -86,9 +86,7 @@
   </table>
 </DIV>
 
- 
 <jsp:include page="../menu/footer.jsp" />
 </body>
  
 </html>
-

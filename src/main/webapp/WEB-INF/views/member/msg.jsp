@@ -46,10 +46,10 @@
           <LI class='li_none'>
             <button type='button' 
                          onclick="location.href='/'"
-                         class="btn btn-info btn-sm">시작 화면</button>
+                         class="my-btn btn">시작 화면</button>
             <button type='button' 
                          onclick="location.href='/member/list.do'"
-                         class="btn btn-info btn-sm">회원 목록</button>                   
+                         class="my-btn btn">회원 목록</button>                   
           </LI>                                                                       
         </c:when>
                 
@@ -66,7 +66,7 @@
           <LI class='li_none'>
             <button type='button' 
                          onclick="location.href='/member/list.do'"
-                         class="btn btn-info btn-sm">회원 목록</button>
+                         class="my-btn btn">회원 목록</button>
           </LI>                                                                     
         </c:when>    
             
@@ -83,7 +83,7 @@
           <LI class='li_none'>
             <button type='button' 
                          onclick="location.href='/'"
-                         class="btn btn-info btn-sm">확인</button>
+                         class="my-btn btn">확인</button>
           </LI>                                                                     
         </c:when>   
         

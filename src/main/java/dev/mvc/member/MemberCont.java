@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.master.MasterProcInter;
+import dev.mvc.notice.NoticeVO;
 
 @Controller
 public class MemberCont {
@@ -166,6 +167,28 @@ public class MemberCont {
       mav.setViewName("/member/login_need"); // /webapp/WEB-INF/views/member/login_need.jsp
     }
     
+    return mav; // forward
+  }
+  
+  /**
+   * 수정 폼
+   * http://localhost:9093/member/update.do?memberno=1
+   * 
+   * @return
+   */
+  @RequestMapping(value = "/member/update.do", method = RequestMethod.GET)
+  public ModelAndView update(HttpSession session, int memberno) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+    MemberVO memberVO = this.memberProc.read(memberno);
+    mav.addObject("memberVO", memberVO);   
+    
+    mav.setViewName("/member/passwd_update"); // /WEB-INF/views/notice/update.jsp
+    }else { // 정상적인 로그인이 아닌 경우
+      mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    }
+
     return mav; // forward
   }
   
