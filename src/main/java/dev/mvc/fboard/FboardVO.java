@@ -8,6 +8,8 @@ public class FboardVO {
 	private String ftitle="";
 	private String fcontent="";
 	private String rdate="";
+	private String passwd="";
+	private String word="";
 	
     /** 메인 이미지 */
     private String file1 = "";
@@ -63,6 +65,18 @@ public class FboardVO {
 	}
 	public void setFcontent(String fcontent) {
 		this.fcontent = fcontent;
+	}
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+	public String getWord() {
+		return word;
+	}
+	public void setWord(String word) {
+		this.word = word;
 	}
 	public String getRdate() {
 		return rdate;

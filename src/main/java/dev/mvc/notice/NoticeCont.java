@@ -123,7 +123,7 @@ public class NoticeCont {
   public ModelAndView read(int noticeno, HttpSession session) {
     ModelAndView mav = new ModelAndView();
 
-    if (masterProc.isMaster(session) || memberProc.isMember(session)) { // 관리자로 로그인한 경우        
+    if (masterProc.isMaster(session) || memberProc.isMember(session)) { // 관리자, 회원으로 로그인한 경우        
     NoticeVO noticeVO = this.noticeProc.read(noticeno);
     
     String title = noticeVO.getNtitle();
@@ -143,7 +143,7 @@ public class NoticeCont {
 
     mav.setViewName("/notice/read"); // /WEB-INF/views/notice/read.jsp
     } else{ // 정상적인 로그인이 아닌 경우
-    	mav.setViewName("/member/login_need"); // /WEB-INF/views/master/login_need.jsp
+    	mav.setViewName("/member/login_need"); // /WEB-INF/views/member/login_need.jsp
     }
     
     return mav;
