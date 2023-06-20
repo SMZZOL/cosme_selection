@@ -6,8 +6,8 @@ DROP TABLE qboard CASCADE CONSTRAINTS;
 
 CREATE TABLE qboard(
         qboardno            NUMBER(7)    NOT NULL,
-        qtitle              VARCHAR(50)    NOT NULL,
-        qcontent            VARCHAR(50)    NOT NULL,
+        qtitle              VARCHAR(200)    NOT NULL,
+        qcontent            VARCHAR(1000)    NOT NULL,
         rdate               DATE           NOT NULL,
         PRIMARY KEY (qboardno)
 );
