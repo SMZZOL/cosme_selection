@@ -53,6 +53,7 @@
 
           <span style="font-size: 1.5em; font-weight: bold;">${qtitle }</span><br>
           <br>
+          <div style="font-size: 1em;">${mname } ${rdate }</div><br><br>
           <div style="font-size: 1.1em;">${qcontent }</div>
         </DIV>
       </li>
