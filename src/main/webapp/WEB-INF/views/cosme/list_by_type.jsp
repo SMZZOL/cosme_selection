@@ -9,7 +9,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>타입별 추천</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script>
     var listVisible = false;
@@ -67,8 +67,20 @@
 		</c:forEach>
   <!--라디오 버튼 (인기순 등)-->
 </div>
-<!-- sdf -->
-<div id="grid">
+
+
+
+  <div id="grid" class="product-grid">
+      <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 1 이미지">
+      <h3>상품 1</h3>
+      <p>상품 1 설명</p>
+    </div>
+    <div class="product-item">
+      <img class="img-90" src="/images/logo2.gif" alt="상품 2 이미지">
+      <h3>상품 2</h3>
+      <p>상품 2 설명</p>
+    </div>
 
 </div>
 <Br>

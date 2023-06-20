@@ -3,6 +3,7 @@ package dev.mvc.cosme;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -117,6 +118,22 @@ public class CosmeProc implements CosmeProcInter {
 	  ArrayList<CosmeVO> list = this.cosmeDAO.list_by_cate(cosme_cateno);
 	  
 	  return list;
+  }
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo) {
+	  this.cosmeDAO.cosme_ingred_relate_insert(cosme_ingredvo);
+	  
+  }
+  
+  public void cosme_type_relate_insert(Cosme_TypeVO cosme_typeVO) {
+	  this.cosmeDAO.cosme_type_relate_insert(cosme_typeVO);
+  }
+  
+  public int last_cosmeno() {
+	  return this.cosmeDAO.last_cosmeno();
+  }
+  
+  public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap){
+	  return this.cosmeDAO.list_by_cosmetype(paramMap);
   }
 
 }

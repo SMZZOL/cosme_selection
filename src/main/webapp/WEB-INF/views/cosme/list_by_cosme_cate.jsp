@@ -58,7 +58,7 @@
 </div>
 
 
-<!-- sdf -->
+
 <div>
   <div id="grid" class="product-grid">
     <div class="product-item">

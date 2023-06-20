@@ -3,6 +3,7 @@ package dev.mvc.cosme;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.cosme_cate.Cosme_cateVO;
 
@@ -89,4 +90,11 @@ public interface CosmeDAOInter {
   
   public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
   
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
+  
+  public void cosme_type_relate_insert(Cosme_TypeVO cosme_typeVO);
+  
+  public int last_cosmeno();
+  
+  public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
 }

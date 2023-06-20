@@ -3,6 +3,7 @@ package dev.mvc.cosme;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.cosme_cate.*;
 import dev.mvc.cosme.*;
@@ -87,7 +88,17 @@ public interface CosmeProcInter {
    */
   public ArrayList<CosmeVO>cate_all();
   
+  //--김세민 화장품 작업--
   public ArrayList<CosmeVO>list_by_type(String cosmetype);
   
   public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
+  
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
+  
+  public void cosme_type_relate_insert(Cosme_TypeVO cosme_typeVO);
+  
+  public int last_cosmeno();
+  
+  public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
+  
 }

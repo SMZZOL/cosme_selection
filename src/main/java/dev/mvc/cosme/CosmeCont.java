@@ -1,6 +1,7 @@
 package dev.mvc.cosme;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,61 +65,7 @@ public class CosmeCont {
 //		
 //		return mav;
 //	}
-	// http://localhost:9093/cosme/list_by_type.do 404
-	//	@PostMapping("/cosme/list_by_type.do")
-	@ResponseBody
-	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.POST)
-	public String listByTypePost(@RequestBody Map<String, Object> request) {
 
-		ArrayList<String> list= (ArrayList<String>) request.get("list");
-		if(list.isEmpty()) {
-			System.out.println("empty");
-		}
-		for(String num : list) {
-			System.out.print(num + ", ");
-		}
-//		System.out.println(request);
-//		System.out.println("들어와따!");
-		
-		
-		return "  <div class=\"product-grid\">\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 1 이미지\">\r\n"
-				+ "      <h3>상품 1</h3>\r\n"
-				+ "      <p>상품 1 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 2 이미지\">\r\n"
-				+ "      <h3>상품 2</h3>\r\n"
-				+ "      <p>상품 2 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
-				+ "      <h3>상품 3</h3>\r\n"
-				+ "      <p>상품 3 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
-				+ "      <h3>상품 3</h3>\r\n"
-				+ "      <p>상품 3 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
-				+ "      <h3>상품 3</h3>\r\n"
-				+ "      <p>상품 3 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 3 이미지\">\r\n"
-				+ "      <h3>상품 3</h3>\r\n"
-				+ "      <p>상품 3 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "    <div class=\"product-item\">\r\n"
-				+ "      <img class=\"img-90\" src=\"\" alt=\"상품 4이미지\">\r\n"
-				+ "      <h3>상품 4</h3>\r\n"
-				+ "      <p>상품 4 설명</p>\r\n"
-				+ "    </div>\r\n"
-				+ "</div>";
-	}
 	
 //	/**
 //	 * 등록 폼
@@ -151,7 +98,7 @@ public class CosmeCont {
 	  // 등록 처리
 //    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
 	 @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-    public ModelAndView create(CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
+    public ModelAndView create(int[] cosmetype,int[] ingred,CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
       ModelAndView mav = new ModelAndView();
       
       if (masterProc.isMaster(session) == true) { // 관리자로 로그인한경우
@@ -201,7 +148,23 @@ public class CosmeCont {
         int masterno = (int)session.getAttribute("masterno"); // adminno FK
         cosmeVO.setMasterno(masterno);
         int cnt = this.cosmeProc.create(cosmeVO); 
-
+        
+        
+        //ingred, cosmetype relate 에 추가. 
+        
+        int curr_cosmeno = this.cosmeProc.last_cosmeno();
+        for(int i : ingred) {
+        	Cosme_IngredVO cosme_ingredvo = new Cosme_IngredVO();
+        	cosme_ingredvo.setCosmeno(curr_cosmeno);
+        	cosme_ingredvo.setIngredno(i);
+        	this.cosmeProc.cosme_ingred_relate_insert(cosme_ingredvo);
+        }
+        for(int i : cosmetype) {
+        	Cosme_TypeVO cosme_typevo = new Cosme_TypeVO();
+        	cosme_typevo.setCosmeno(curr_cosmeno);
+        	cosme_typevo.setCosmetypeno(i);
+        	this.cosmeProc.cosme_type_relate_insert(cosme_typevo);
+        }
         // ------------------------------------------------------------------------------
         // PK의 return
         // ------------------------------------------------------------------------------
@@ -518,6 +481,37 @@ public class CosmeCont {
     	
     	return str;
     }
+    
+	// http://localhost:9093/cosme/list_by_type.do 404
+	//	@PostMapping("/cosme/list_by_type.do")
+	@ResponseBody
+	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.POST)
+	public String listByTypePost(@RequestBody Map<String, Object> request) {
+    	String str = "";
+		ArrayList<String> list= (ArrayList<String>) request.get("list");
+		if(list.isEmpty()) {
+			return "<br><h6>조건에 해당하는 상품이 없습니다<h6>";
+		}
+		int length = list.size();
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("list", list);
+		paramMap.put("length", length);
+		
+			
+		ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_by_cosmetype(paramMap);
+    	if(cosme_list.isEmpty()) {
+			return "<br><h6>조건에 해당하는 상품이 없습니다<h6>";
+    	}
+		for (CosmeVO cosmevo: cosme_list) {
+    		str +="    <div class=\"product-item\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    				+ "    </div>";
+    	}
+		
+		return str;
+	}
     
     /**
      * 삭제 처리 http://localhost:9093/cosme/delete.do

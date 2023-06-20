@@ -82,6 +82,8 @@ CREATE TABLE cosne_ingred_relate(
   FOREIGN KEY (COSMENO) REFERENCES COSME (COSMENO)
 );
 
+drop table cosme_type;
+commit;
 /**********************************/
 /* Table Name: 화장품/타입 릴레이션 */
 /**********************************/
