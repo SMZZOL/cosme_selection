@@ -10,6 +10,7 @@ CREATE TABLE fboard(
         fcontent           CLOB    NOT NULL,
         passwd              VARCHAR2(15)         NOT NULL,
         word                VARCHAR2(100)         NULL ,
+        views                NUMBER(10)     NOT NULL,
         rdate               DATE           NOT NULL,
         file1                VARCHAR(100)          NULL,  -- 원본 파일명 image
         file1saved            VARCHAR(100)          NULL,  -- 저장된 파일명, image

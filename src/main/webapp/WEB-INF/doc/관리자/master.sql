@@ -61,7 +61,7 @@ SELECT masterno, id, passwd, mname, mdate, grade FROM master WHERE masterno=1;
 ---------- -------------------- --------------- -------------------- ------------------- ----------
          1 master1              1234            관리자1              2023-05-30 12:56:36          1
 
-UPDATE master SET passwd='1234', mname='관리자1', mdate=sysdate, grade=1 WHERE masterno=1;
+UPDATE master SET passwd='1234' WHERE masterno=1;
 
 COMMIT;
          
