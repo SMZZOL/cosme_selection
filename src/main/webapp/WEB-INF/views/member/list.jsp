@@ -31,15 +31,16 @@
   <DIV class='menu_line'></DIV>
   
   <table class="class='table table-hover" style='width: 100%;'>
-            <col style="width: 20%;"></col>
+           <col style="width: 20%;"></col>
           <col style="width: 30%;"></col>
           <col style="width: 20%;"></col>
-          <col style="width: 10%;"></col>           
+          <col style="width: 20%;"></col>           
 
 
       <tr>
         <th style='text-align: center;'>구분</th>
         <th style='text-align: left;'>아이디</th>
+        <th style='text-align: center;'>이름</th>
         <th style='text-align: center;'>등록일</th>
       </tr>
     
@@ -48,7 +49,8 @@
 <tbody>
   <c:forEach var="memberVO" items="${list}">
   <c:set var="memberno" value="${memberVO.memberno }" />
-  <c:set var="id" value="${memberVO.id }" />        
+  <c:set var="id" value="${memberVO.id }" />       
+  <c:set var="mname" value="${memberVO.mname }" />  
   <c:set var="mdate" value="${memberVO.mdate.substring(0, 10) }" />
   
    <tr style="height: 112px;">

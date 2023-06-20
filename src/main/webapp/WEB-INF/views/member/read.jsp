@@ -2,13 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.ArrayList" %>
-
-<c:forEach var="memberVO" items="${list}">
-  <c:set var="memberno" value="${memberVO.memberno }" />
-  <c:set var="id" value="${memberVO.id }" />        
-  <c:set var="mdate" value="${memberVO.mdate.substring(0, 10) }" />
-  
-
+<%@ page import="dev.mvc.qboard.QboardVO" %>
+ 
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -24,52 +19,74 @@
 <c:import url="../menu/header.jsp" />
 
 <DIV class='content_body'>
+<DIV class='title_line'>질문게시판</DIV>
 
-<DIV class='title_line'>
-<A href="./read.do" class='title_link'>질문게시판</A></DIV>
 
   <ASIDE class="aside_right">
-  <br>
-    <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
+  <%-- 관리자로 로그인해야 메뉴가 출력됨 --%>
     <c:if test="${sessionScope.master_id != null }">
-      <%--
-      http://localhost:9093/qboard/create.do?qboardno=1
-      --%>
-      
-
-      <A href="./delete.do?qboardno=${qboardno}&now_page=${param.now_page}">삭제</A>  
-    <span class='menu_divide' >│</span>  
     </c:if>
-          <A href="./create.do">등록</A>
-      <span class='menu_divide' >│</span>
+    <br>
+     <A href="./create.do">등록</A>
+     <span class='menu_divide' >│</span>     
     <A href="javascript:location.reload();">새로고침</A>
-  
-  </ASIDE> 
-  
+
+  </ASIDE>
+
   <DIV class='menu_line'></DIV>
-
-  <fieldset class="fieldset_basic">
-    <ul>
-      <li class="li_none">
-        <DIV style="width: 100%; word-break: break-all;">
-
-          <span style="font-size: 1.5em; font-weight: bold;">${qtitle }</span><br>
-          <br>
-          <div style="font-size: 1em;">${mname } ${rdate }</div><br><br>
-          <div style="font-size: 1.1em;">${qcontent }</div>
-        </DIV>
-      </li>
-
-    </ul>
-  </fieldset>
   
-    <div class="content_body_bottom">  
-    <button type="button" onclick="location.href='/qboard/list_all.do'" class="my-btn btn">목록</button>
-  </div>
- 
+  <table class="class='table table-hover" style='width: 100%;'>
+          <col style="width: 20%;"></col>
+          <col style="width: 40%;"></col>
+          <col style="width: 20%;"></col>        
+
+
+      <tr>
+        <th style='text-align: center;'>순서</th>
+        <th style='text-align: left;'>제목</th>
+        <th style='text-align: center;'>작성일</th>
+      </tr>
+    
+
+    
+<tbody>
+  <c:forEach var="qboardVO" items="${list}">
+  <c:set var="qboardno" value="${qboardVO.qboardno }" />
+  <c:set var="qtitle" value="${qboardVO.qtitle }" />        
+  <c:set var="rdate" value="${qboardVO.rdate.substring(0, 10) }" />
+  
+   <tr style="height: 112px;" onclick="location.href='./read.do?qboardno=${qboardno }&now_page=${param.now_page == null ? 1 : param.now_page}'" class='hover'>
+          <td style='vertical-align: middle; text-align: center; '>
+            <IMG src="/qboard/images/show.png" style="width: 15px; height: 15px;">          
+          </td>  
+          
+          <td style='vertical-align: middle;'>
+            <div style='font-weight: bold;'>${qtitle }</div>
+          </td>
+          
+          <td style='vertical-align: middle; text-align: center;'>
+            <div style='font-weight: bold;'>${rdate }</div>
+          </td>
+          
+          <c:choose>
+            <c:when test="${sessionScope.master_id != null }"> 
+              <td style='vertical-align: middle; text-align: center;'>
+               <A href="/qboard/delete.do?qboardno=${qboardno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="삭제"><IMG src="/qboard/images/delete.png" class="icon"></A>
+              </td>
+            </c:when>
+            <c:otherwise>
+            
+            </c:otherwise>
+          </c:choose>
+                    
+        </tr>
+        
+      </c:forEach>
+    </tbody>
+  </table>
 </DIV>
-   </c:forEach>
-<jsp:include page="../menu/footer.jsp"  />
+
+<jsp:include page="../menu/footer.jsp" />
 </body>
  
 </html>
