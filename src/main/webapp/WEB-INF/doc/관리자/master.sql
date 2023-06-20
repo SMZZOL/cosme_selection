@@ -61,12 +61,12 @@ SELECT masterno, id, passwd, mname, mdate, grade FROM master WHERE masterno=1;
 ---------- -------------------- --------------- -------------------- ------------------- ----------
          1 master1              1234            관리자1              2023-05-30 12:56:36          1
 
-UPDATE master SET passwd='1234', mname='관리자1', mdate=sysdate, grade=1 WHERE masterno=1;
+UPDATE master SET passwd='1234' WHERE masterno=1;
 
 COMMIT;
          
 -- 로그인, 1: 로그인 성공, 0: 로그인 실패
-SELECT COUNT(*) as cnt FROM master WHERE id='master1' AND passwd='1234'; 
+SELECT COUNT(masterno) as cnt FROM master WHERE masterno=1 AND passwd='1234'; 
 
 ---------------------------------------------------------------
 --AWS 관리자 설정
@@ -78,8 +78,10 @@ VALUES(master_seq.nextval, 'master@', '121212', '관리자2', sysdate, 1);
 
 commit;
 
-SELECT masterno, id, passwd, mname, mdate, grade FROM master ORDER BY masterno ASC;
+--masterno로 master1 정보 보기
+SELECT masterno, id, passwd, mname, mdate, grade FROM master WHERE masterno=1;
 
+--id로 master1 정보 보기
 SELECT  masterno, id, passwd, mname, mdate, grade
 FROM master
 WHERE id='master';

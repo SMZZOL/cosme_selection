@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
-<!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="dev.mvc.cosme.CosmeDAOInter">
 	<!-- 화장품 등록 -->
@@ -110,6 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into cosme_ingred_relate(cosmeno, ingredno)
 		values(#{cosmeno},#{ingredno})
 	</insert>
+
 	<insert id="cosme_type_relate_insert">
 		insert into COSME_TYPE_RELATE(cosmeno, cosmetypeno)
 		values(#{cosmeno},#{cosmetypeno})
@@ -118,8 +117,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="last_cosmeno">
 		select cosmeno from cosme where rownum =1 ORDER BY cosmeno DESC
 	</select>
+
 	<select id="list_by_cosmetype"
-		resultType="dev.mvc.cosme.CosmeVO"  parameterType="java.util.Map">
+		resultType="dev.mvc.cosme.CosmeVO" parameterType="java.util.Map">
 		select cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.masterno,
 		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
 		cosme.cosme_file_size, cosme.cosme_youtube
@@ -136,9 +136,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		having count(cosme.cosmeno) >= #{length}
 	</select>
 
+	<!-- 자료수 감소, cnt 컬럼 1씩 증가, id: update_cnt_add <update id="update_cnt_sub" 
+		parameterType="int"> UPDATE cosme SET cnt = cnt - 1 WHERE cosmeno = #{cosmeno} 
+		</update> -->
 
-</mapper> 
-
-
-
-
+	<!-- 카테고리 목록 -->
+	<select id="cate_all"
+		resultType="dev.mvc.cosme_cate.Cosme_cateVO">
+		SELECT cosme_cateno, cosme_catename
+		FROM cosme_cate
+		ORDER BY cosme_cateno ASC
+	</select>
+</mapper>

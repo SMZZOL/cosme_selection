@@ -95,10 +95,10 @@ public interface CosmeProcInter {
   
   public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
   
+
   public void cosme_type_relate_insert(Cosme_TypeVO cosme_typeVO);
   
   public int last_cosmeno();
   
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
-  
 }

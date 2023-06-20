@@ -7,12 +7,14 @@
 <head> 
 <meta charset="UTF-8"> 
 <meta name="viewport" content="user-scalable=yes, initial-scale=1.0, maximum-scale=5.0, width=device-width" /> 
-<title>Resort world</title>
+<title>관리자 패스워드 변경</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
  
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
   $(function() { // 자동 실행, 동적 이벤트 설정: 여러 상황에따라 버튼이 실행하는 함수 변경 가능한 패턴
@@ -24,7 +26,7 @@
 
   function send() {
     if ($('#new_passwd').val() != $('#new_passwd2').val()) { // 새로 입력되는 2개의 패스워드 비교
-      $('#modal_title').html('패스워드 일치 여부 확인'); // 제목 
+      $('#modal_title').html('패스워드 일치 여부  확인'); // 제목 
 
       $('#modal_content').attr('class', 'alert alert-danger'); // CSS 변경  
         msg = '· 입력된 패스워드가 일치하지 않습니다.<br>';
@@ -54,42 +56,39 @@
 <c:import url="../menu/header.jsp" />
 
   <DIV class='content_body'>
-  <DIV class='title_line'>
-    회원 패스워드 변경
+    <DIV class='title_line'>
+    관리자 패스워드 변경
   </DIV>
     <ASIDE class="aside_right">
-    <br>
       <A href="javascript:location.reload();">새로고침</A>
       <span class='menu_divide' >│</span> 
-      <A href='./create.do'>회원 가입</A>
-
+      <A href='./list.do'>목록</A>
     </ASIDE> 
    
     <div class='menu_line'></div>
     
     <div style='width: 40%; margin: 0px auto;'>  
     <FORM name='frm' id='frm' method='POST' action='./passwd_update.do'>
-      <input type='hidden' name='memberno' id='memberno' value='${param.memberno }'>       
+      <input type='hidden' name='masterno' id='masterno' value='${param.masterno }'>       
   
       <div class="form-group">
-          <br>  
-        <label>현재 패스워드</label>  
-    
+        <label>현재 패스워드</label>    
         <input type='password' class="form-control" name='current_passwd' 
                     id='current_passwd' value='' required="required" style='width: 70%;' placeholder="현재 패스워드">
       </div>   
-          <br>  
-                      
+      <br>
+                    
       <div class="form-group">
         <label>새로운 패스워드</label>    
         <input type='password' class="form-control" name='new_passwd' 
                   id='new_passwd' value='' required="required" style='width: 70%;' placeholder="새로운 패스워드">
       </div>   
-       <br>  
+      <br>
+   
       <div class="form-group">
         <label>새로운 패스워드 확인</label>    
         <input type='password' class="form-control" name='new_passwd2' 
-                  id='new_passwd2' value='' required="required" style='width: 70%;' placeholder="패스워드 확인">
+                  id='new_passwd2' value='' required="required" style='width: 70%;' placeholder="패스워드">
       </div>   
       
       <div class="form_input">

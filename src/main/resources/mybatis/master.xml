@@ -4,20 +4,20 @@
 
 <mapper namespace="dev.mvc.master.MasterDAOInter">
   <!-- 로그인 -->
-  <select id="login" resultType="int" parameterType="dev.mvc.master.MasterVO">
+  <select id="login" resultType="int" parameterType="HashMap">
     SELECT COUNT(*) as cnt
     FROM master
     WHERE id=#{id} AND passwd=#{passwd} 
   </select>
   
-  <!-- 관리자 정보 -->
+  <!-- id로 관리자 정보 조회-->
   <select id="read_by_id" resultType="dev.mvc.master.MasterVO" parameterType ="String" >
 		SELECT masterno, id, passwd, mname, mdate, grade 
 		FROM master 
     WHERE id=#{id}
   </select>
   
-    <!-- masterno를 통한 관리자 정보 -->
+    <!-- masterno를 통한 관리자 정보 조회-->
   <select id="read" resultType="dev.mvc.master.MasterVO" parameterType ="int" >
     SELECT masterno, id, passwd, mname, mdate, grade 
     FROM master 
@@ -30,5 +30,19 @@
    FROM master 
    ORDER BY masterno DESC
     </select>
+    
+  <!--  현재 패스워드 검사 -->
+  <select id="passwd_check" parameterType="HashMap" resultType="int">
+    SELECT COUNT(masterno) as cnt 
+    FROM master 
+    WHERE masterno=#{masterno} AND passwd=#{passwd}
+  </select>
+  
+    <!-- 패스워드 변경 -->
+  <update id="passwd_update" parameterType="HashMap">
+    UPDATE master 
+    SET passwd=#{passwd}
+    WHERE masterno=#{masterno}
+  </update>
        
   </mapper>

@@ -10,6 +10,7 @@ CREATE TABLE fboard(
         fcontent           CLOB    NOT NULL,
         passwd              VARCHAR2(15)         NOT NULL,
         word                VARCHAR2(100)         NULL ,
+        views                NUMBER(10)     NOT NULL,
         rdate               DATE           NOT NULL,
         file1                VARCHAR(100)          NULL,  -- 원본 파일명 image
         file1saved            VARCHAR(100)          NULL,  -- 저장된 파일명, image
@@ -26,11 +27,13 @@ COMMENT ON COLUMN fboard.ftitle is '자유게시판 제목';
 COMMENT ON COLUMN fboard.fcontent is '자유게시판 내용';
 COMMENT ON COLUMN fboard.passwd is '패스워드';
 COMMENT ON COLUMN fboard.word is '검색어';
+COMMENT ON COLUMN fboard.view is '조회수';
 COMMENT ON COLUMN fboard.rdate is '등록일';
 COMMENT ON COLUMN fboard.file1 is '메인 이미지';
 COMMENT ON COLUMN fboard.file1saved is '실제 저장된 메인 이미지';
 COMMENT ON COLUMN fboard.thumb1 is '메인 이미지 Preview';
 COMMENT ON COLUMN fboard.size1 is '메인 이미지 크기';
+COMMENT ON COLUMN fboard.youtube is 'youtube';
 
 DROP SEQUENCE fboard_seq;
 
@@ -57,7 +60,7 @@ INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, rdate, file1, file1save
 VALUES(fboard_seq.nextval, 1, '자유3', '오늘 하루', sysdate, 'cosme.jpg', 'cosme_1.jpg', 'cosme_t.jpg', 1000);
 
 -- 유형 1 전체 목록
-SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
 FROM fboard
 ORDER BY fboardno ASC;
          
@@ -108,6 +111,25 @@ WHERE fboardno = 1;
 UPDATE fboard
 SET ftitle='추천', fcontent='직접 "사용해 본" 후기입니다'
 WHERE fboardno = 1;
+
+-- title, content, word column search
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+FROM fboard
+WHERE ftitle LIKE '%화장품%' OR fcontent LIKE '%화장품%' OR word LIKE '%화장품%'
+ORDER BY fboardno DESC;
+
+--페이징
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, r
+FROM (
+           SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, rownum as r
+           FROM (
+                     SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+                     FROM fboard
+                     WHERE ftitle LIKE '%단풍%' OR fcontent LIKE '%단풍%' OR word LIKE '%단풍%'
+                     ORDER BY fboardno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
 
 -- 삭제
 DELETE FROM fboard

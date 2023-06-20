@@ -35,6 +35,7 @@
     WHERE id = #{id}
   </select>
   
+  <!-- 수정처리 -->
   <update id="update" parameterType="dev.mvc.member.MemberVO">
     UPDATE member 
     SET id=#{id}, mname=#{mname}, tel=#{tel}, zipcode=#{zipcode}, address1=#{address1}, address2=#{address2}

@@ -9,7 +9,7 @@ import dev.mvc.cosme_cate.Cosme_cateVO;
 
 public interface CosmeDAOInter {
   /**
-   * 화장품 등록
+   * 화장품 등록 
    * spring framework이 JDBC 관련 코드를 모두 생성해줌
    * @param contentsVO
    * @return

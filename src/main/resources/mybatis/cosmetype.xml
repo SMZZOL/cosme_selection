@@ -18,4 +18,23 @@
     ORDER BY cosmetypeno ASC
   </select>
   
+   <!-- 조회 --> 
+ <select id = "read" resultType = "dev.mvc.cosmetype.CosmetypeVO" parameterType = "int">
+  SELECT cosmetypeno, cosmetypename
+  FROM cosmetype
+  WHERE cosmetypeno=#{cosmetypeno}
+ </select>
+ 
+<!-- 수정 --> 
+<update id="update" parameterType="dev.mvc.cosmetype.CosmetypeVO">
+  UPDATE cosmetype 
+  SET cosmetypename=#{cosmetypename}
+  WHERE cosmetypeno=#{cosmetypeno} 
+</update>
+  
+  <!-- 삭제, 삭제된 레코드 갯수를 리턴 -->
+<delete id="delete" parameterType="int">
+  DELETE FROM cosmetype 
+  WHERE cosmetypeno=#{cosmetypeno}
+</delete>
 </mapper> 

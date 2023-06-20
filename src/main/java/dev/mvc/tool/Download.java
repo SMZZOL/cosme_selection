@@ -60,10 +60,22 @@ public class Download extends javax.servlet.http.HttpServlet {
       HttpServletResponse response) throws ServletException, IOException {
     ServletContext ctx = config.getServletContext();
 
-    // 저장 폴더를 절대 경로로 변환, /contents/storage, /notice/storage, /member/storage...
-    String dir =  Tool.getOSPath() + request.getParameter("dir");
-    // 완성된 경로 dir: C:/kd/deploy/resort_v2sbm3c/contents/storage/
-    System.out.println("-> 완성된 경로 dir: " + dir);
+    // 저장 폴더를 절대 경로로 변환, /contents/storage
+    String dir = request.getParameter("dir");
+    if (dir.equals("/contents/storage")) {
+        // dir = Contents.getUploadDir();
+    }
+
+//    if (dir.equals("/contents/storage")) {
+//        dir = Contents.getUploadDir();
+//    } else if (dir.equals("/attachfile/storage")) {
+//        dir = Attachfile.getUploadDir();
+//    } 
+    
+    // 완성된 경로 C:/kd1/ws_java/resort_v1sbm3c/src/main/resources/static/contents/storage
+    // dir =  System.getProperty("user.dir") + "/src/main/resources/static" + dir; // 절대 경로
+    // 수정된 dir: C:/kd1/deploy/resort_v1sbm3c/contents/storage/
+    System.out.println("-> 수정된 dir: " + dir);
 
     // 실제 웹사이트 서버에 저장된 파일명: file1saved
     String filename = request.getParameter("filename");
@@ -193,5 +205,3 @@ public class Download extends javax.servlet.http.HttpServlet {
   }
 
 }
-
-

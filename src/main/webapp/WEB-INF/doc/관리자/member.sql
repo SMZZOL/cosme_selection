@@ -122,7 +122,7 @@ COMMIT;
 
 5. 특정 회원 삭제
 DELETE FROM member
-WHERE memberno=3;
+WHERE memberno=1;
 
 COMMIT;
 

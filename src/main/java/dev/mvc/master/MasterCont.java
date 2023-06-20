@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
 
 
@@ -91,24 +92,26 @@ public class MasterCont {
   */
   // http://localhost:9093/master/login.do 
   @RequestMapping(value = "/master/login.do",  method = RequestMethod.POST)
-  public ModelAndView login_cookie_proc(HttpServletRequest request, HttpServletResponse response, HttpSession session, MasterVO masterVO) {
+  public ModelAndView login_cookie_proc(HttpServletRequest request, HttpServletResponse response, HttpSession session, String id, String passwd
+		  ,@RequestParam(value="id_save", defaultValue="") String id_save,
+          @RequestParam(value="passwd_save", defaultValue="") String passwd_save) {
     ModelAndView mav = new ModelAndView();
+    HashMap<String, Object> map = new HashMap<String, Object>();
+    map.put("id", id);
+    map.put("passwd", passwd);
    
-    int cnt = masterProc.login(masterVO);
+    int cnt = this.masterProc.login(map);
     //System.out.println(masterVO.getId());
     //System.out.println(masterVO.getPasswd());
 
     
     if (cnt == 1) { // 로그인 성공
-      MasterVO masterVO_read = masterProc.read_by_id(masterVO.getId()); // DBMS에서 id를 이용한 회원 조회
+      MasterVO masterVO_read = masterProc.read_by_id(id); // DBMS에서 id를 이용한 회원 조회
       session.setAttribute("masterno", masterVO_read.getMasterno()); // 서버의 메모리에 기록
       session.setAttribute("master_id", masterVO_read.getId());
       session.setAttribute("master_mname", masterVO_read.getMname());
       session.setAttribute("master_grade", masterVO_read.getGrade());
-      String id_save = Tool.checkNull(masterVO.getId_save()); // 폼에 입력된 id 저장 여부
-      String id = masterVO.getId();              // 폼에 입력된 id
-      String passwd_save = Tool.checkNull(masterVO.getPasswd_save()); // 폼에 입력된 passwd 저장 여부
-      String passwd = masterVO.getPasswd();              // 폼에 입력된 passwd 
+      
       
       // -------------------------------------------------------------------
       // id 관련 쿠키 저장
@@ -190,13 +193,13 @@ public class MasterCont {
     return mav; // forward
   }  
   
-   // http://localhost:9093/master/read.do?masterno=1
-   @RequestMapping(value = "/master/read.do", method = RequestMethod.GET)
-   public String read(int masterno) {
-     System.out.println("-> mname: " + this.masterProc.read(masterno).getMname());
-     return "";
-   
-   }
+//   // http://localhost:9093/master/read.do?masterno=1
+//   @RequestMapping(value = "/master/read.do", method = RequestMethod.GET)
+//   public String read(int masterno) {
+//     System.out.println("-> mname: " + this.masterProc.read(masterno).getMname());
+//     return "";
+//   
+//   }
    
    /**
     * 모든 카테고리의 등록된 글목록, http://localhost:9093/master/list_all.do
@@ -217,5 +220,142 @@ public class MasterCont {
 	      }    
 		   return mav;
    }
+   
+   /**
+    * 패스워드 변경
+    * @param masterno
+    * @return
+    */
+   @RequestMapping(value="/master/passwd_update.do", method=RequestMethod.GET)
+   public ModelAndView passwd_update(int masterno){
+     ModelAndView mav = new ModelAndView();
+     mav.setViewName("/master/passwd_update"); // passwd_update.jsp
+     
+     return mav;
+   }
+   
+   /**
+    * 패스워드 변경 처리
+    * @param masterno 번호
+    * @param current_passwd 현재 패스워드
+    * @param new_passwd 새로운 패스워드
+    * @return
+    */
+   @RequestMapping(value="/master/passwd_update.do", method=RequestMethod.POST)
+   public ModelAndView passwd_update(int masterno, String current_passwd, String new_passwd){
+     ModelAndView mav = new ModelAndView();
+     
+     MasterVO masterVO = this.masterProc.read(masterno); // 패스워드를 변경하려는 관리자 정보를 읽음
+     mav.addObject("mname", masterVO.getMname());  
+     mav.addObject("id", masterVO.getId());
+     
+     // 현재 패스워드 검사용 데이터
+     HashMap<Object, Object> map = new HashMap<Object, Object>();
+     map.put("masterno", masterno);
+     map.put("passwd", current_passwd);
+     
+     int cnt = masterProc.passwd_check(map); // 현재 패스워드 검사
+     int update_cnt = 0; // 변경된 패스워드 수
+     
+     if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+       map.put("passwd", new_passwd); // 새로운 패스워드를 저장
+       update_cnt = this.masterProc.passwd_update(map); // 패스워드 변경 처리
+       
+       if (update_cnt == 1) {
+         mav.addObject("code", "passwd_update_success"); // 패스워드 변경 성공
+       } else {
+         cnt = 0;  // 패스워드는 일치했으나 변경하지는 못함.
+         mav.addObject("code", "passwd_update_fail");       // 패스워드 변경 실패
+       }
+       
+       mav.addObject("update_cnt", update_cnt);  // 변경된 패스워드의 갯수    
+     } else {
+       mav.addObject("code", "passwd_fail"); // 패스워드가 일치하지 않는 경우
+     }
+
+     mav.addObject("cnt", cnt); // 패스워드 일치 여부
+     mav.addObject("url", "/master/msg");  // /member/msg -> /member/msg.jsp
+     
+     mav.setViewName("redirect:/master/msg.do");
+     
+     return mav;
+   }
+     
+ /**
+  * 패스워드 체크 폼
+  * @param masterno
+  * @return
+  */
+ @RequestMapping(value="/master/passwd_check.do", method=RequestMethod.GET)
+ public ModelAndView passwd_check(){
+   ModelAndView mav = new ModelAndView();
+   mav.setViewName("/master/passwd_check"); // passwd_check.jsp
+   
+   return mav; // forward
+ }
+ 
+ /**
+  * 패스워드 체크 폼
+  * @param masterno
+  * @return
+  */
+ @RequestMapping(value="/master/passwd_check.do", method=RequestMethod.POST)
+ public ModelAndView passwd_check(int masterno, String current_passwd){
+   ModelAndView mav = new ModelAndView();
+   
+   MasterVO masterVO = this.masterProc.read(masterno); // 패스워드를 변경하려는 관리자 정보를 읽음
+   mav.addObject("mname", masterVO.getMname());  
+   mav.addObject("id", masterVO.getId());
+   
+   // 현재 패스워드 검사용 데이터
+   HashMap<Object, Object> map = new HashMap<Object, Object>();
+   map.put("masterno", masterno);
+   map.put("passwd", current_passwd);
+   
+   int cnt = masterProc.passwd_check(map); // 현재 패스워드 검사
+   
+   if (cnt == 1) { // 현재 패스워드가 일치하는 경우
+  	  mav.setViewName("/master/read"); // /master/read.jsp
+  	  
+   } else {
+     mav.addObject("code", "passwd_fail"); // 패스워드가 일치하지 않는 경우
+   }
+
+   mav.addObject("cnt", cnt); // 패스워드 일치 여부
+   mav.addObject("url", "/master/msg");  // /member/msg -> /member/msg.jsp
+   
+   mav.setViewName("redirect:/master/msg.do");
+   
+   return mav;
+ }
+   
+   /**
+    * 조회
+    * 관리자만 가능
+    * @param masterno
+    * @return
+    */
+   @RequestMapping(value="/master/read.do", method=RequestMethod.GET)
+   public ModelAndView read(HttpSession session, HttpServletRequest request){
+     ModelAndView mav = new ModelAndView();
+     
+     int masterno = 0;
+     if (this.masterProc.isMaster(session)) { 
+         
+       MasterVO masterVO = this.masterProc.read(masterno);
+       mav.addObject("masterVO", masterVO);
+       
+       //패스워드를 검사하기 위한 페이지로 이동
+       mav.setViewName("/master/read"); // /master/read.jsp
+       
+     } else {
+       // 로그인을 하지 않은 경우
+       mav.setViewName("/master/login_need"); // /webapp/WEB-INF/views/master/login_need.jsp
+     }
+     
+     return mav; // forward
+   }
+
+   
   
 }

@@ -165,6 +165,15 @@ public class CosmeCont {
         	cosme_typevo.setCosmetypeno(i);
         	this.cosmeProc.cosme_type_relate_insert(cosme_typevo);
         }
+//        for(int i : ingred) {
+//        	Cosme_IngredVO cosme_ingredvo = null;
+//        	cosme_ingredvo.setCosmeno(cosmeVO.getCosmeno());
+//        	cosme_ingredvo.setIngredno(i);
+//        	this.cosmeProc.cosme_ingred_relate_insert(cosme_ingredvo);
+//        }
+//        for(int i : cosmetype) {
+//        	System.out.println(i);
+//        }
         // ------------------------------------------------------------------------------
         // PK의 return
         // ------------------------------------------------------------------------------
@@ -514,6 +523,24 @@ public class CosmeCont {
 	}
     
     /**
+     * 삭제 폼
+     * param cosmeno
+     * return
+     */
+    @RequestMapping(value="/cosme/delete.do", method=RequestMethod.GET)
+    public ModelAndView delete(int cosmeno) {
+      ModelAndView mav = new ModelAndView();
+      
+      // 삭제할 정보를 조회하여 확인
+      CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
+      mav.addObject("cosmeVO", cosmeVO);
+
+      mav.setViewName("/cosme/delete"); // /webapp/WEB-INF/views/cosme/delete.jsp
+      
+      return mav;
+    }
+    
+    /**
      * 삭제 처리 http://localhost:9093/cosme/delete.do
      * 
      * @return
@@ -537,11 +564,19 @@ public class CosmeCont {
       // -------------------------------------------------------------------------
       // 파일 삭제 종료
       // -------------------------------------------------------------------------
-      
-      this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); // DBMS 삭제
      
       mav.addObject("cosmeno", cosmeVO.getCosmeno());
-      mav.setViewName("redirect:/cosme/list_all.do");
+      int cnt = this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); 
+
+      if (cnt == 1) {
+       // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
+        mav.addObject("code", "cosme_delete_success");
+        mav.setViewName("/cosme/msg");
+      } else {
+        mav.addObject("code", "cosme_delete_fail");
+        mav.setViewName("/cosme/msg");
+      }
+      mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
       
       return mav;
     }
