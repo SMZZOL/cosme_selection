@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import dev.mvc.member.MemberVO;
 import dev.mvc.tool.Tool;
 
 
@@ -279,5 +280,9 @@ public class MasterCont {
      
      return mav;
    }
+   
+     
+     
+   
   
 }
