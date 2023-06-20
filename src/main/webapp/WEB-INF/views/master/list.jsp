@@ -74,9 +74,8 @@
           </td>
           
 
-              <td style='vertical-align: middle; text-align: center;'>
-              
-
+              <td style='vertical-align: middle; text-align: center;'>              
+                <A href="/master/passwd_update.do?masterno=${masterno}&now_page=${param.now_page == null ? 1 : param.now_page}" title="수정"><IMG src="/matser/images/update.png" class="icon"></A>
               </td>
         </tr>
       </c:forEach>

@@ -66,7 +66,7 @@ UPDATE master SET passwd='1234', mname='관리자1', mdate=sysdate, grade=1 WHER
 COMMIT;
          
 -- 로그인, 1: 로그인 성공, 0: 로그인 실패
-SELECT COUNT(*) as cnt FROM master WHERE id='master1' AND passwd='1234'; 
+SELECT COUNT(masterno) as cnt FROM master WHERE masterno=1 AND passwd='1234'; 
 
 ---------------------------------------------------------------
 --AWS 관리자 설정
