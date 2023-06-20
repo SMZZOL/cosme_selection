@@ -10,6 +10,7 @@
 <c:set var="thumb1" value="${fboardVO.thumb1 }" />
 <c:set var="youtube" value="${fboardVO.youtube }" />
 <c:set var="word" value="${fboardVO.word }" />
+<c:set var="youtube" value="${fboardVO.youtube }" />
 <c:set var="size1_label" value="${fboardVO.size1_label }" />
 <c:set var="rdate" value="${fboardVO.rdate.substring(0, 16) }" />
 

@@ -47,6 +47,7 @@
      
         <div class="form_input">
           <button type="submit" class="my-btn btn">로그인</button>
+          <button type='button' id='btn_loadDefault' class="my-btn btn">테스트 계정</button>
         </div>   
         
       </FORM>

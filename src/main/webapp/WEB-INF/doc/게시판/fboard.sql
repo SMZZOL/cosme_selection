@@ -31,6 +31,7 @@ COMMENT ON COLUMN fboard.file1 is '메인 이미지';
 COMMENT ON COLUMN fboard.file1saved is '실제 저장된 메인 이미지';
 COMMENT ON COLUMN fboard.thumb1 is '메인 이미지 Preview';
 COMMENT ON COLUMN fboard.size1 is '메인 이미지 크기';
+COMMENT ON COLUMN fboard.youtube is 'youtube';
 
 DROP SEQUENCE fboard_seq;
 
@@ -57,7 +58,7 @@ INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, rdate, file1, file1save
 VALUES(fboard_seq.nextval, 1, '자유3', '오늘 하루', sysdate, 'cosme.jpg', 'cosme_1.jpg', 'cosme_t.jpg', 1000);
 
 -- 유형 1 전체 목록
-SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
 FROM fboard
 ORDER BY fboardno ASC;
          
@@ -108,6 +109,25 @@ WHERE fboardno = 1;
 UPDATE fboard
 SET ftitle='추천', fcontent='직접 "사용해 본" 후기입니다'
 WHERE fboardno = 1;
+
+-- title, content, word column search
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+FROM fboard
+WHERE ftitle LIKE '%화장품%' OR fcontent LIKE '%화장품%' OR word LIKE '%화장품%'
+ORDER BY fboardno DESC;
+
+--페이징
+SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, r
+FROM (
+           SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, rownum as r
+           FROM (
+                     SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+                     FROM fboard
+                     WHERE ftitle LIKE '%단풍%' OR fcontent LIKE '%단풍%' OR word LIKE '%단풍%'
+                     ORDER BY fboardno DESC
+           )          
+)
+WHERE r >= 1 AND r <= 3;
 
 -- 삭제
 DELETE FROM fboard
