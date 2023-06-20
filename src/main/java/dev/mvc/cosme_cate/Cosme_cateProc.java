@@ -43,11 +43,25 @@ import dev.mvc.tool.Tool;
       
       return list;
     }
-
+    // 조회
     @Override
     public Cosme_cateVO read(int cosme_cateno) {
       Cosme_cateVO cosme_cateVO = this.cosme_cateDAO.read(cosme_cateno);
       return cosme_cateVO;
+    }
+
+    // 수정
+    @Override
+    public int update(Cosme_cateVO cosme_cateVO) {
+      int cnt = this.cosme_cateDAO.update(cosme_cateVO);
+      return cnt;
+    }
+
+    // 삭제
+    @Override
+    public int delete(int cosme_cateno) {
+      int cnt = this.cosme_cateDAO.delete(cosme_cateno);
+      return cnt;
     }
   }
 

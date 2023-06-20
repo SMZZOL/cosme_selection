@@ -9,4 +9,9 @@
     values(ingred_seq.nextval, #{ingredname} , #{ingredeffect})
 
 </insert>
+
+<select id="ingred_list" parameterType="dev.mvc.ingred.IngredVO">
+    select ingredno, ingredname, ingredeffect
+    from ingred
+</select>
 </mapper>

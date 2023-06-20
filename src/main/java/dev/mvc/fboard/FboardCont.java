@@ -136,21 +136,21 @@ public class FboardCont {
     return mav; // forward
   }
   
-  /**
-   * 모든 카테고리의 등록된 글목록, http://localhost:9093/fboard/list_all.do
-   * @return
-   */
-  @RequestMapping(value="/fboard/list_all.do", method=RequestMethod.GET)
-  public ModelAndView list_all() {
-    ModelAndView mav = new ModelAndView();
-    
-    ArrayList<FboardVO> list = this.fboardProc.list_all();
-    mav.addObject("list", list);
-    
-    mav.setViewName("/fboard/list_all"); // /webapp/WEB-INF/views/fboard/list_all.jsp
-    
-    return mav;
-  }
+//  /**
+//   * 자유게시판에 등록된 글 목록, http://localhost:9093/fboard/list_all.do
+//   * @return
+//   */
+//  @RequestMapping(value="/fboard/list_all.do", method=RequestMethod.GET)
+//  public ModelAndView list_all() {
+//    ModelAndView mav = new ModelAndView();
+//    
+//    ArrayList<FboardVO> list = this.fboardProc.list_all();
+//    mav.addObject("list", list);
+//    
+//    mav.setViewName("/fboard/list_all"); // /webapp/WEB-INF/views/fboard/list_all.jsp
+//    
+//    return mav;
+//  }
   
   /**
    * 조회
@@ -188,6 +188,85 @@ public class FboardCont {
     		}
     
     	return mav;
+  }
+  
+  /**
+   * Youtube 등록/수정/삭제 폼
+   * http://localhost:9091/fboard/youtube.do?contentsno=1
+   * @return
+   */
+  @RequestMapping(value="/fboard/youtube.do", method=RequestMethod.GET )
+  public ModelAndView youtube(int fboardno) {
+    ModelAndView mav = new ModelAndView();
+
+    FboardVO fboardVO = this.fboardProc.read(fboardno); // youtube 정보 읽어 오기
+    mav.addObject("fboardVO", fboardVO); // request.setAttribute("fboardVO", fboardVO);
+
+    mav.setViewName("/fboard/youtube"); // /WEB-INF/views/fboard/youtube.jsp
+        
+    return mav;
+  }
+  
+  /**
+   * Youtube 등록/수정/삭제 처리
+   * http://localhost:9093/fboard/youtube.do
+   * @param fboardVO
+   * @return
+   */
+  @RequestMapping(value="/fboard/youtube.do", method = RequestMethod.POST)
+  public ModelAndView youtube_update(FboardVO fboardVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    if (fboardVO.getYoutube().trim().length() > 0) { // 삭제 중인지 확인, 삭제가 아니면 youtube 크기 변경
+      // youtube 영상의 크기를 width 기준 640 px로 변경 
+      String youtube = Tool.youtubeResize(fboardVO.getYoutube());
+      fboardVO.setYoutube(youtube);
+    }
+    
+    this.fboardProc.youtube(fboardVO);
+
+    // youtube 크기 조절
+    // <iframe width="1019" height="573" src="https://www.youtube.com/embed/Aubh5KOpz-4" title="교보문고에서 가장 잘나가는 일본 추리소설 베스트셀러 10위부터 1위까지 소개해드려요📚" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    
+    
+    mav.setViewName("redirect:/fboard/read.do?fboardno=" + fboardVO.getFboardno()); 
+    // /webapp/WEB-INF/views/fboard/read.jsp
+    
+    return mav;
+  }
+  
+  /**
+   * 목록 + 검색 + 페이징 지원
+   * http://localhost:9093/fboard/list_all.do?word=화장품&now_page=1
+   * @return
+   */
+  @RequestMapping(value="/fboard/list_all.do", method=RequestMethod.GET )
+  public ModelAndView list_by_search_paging(FboardVO fboardVO) {
+    ModelAndView mav = new ModelAndView();
+    
+    // 검색된 전체 글 수
+    int search_count = this.fboardProc.search_count(fboardVO);
+    mav.addObject("search_count", search_count);
+
+    // 검색 목록: 검색된 레코드를 페이지 단위로 분할하여 가져옴
+    ArrayList <FboardVO> list= this.fboardProc.list_by_search_paging(fboardVO);
+    mav.addObject("list", list);
+    
+    /*
+     * SPAN태그를 이용한 박스 모델의 지원, 1 페이지부터 시작 현재 페이지: 11 / 22 [이전] 11 12 13 14 15 16 17
+     * 18 19 20 [다음]
+     * @param now_page 현재 페이지
+     * @param word 검색어
+     * @return 페이징용으로 생성된 HTML/CSS tag 문자열
+     */
+    String paging = fboardProc.pagingBox(fboardVO.getNow_page(), fboardVO.getWord(), "list_all.do");
+    mav.addObject("paging", paging);
+
+    // mav.addObject("now_page", now_page);
+
+    mav.setViewName("/fboard/list_by_search_paging"); // /WEB-INF/views/fboard/list_by_search_paging.jsp
+        
+    return mav;
   }
   
 

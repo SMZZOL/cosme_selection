@@ -28,43 +28,46 @@
        <input type='text' name='cosmename' placeholder='화장품 이름' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 100%;'>
     </div>
-    <br><Br>
+    <br>
     <div>
        <label class="">브랜드</label>
        <input type='text' name='brand' placeholder='화장품 브랜드' required="required" 
                  class="form-control" style='width: 100%;'>
     </div>
+    <br>
     <div>
        <label class="">화장품 관련 유튜브 채널</label>
        <input type='text' name='cosme_youtube' placeholder='화장품 유튜브 채널' 
                  class="form-control" style='width: 100%;'>
     </div>
+    <br>
     <div>
        <label>이미지</label>
        <input type='file' class="form-control" name='file1MF' id='file1MF' 
                  value='' placeholder="파일 선택">
     </div>   
+    <br>
     <div>
         <label>화장품 카테고리</label>
         <select name='cosme_cateno' >
-          <c:forEach var="cosme_cateVO" items="${list2}" >
+          <c:forEach var="cosme_cateVO" items="${cosme_cate_list}" >
             <option value="${cosme_cateVO.cosme_cateno}">${cosme_cateVO.cosme_catename}</option>
           </c:forEach>
         </select>
     </div>
     <div>
         <label>화장품 타입</label>
-        <c:forEach items="${cosmetype}" var="item">
-            <input type="radio" name="cosmetype" value="${item.cosmetypeno}" id="cosmetype_${item.cosmetypeno}" />
-            <label for="cosmetype_${item.cosmetypeno}">${item.cosmetypename}</label>
+        <c:forEach items="${coseme_type_list}" var="CosmetypeVO">
+            <input type="checkbox" name="cosmetype" value="${CosmetypeVO.cosmetypeno}" id="${CosmetypeVO.cosmetypeno}" />
+            <label for="cosmetype_${CosmetypeVO.cosmetypeno}">${CosmetypeVO.cosmetypename}</label>
         </c:forEach>
     </div>
     
     <div>
         <label>화장품 성분</label>
-        <c:forEach items="${ingred}" var="item">
-            <input type="radio" name="ingred" value="${item.ingredno}" id="ingred_${item.ingredno}" />
-            <label for="ingred_${item.ingredno}">${item.ingredname}</label>
+        <c:forEach items="${ingred_list}" var="IngredVO">
+            <input type="checkbox" name="ingred" value="${IngredVO.ingredno}" id="ingred_${IngredVO.ingredno}" />
+            <label for="ingred_${IngredVO.ingredno}">${IngredVO.ingredname}</label>
         </c:forEach>
     </div>
 
