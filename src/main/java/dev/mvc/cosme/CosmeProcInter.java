@@ -87,7 +87,11 @@ public interface CosmeProcInter {
    */
   public ArrayList<CosmeVO>cate_all();
   
+  //--김세민 화장품 작업--
   public ArrayList<CosmeVO>list_by_type(String cosmetype);
   
   public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
+  
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
+  
 }

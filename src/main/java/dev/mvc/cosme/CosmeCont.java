@@ -151,7 +151,7 @@ public class CosmeCont {
 	  // 등록 처리
 //    @RequestMapping(value = "/contents/create.do", method = RequestMethod.POST)
 	 @RequestMapping(value="/cosme/create.do", method=RequestMethod.POST)
-    public ModelAndView create(CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
+    public ModelAndView create(int[] cosmetype,int[] ingred,CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
       ModelAndView mav = new ModelAndView();
       
       if (masterProc.isMaster(session) == true) { // 관리자로 로그인한경우
@@ -201,7 +201,15 @@ public class CosmeCont {
         int masterno = (int)session.getAttribute("masterno"); // adminno FK
         cosmeVO.setMasterno(masterno);
         int cnt = this.cosmeProc.create(cosmeVO); 
-
+//        for(int i : ingred) {
+//        	Cosme_IngredVO cosme_ingredvo = null;
+//        	cosme_ingredvo.setCosmeno(cosmeVO.getCosmeno());
+//        	cosme_ingredvo.setIngredno(i);
+//        	this.cosmeProc.cosme_ingred_relate_insert(cosme_ingredvo);
+//        }
+//        for(int i : cosmetype) {
+//        	System.out.println(i);
+//        }
         // ------------------------------------------------------------------------------
         // PK의 return
         // ------------------------------------------------------------------------------

@@ -100,6 +100,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     ORDER BY cosme_cateno ASC
   </select>
   
+  <insert id="cosme_ingred_relate_insert">
+  
+  </insert>
+  
   
 </mapper> 
 

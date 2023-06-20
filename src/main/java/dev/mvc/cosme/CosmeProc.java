@@ -118,5 +118,9 @@ public class CosmeProc implements CosmeProcInter {
 	  
 	  return list;
   }
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo) {
+	  this.cosmeDAO.cosme_ingred_relate_insert(cosme_ingredvo);
+	  
+  }
 
 }

@@ -66,7 +66,7 @@
     <div>
         <label>화장품 성분</label>
         <c:forEach items="${ingred_list}" var="IngredVO">
-            <input type="checkbox" name="ingred" value="${IngredVO.ingredno}" id="ingred_${IngredVO.ingredno}" />
+            <input type="checkbox" name="ingred" value="${IngredVO.ingredno}" id="${IngredVO.ingredno}" />
             <label for="ingred_${IngredVO.ingredno}">${IngredVO.ingredname}</label>
         </c:forEach>
     </div>

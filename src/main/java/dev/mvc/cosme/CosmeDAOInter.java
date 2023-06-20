@@ -89,4 +89,5 @@ public interface CosmeDAOInter {
   
   public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
   
+  public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
 }
