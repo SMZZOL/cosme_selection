@@ -97,4 +97,6 @@ public interface CosmeDAOInter {
   public int last_cosmeno();
   
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
+  
+  public ArrayList<CosmeVO> list_all();
 }

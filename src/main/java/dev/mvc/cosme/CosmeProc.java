@@ -135,5 +135,8 @@ public class CosmeProc implements CosmeProcInter {
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap){
 	  return this.cosmeDAO.list_by_cosmetype(paramMap);
   }
+  public ArrayList<CosmeVO> list_all(){
+	  return this.cosmeDAO.list_all();
+  }
 
 }

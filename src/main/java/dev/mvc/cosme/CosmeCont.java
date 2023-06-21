@@ -499,7 +499,15 @@ public class CosmeCont {
     	String str = "";
 		ArrayList<String> list= (ArrayList<String>) request.get("list");
 		if(list.isEmpty()) {
-			return "<br><h6>조건에 해당하는 상품이 없습니다<h6>";
+			ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
+			for (CosmeVO cosmevo: cosme_list) {
+	    		str +="    <div class=\"product-item\">\r\n"
+	    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+	    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+	    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+	    				+ "    </div>";
+	    	}	
+			return str;
 		}
 		int length = list.size();
 		Map<String, Object> paramMap = new HashMap<>();

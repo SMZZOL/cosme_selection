@@ -5,24 +5,30 @@
 <mapper namespace="dev.mvc.cosme.CosmeDAOInter">
 	<!-- 화장품 등록 -->
 	<insert id="create" parameterType="dev.mvc.cosme.CosmeVO">
-		INSERT INTO cosme(cosmeno, brand, cosmename, rdate, masterno, cosme_cateno,
-		cosme_file, cosme_file_saved, cosme_file_preview, cosme_file_size,
+		INSERT INTO cosme(cosmeno,
+		brand, cosmename, rdate, masterno, cosme_cateno,
+		cosme_file,
+		cosme_file_saved, cosme_file_preview, cosme_file_size,
 		cosme_youtube)
-		VALUES(cosme_seq.nextval, #{brand}, #{cosmename}, sysdate, #{masterno}, #{cosme_cateno},
-		#{cosme_file}, #{cosme_file_saved}, #{cosme_file_preview},
+		VALUES(cosme_seq.nextval, #{brand}, #{cosmename}, sysdate,
+		#{masterno}, #{cosme_cateno},
+		#{cosme_file}, #{cosme_file_saved},
+		#{cosme_file_preview},
 		#{cosme_file_size}, #{cosme_youtube})
 	</insert>
 
 	<!-- 화장품 글 목록 -->
 	<select id="cosme_all" resultType="dev.mvc.cosme.CosmeVO">
-		SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file,
+		SELECT cosmeno, brand,
+		cosmename, rdate, masterno, cosme_cateno, cosme_file,
 		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
 		ORDER BY cosmeno DESC
 	</select>
 
 	<select id="list_by_cate" resultType="dev.mvc.cosme.CosmeVO">
-		SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file,
+		SELECT cosmeno, brand,
+		cosmename, rdate, masterno, cosme_cateno, cosme_file,
 		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
 		WHERE cosme_cateno=#{cosme_cateno}
@@ -31,17 +37,25 @@
 	<!-- 일반적인 조회 -->
 	<select id="cosme_read" resultType="dev.mvc.cosme.CosmeVO"
 		parameterType="int">
+		SELECT cosmeno, brand, cosmename, rdate, masterno,
+		cosme_cateno, cosme_file,
+		cosme_file_saved, cosme_file_preview,
+		cosme_file_size, cosme_youtube
+		FROM cosme
+		WHERE cosmeno = #{cosmeno}
+	</select>
+	<select id="list_all" resultType="dev.mvc.cosme.CosmeVO">
 		SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file,
 		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
-		WHERE cosmeno = #{cosmeno}
 	</select>
 
 	<!-- 전체 수정 -->
 	<update id="update_all_cosme"
 		parameterType="dev.mvc.cosme.CosmeVO">
 		UPDATE cosme
-		SET brand=#{brand}, cosmename=#{cosmename}, rdate=sysdate,
+		SET brand=#{brand}, cosmename=#{cosmename},
+		rdate=sysdate,
 		masterno=#{masterno}, cosme_cateno=#{cosme_cateno},
 		cosme_file=#{cosme_file}, cosme_file_saved=#{cosme_file_saved},
 		cosme_file_preview=#{cosme_file_preview},
@@ -52,7 +66,8 @@
 	<!-- 파일 제외 수정 -->
 	<update id="update_cosme" parameterType="dev.mvc.cosme.CosmeVO">
 		UPDATE cosme
-		SET brand=#{brand}, cosmename=#{cosmename}, rdate=sysdate,
+		SET
+		brand=#{brand}, cosmename=#{cosmename}, rdate=sysdate,
 		masterno=#{masterno}, cosme_cateno=#{cosme_cateno},
 		cosme_youtube=#{cosme_youtube}
 		WHERE cosmeno = #{cosmeno}
@@ -62,7 +77,8 @@
 	<update id="update_file_cosme"
 		parameterType="dev.mvc.cosme.CosmeVO">
 		UPDATE cosme
-		SET cosme_file=#{cosme_file}, cosme_file_saved=#{cosme_file_saved},
+		SET cosme_file=#{cosme_file},
+		cosme_file_saved=#{cosme_file_saved},
 		cosme_file_preview=#{cosme_file_preview},
 		cosme_file_size=#{cosme_file_size}
 		WHERE cosmeno = #{cosmeno}
@@ -71,7 +87,8 @@
 	<!-- 화장품 삭제 -->
 	<delete id="cosme_delete" parameterType="int">
 		DELETE FROM cosme
-		WHERE cosmeno=#{cosmeno}
+		WHERE
+		cosmeno=#{cosmeno}
 	</delete>
 
 	<!-- 특정 카테고리에 속한 레코드 갯수를 리턴 -->
@@ -79,7 +96,8 @@
 		parameterType="int">
 		SELECT COUNT(*) as cnt
 		FROM cosme
-		WHERE cosme_cateno=#{cosme_cateno}
+		WHERE
+		cosme_cateno=#{cosme_cateno}
 	</select>
 
 	<!-- 특정 카테고리에 속한 모든 레코드 삭제 -->
@@ -109,7 +127,8 @@
 	</insert>
 
 	<select id="last_cosmeno">
-		select cosmeno from cosme where rownum =1 ORDER BY cosmeno DESC
+		select cosmeno from cosme where rownum =1 ORDER BY
+		cosmeno DESC
 	</select>
 
 	<select id="list_by_cosmetype"
@@ -118,8 +137,10 @@
 		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
 		cosme.cosme_file_size, cosme.cosme_youtube
 		from cosme
-		join cosme_type_relate on cosme.cosmeno = cosme_type_relate.cosmeno
-		where cosme_type_relate.cosmetypeno in
+		join
+		cosme_type_relate on cosme.cosmeno = cosme_type_relate.cosmeno
+		where
+		cosme_type_relate.cosmetypeno in
 		<foreach collection="list" item="item" open="(" separator=","
 			close=")">
 			#{item}
@@ -127,7 +148,8 @@
 		group by cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.masterno,
 		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
 		cosme.cosme_file_size, cosme.cosme_youtube
-		having count(cosme.cosmeno) >= #{length}
+		having count(cosme.cosmeno)
+		>= #{length}
 	</select>
 
 	<!-- 자료수 감소, cnt 컬럼 1씩 증가, id: update_cnt_add <update id="update_cnt_sub" 
@@ -140,6 +162,7 @@
 		resultType="dev.mvc.cosme_cate.Cosme_cateVO">
 		SELECT cosme_cateno, cosme_catename
 		FROM cosme_cate
-		ORDER BY cosme_cateno ASC
+		ORDER BY
+		cosme_cateno ASC
 	</select>
 </mapper>

@@ -89,16 +89,18 @@ public interface CosmeProcInter {
   public ArrayList<CosmeVO>cate_all();
   
   //--김세민 화장품 작업--
+  //(구)타입별 리스트
   public ArrayList<CosmeVO>list_by_type(String cosmetype);
-  
+  //종류별 리스트
   public ArrayList<CosmeVO>list_by_cate(String cosme_cateno);
-  
+  //화장품 등록시 성분 연계 등록
   public void cosme_ingred_relate_insert(Cosme_IngredVO cosme_ingredvo);
-  
-
+  //화장품 등록시 타입 연계 등록
   public void cosme_type_relate_insert(Cosme_TypeVO cosme_typeVO);
-  
+  //마지막 등록된 cosmeno 반환
   public int last_cosmeno();
-  
+  //타입별 ㄹ리스트
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
+  //리스트 전부
+  public ArrayList<CosmeVO> list_all();
 }
