@@ -97,12 +97,6 @@
 
 
 	<!-- 카테고리 목록 -->
-	<select id="cate_all"
-		resultType="dev.mvc.cosme_cate.Cosme_cateVO">
-		SELECT cosme_cateno, cosme_catename
-		FROM cosme_cate
-		ORDER BY cosme_cateno ASC
-	</select>
 
 	<insert id="cosme_ingred_relate_insert">
 		insert into cosme_ingred_relate(cosmeno, ingredno)
@@ -139,6 +133,7 @@
 	<!-- 자료수 감소, cnt 컬럼 1씩 증가, id: update_cnt_add <update id="update_cnt_sub" 
 		parameterType="int"> UPDATE cosme SET cnt = cnt - 1 WHERE cosmeno = #{cosmeno} 
 		</update> -->
+
 
 	<!-- 카테고리 목록 -->
 	<select id="cate_all"
