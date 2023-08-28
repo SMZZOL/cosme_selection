@@ -21,18 +21,19 @@
 <body>
 <c:import url="../menu/header.jsp" />
  
-<DIV class='title_line'>화장품 종류 등록</DIV>
 
 <DIV class='content_body'>
+<DIV class='title_line'>화장품 종류 등록</DIV>
   <FORM name='frm' method='POST' action='/cosme_cate/create.do'> <!-- /cate 폴더 자동 인식, 권장 -->
+      <br><Br>
     <div>
        <label>화장품 이름</label>
        <input type='text' name='cosme_catename' value='' required="required" 
                  autofocus="autofocus" class="form-control" style='width: 50%;'>
     </div>
     <div class="content_body_bottom">
-      <button type="submit" class="btn btn-info">등록</button>
-      <button type="button" onclick="location.href='./list_all.do'" class="btn btn-info">목록</button>
+      <button type="submit" class="normal_button">등록</button>
+      <button type="button" onclick="location.href='./list_all.do'" class="normal_button">목록</button>
     </div>
   
   </FORM>

@@ -33,7 +33,7 @@ public interface FboardProcInter {
   public int youtube(FboardVO fboardVO);
   
   /**
-   *  특정 카테고리의 검색된 글목록
+   *  자유게시판에 검색된 글목록
    *  spring framework이 JDBC 관련 코드를 모두 생성해줌
    * @return
    */
@@ -64,6 +64,62 @@ public interface FboardProcInter {
    * @return 페이징 생성 문자열
    */ 
   public String pagingBox(int now_page, String word, String list_file);
+  
+  /**
+   * 패스워드 검사  
+   * @param contentsVO
+   * @return 1: 패스워드 일치, 0: 패스워드 불일치
+   */
+  public int password_check(FboardVO fboardVO);
+  
+  /**
+   * 수정
+   * @param fboardVO
+   * @return 처리된 레코드 갯수
+   */
+  public int update(FboardVO fboardVO);
+  
+  /**
+   * 글 정보 수정
+   * @param fboardVO
+   * @return 처리된 레코드 갯수
+   */
+  public int update_text(FboardVO fboardVO);
+  
+  /**
+   * 파일 정보 수정
+   * @param fboardVO
+   * @return 처리된 레코드 갯수
+   */
+  public int update_file(FboardVO fboardVO);
+  
+  /**
+   * 삭제
+   * @param fboardno
+   * @return 삭제된 레코드 갯수
+   */
+  public int delete(int fboardno);
+  
+  /**
+   * 조회수
+   * @param fboardno
+   * @return 처리된 레코드 갯수
+   */
+  public int views(int fboardno);
+  
+  /**
+   * 댓글 수 증가
+   * @param 
+   * @return
+   */ 
+  public int increaseReplycnt(int fboardno);
+ 
+  /**
+   * 댓글 수 감소
+   * @param 
+   * @return
+   */   
+  public int decreaseReplycnt(int fboardno);
 	
 
 }

@@ -1,5 +1,7 @@
 package dev.mvc.cosme;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,11 +26,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dev.mvc.tool.Tool; 
 import dev.mvc.tool.Upload;
-import dev.mvc.master.*;
+import dev.mvc.admin.AdminProcInter;
 import dev.mvc.cosme_cate.*;
 import dev.mvc.cosmetype.CosmetypeProcInter;
 import dev.mvc.cosmetype.CosmetypeVO;
 import dev.mvc.ingred.*;
+import dev.mvc.member.MemberProcInter;
+import dev.mvc.member.MemberVO;
+import dev.mvc.review.ReviewProcInter;
+import dev.mvc.review.ReviewVO;
 
 @Controller
 public class CosmeCont {
@@ -41,8 +47,8 @@ public class CosmeCont {
   private Cosme_cateProcInter cosme_cateProc;
   
   @Autowired
-  @Qualifier("dev.mvc.master.MasterProc")
-  private MasterProcInter masterProc;
+  @Qualifier("dev.mvc.admin.AdminProc") 
+  private AdminProcInter adminProc = null;
   
   @Autowired
   @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
@@ -51,6 +57,15 @@ public class CosmeCont {
   @Autowired
   @Qualifier("dev.mvc.ingred.IngredProc")
   private IngredProcInter ingredproc;
+  
+	
+@Autowired
+@Qualifier("dev.mvc.review.ReviewProc")
+private ReviewProcInter reviewproc;
+
+@Autowired
+@Qualifier("dev.mvc.member.MemberProc")
+private MemberProcInter memberProc = null;
   
   
   
@@ -81,15 +96,17 @@ public class CosmeCont {
   	  ArrayList<CosmetypeVO> coseme_type_list= this.cosmetypeproc.list_all();
   	  ArrayList<IngredVO> ingred_list = this.ingredproc.ingred_list();
   	  
+  	  
+  	  
   	  mav.addObject("cosme_cate_list", cosme_cate_list); // 모델에 카테고리 목록 추가
   	  mav.addObject("coseme_type_list", coseme_type_list); // 모델에 화장품 타입 추가
   	  mav.addObject("ingred_list", ingred_list); // 모델에 화장품 성분 추가
       mav.setViewName("/cosme/create"); // create.jsp
       
-      if (this.masterProc.isMaster(session) == true) {
+      if (this.adminProc.isAdmin(session) == true) {
         mav.setViewName("/cosme/create");
       } else {
-          mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+          mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
         }
       
       return mav;
@@ -101,7 +118,7 @@ public class CosmeCont {
     public ModelAndView create(int[] cosmetype,int[] ingred,CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
       ModelAndView mav = new ModelAndView();
       
-      if (masterProc.isMaster(session) == true) { // 관리자로 로그인한경우
+      if (adminProc.isAdmin(session) == true) { // 관리자로 로그인한경우
         // ------------------------------------------------------------------------------
         // 파일 전송 코드 시작
         // ------------------------------------------------------------------------------
@@ -145,8 +162,8 @@ public class CosmeCont {
         // 다른 필요한 핸들러 메서드를 추가로 구현할 수 있습니다.
 
         // Call By Reference: 메모리 공유, Hashcode 전달
-        int masterno = (int)session.getAttribute("masterno"); // adminno FK
-        cosmeVO.setMasterno(masterno);
+        int adminno = (int)session.getAttribute("adminno"); // adminno FK
+        cosmeVO.setAdminno(adminno);
         int cnt = this.cosmeProc.create(cosmeVO); 
         
         
@@ -194,7 +211,7 @@ public class CosmeCont {
         mav.setViewName("redirect:/cosme/msg.do"); 
 
       } else {
-        mav.addObject("url", "/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+        mav.addObject("url", "/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
         mav.setViewName("redirect:/cosme/msg.do"); 
       }
       
@@ -284,7 +301,7 @@ public class CosmeCont {
      ModelAndView mav = new ModelAndView();
      mav.setViewName("/cosme/msg");
 
-     if (this.masterProc.isMaster(session) == true) {
+     if (this.adminProc.isAdmin(session) == true) {
        int count = this.cosmeProc.update_cosme(cosmeVO);
        
        if (count == 1) {
@@ -301,7 +318,7 @@ public class CosmeCont {
        mav.addObject("count", count);
        
      } else {
-       mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+       mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
      }
 
        return mav;
@@ -341,7 +358,7 @@ public class CosmeCont {
    public ModelAndView update(CosmeVO cosmeVO, HttpServletRequest request, HttpSession session) {
      ModelAndView mav = new ModelAndView();
      
-     if (masterProc.isMaster(session) == true) { // 관리자로 로그인한경우
+     if (adminProc.isAdmin(session) == true) { // 관리자로 로그인한경우
        // 삭제할 파일 정보를 읽어옴, 기존에 등록된 레코드 저장용
        CosmeVO cosmeVO_old = cosmeProc.cosme_read(cosmeVO.getCosmeno());
        
@@ -401,8 +418,8 @@ public class CosmeCont {
        // 다른 필요한 핸들러 메서드를 추가로 구현할 수 있습니다.
 
        // Call By Reference: 메모리 공유, Hashcode 전달
-       int masterno = (int)session.getAttribute("masterno"); // masterno FK
-       cosmeVO.setMasterno(masterno);
+       int adminno = (int)session.getAttribute("adminno"); // adminno FK
+       cosmeVO.setAdminno(adminno);
        int cnt = this.cosmeProc.update_file_cosme(cosmeVO); 
 
        // ------------------------------------------------------------------------------
@@ -425,7 +442,7 @@ public class CosmeCont {
        mav.setViewName("redirect:/cosme/msg.do"); 
 
      } else {
-       mav.addObject("url", "/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+       mav.addObject("url", "/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
        mav.setViewName("redirect:/cosme/msg.do"); 
      }
      
@@ -438,21 +455,6 @@ public class CosmeCont {
      * 모든 카테고리의 등록된 글목록, http://localhost:9093/cosme/list_by_type.do
      * @return
      */
-    @RequestMapping(value="/cosme/list_by_type.do", method=RequestMethod.GET)
-    public ModelAndView cosme_all() {
-      ModelAndView mav = new ModelAndView();
-      
-      ArrayList<CosmeVO> cosme_list = this.cosmeProc.cosme_all();
-      mav.addObject("cosme_list", cosme_list);
-      
-      ArrayList<CosmetypeVO> type_list = this.cosmetypeproc.list_all();
-      mav.addObject("type_list", type_list);
-      
-      mav.setViewName("/cosme/list_by_type"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
-      
-      return mav;
-    }
-    
     // http://localhost:9093/cosme/msg.do?code=create_success
     @RequestMapping(value = "/cosme/msg.do", method = RequestMethod.GET)
     public ModelAndView msg() {
@@ -464,15 +466,28 @@ public class CosmeCont {
     @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.GET)
     public ModelAndView cosme_by_cate() {
     	   ModelAndView mav = new ModelAndView();
+    	      ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
+    	      mav.addObject("cosme_list", cosme_list);
     	   
     	        mav.setViewName("/cosme/list_by_cosme_cate"); // /WEB-INF/views/cosme_cate/list_all.jsp
     	        
     	        ArrayList<Cosme_cateVO> list = this.cosme_cateProc.list_all();
+    	        for(CosmeVO cosmevo: cosme_list) {
+    	        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+    	        	if(reviewgrade ==null) {
+    	        		reviewgrade = "0.0";
+    	        	}
+    	        	cosmevo.setReviewgrade(reviewgrade);
+    	        }
+    	        
+    	        
+    	        
     	        mav.addObject("list", list);   
     	        
 
     	   return mav;
     }
+
     @ResponseBody
     @RequestMapping(value = "/cosme/cosme_by_cate.do", method = RequestMethod.POST)
     public String cosme_by_cate_sort(@RequestBody Map<String, Object> request) {
@@ -480,11 +495,21 @@ public class CosmeCont {
     	System.out.println(cosme_cateno);
     	String str = "";
     	ArrayList<CosmeVO> list = this.cosmeProc.list_by_cate(cosme_cateno);
+        for(CosmeVO cosmevo: list) {
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+        }
     	for (CosmeVO cosmevo: list) {
-    		str +="    <div class=\"product-item\">\r\n"
-    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+    		
+    		
+    		str +="    <div class=\"product-item\" onclick=\"location.href='/cosme/read_by_cosmeno.do?cosmeno="+cosmevo.getCosmeno()+"'\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/cosme/"+cosmevo.getCosme_file_saved()+"\" alt=\"상품 1 이미지\">\r\n"
     				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
     				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    				+"<p style=\"color:red;'\">★"+cosmevo.getReviewgrade()+"</p>"
     				+ "    </div>";
     	}
     	
@@ -493,6 +518,106 @@ public class CosmeCont {
     
 	// http://localhost:9093/cosme/list_by_type.do 404
 	//	@PostMapping("/cosme/list_by_type.do")
+    @RequestMapping(value="/cosme/list_by_ingred.do", method=RequestMethod.GET)
+    public ModelAndView list_by_ingred() {
+    	ModelAndView mav = new ModelAndView();
+    	
+    	
+    	
+    	ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
+    	mav.addObject("cosme_list", cosme_list);
+        for(CosmeVO cosmevo: cosme_list) {
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+        }
+    	
+    	ArrayList<IngredVO> ingred_list = this.ingredproc.ingred_list();
+    	mav.addObject("ingred_list", ingred_list);
+    	for (IngredVO list :ingred_list) {
+    		System.out.println(list.getIngredno());
+    	}
+    	
+    	mav.setViewName("/cosme/list_by_ingred"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
+    	
+    	return mav;
+    }
+	@ResponseBody
+	@RequestMapping(value="/cosme/list_by_ingred.do" , method = RequestMethod.POST)
+	public String list_by_ingred_post(@RequestBody Map<String, Object> request) {
+    	String str = "";
+		ArrayList<String> list= (ArrayList<String>) request.get("list");
+		if(list.isEmpty()) {
+			ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
+			for (CosmeVO cosmevo: cosme_list) {
+	        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+	        	if(reviewgrade ==null) {
+	        		reviewgrade = "0.0";
+	        	}
+	        	cosmevo.setReviewgrade(reviewgrade);
+	    		str +="    <div class=\"product-item\" onclick=\"location.href='/cosme/read_by_cosmeno.do?cosmeno="+cosmevo.getCosmeno()+"'\">\r\n"
+	    				+ "      <img class=\"img-90\" src=\"/cosme/"+cosmevo.getCosme_file_saved()+"\" alt=\"상품 1 이미지\">\r\n"
+	    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+	    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+	    	    				+"<p style=\"color:red;'\">★"+cosmevo.getReviewgrade()+"</p>"
+	    				+ "    </div>";
+	    	}	
+			return str;
+		}
+		int length = list.size();
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("list", list);
+		paramMap.put("length", length);
+		
+			
+		ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_by_ingred(paramMap);
+    	if(cosme_list.isEmpty()) {
+			return "<br><h6>조건에 해당하는 상품이 없습니다<h6>";
+    	}
+		for (CosmeVO cosmevo: cosme_list) {
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+    		str +="    <div class=\"product-item\" onclick=\"location.href='/cosme/read_by_cosmeno.do?cosmeno="+cosmevo.getCosmeno()+"'\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/cosme/"+cosmevo.getCosme_file_saved()+"\" alt=\"상품 1 이미지\">\r\n"
+    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
+    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    	    				+"<p style=\"color:red;'\">★"+cosmevo.getReviewgrade()+"</p>"
+    				+ "    </div>";
+    	}
+		
+		return str;
+	}
+    
+    @RequestMapping(value="/cosme/list_by_type.do", method=RequestMethod.GET)
+    public ModelAndView list_by_type() {
+    	ModelAndView mav = new ModelAndView();
+    	
+    	
+    	
+    	ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
+    	mav.addObject("cosme_list", cosme_list);
+    	
+        for(CosmeVO cosmevo: cosme_list) {
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+        }
+    	
+    	ArrayList<CosmetypeVO> type_list = this.cosmetypeproc.list_all();
+    	mav.addObject("type_list", type_list);
+    	
+    	mav.setViewName("/cosme/list_by_type"); // /webapp/WEB-INF/views/cosme/list_by_type.jsp
+    	
+    	return mav;
+    }
+    
 	@ResponseBody
 	@RequestMapping(value="/cosme/list_by_type.do" , method = RequestMethod.POST)
 	public String listByTypePost(@RequestBody Map<String, Object> request) {
@@ -501,12 +626,20 @@ public class CosmeCont {
 		if(list.isEmpty()) {
 			ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_all();
 			for (CosmeVO cosmevo: cosme_list) {
-	    		str +="    <div class=\"product-item\">\r\n"
-	    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+	        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+	        	if(reviewgrade ==null) {
+	        		reviewgrade = "0.0";
+	        	}
+	        	cosmevo.setReviewgrade(reviewgrade);
+	    		str +="    <div class=\"product-item\" onclick=\"location.href='/cosme/read_by_cosmeno.do?cosmeno="+cosmevo.getCosmeno()+"'\">\r\n"
+	    				+ "      <img class=\"img-90\" src=\"/cosme/"+cosmevo.getCosme_file_saved()+"\" alt=\"상품 1 이미지\">\r\n"
 	    				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
 	    				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+	    	    				+"<p style=\"color:red;'\">★"+cosmevo.getReviewgrade()+"</p>"
 	    				+ "    </div>";
 	    	}	
+			
+
 			return str;
 		}
 		int length = list.size();
@@ -520,51 +653,38 @@ public class CosmeCont {
 			return "<br><h6>조건에 해당하는 상품이 없습니다<h6>";
     	}
 		for (CosmeVO cosmevo: cosme_list) {
-    		str +="    <div class=\"product-item\">\r\n"
-    				+ "      <img class=\"img-90\" src=\"/images/logo2.gif\" alt=\"상품 1 이미지\">\r\n"
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+    		str +="    <div class=\"product-item\" onclick=\"location.href='/cosme/read_by_cosmeno.do?cosmeno="+cosmevo.getCosmeno()+"'\">\r\n"
+    				+ "      <img class=\"img-90\" src=\"/cosme/"+cosmevo.getCosme_file_saved()+"\" alt=\"상품 1 이미지\">\r\n"
     				+ "      <h3>"+cosmevo.getCosmename()+"</h3>\r\n"
     				+ "      <p>"+cosmevo.getBrand()+"</p>\r\n"
+    	    				+"<p style=\"color:red;'\">★"+cosmevo.getReviewgrade()+"</p>"
     				+ "    </div>";
     	}
 		
 		return str;
 	}
-    
-    /**
-     * 삭제 폼
-     * param cosmeno
-     * return
-     */
-    @RequestMapping(value="/cosme/delete.do", method=RequestMethod.GET)
-    public ModelAndView delete(int cosmeno) {
-      ModelAndView mav = new ModelAndView();
-      
-      // 삭제할 정보를 조회하여 확인
-      CosmeVO cosmeVO = this.cosmeProc.cosme_read(cosmeno);
-      mav.addObject("cosmeVO", cosmeVO);
-
-      mav.setViewName("/cosme/delete"); // /webapp/WEB-INF/views/cosme/delete.jsp
-      
-      return mav;
-    }
-    
     /**
      * 삭제 처리 http://localhost:9093/cosme/delete.do
      * 
      * @return
      */
     @RequestMapping(value = "/cosme/delete.do", method = RequestMethod.POST)
-    public ModelAndView cosme_delete(CosmeVO cosmeVO) {
+    public ModelAndView cosme_delete(int cosmeno) {
       ModelAndView mav = new ModelAndView();
       
       // -------------------------------------------------------------------
       // 파일 삭제 시작
       // -------------------------------------------------------------------
       // 삭제할 파일 정보를 읽어옴.
-      CosmeVO cosmeVO_read = cosmeProc.cosme_read(cosmeVO.getCosmeno());
+      CosmeVO cosmeVO_read = cosmeProc.cosme_read(cosmeno);
       
-      String cosme_file_saved = cosmeVO.getCosme_file_saved();
-      String cosme_file_preview = cosmeVO.getCosme_file_preview();
+      String cosme_file_saved = cosmeVO_read.getCosme_file_saved();
+      String cosme_file_preview = cosmeVO_read.getCosme_file_preview();
       
       String uploadDir = Cosme.getUploadDir();
       Tool.deleteFile(uploadDir, cosme_file_saved); // 실제 저장된 파일삭제
@@ -573,19 +693,74 @@ public class CosmeCont {
       // 파일 삭제 종료
       // -------------------------------------------------------------------------
      
-      mav.addObject("cosmeno", cosmeVO.getCosmeno());
-      int cnt = this.cosmeProc.cosme_delete(cosmeVO.getCosmeno()); 
+      int cnt = this.cosmeProc.cosme_delete(cosmeno); 
 
-      if (cnt == 1) {
-       // this.cosmeProc.update_cnt_add(cosmeVO.getCosmeno()); 
-        mav.addObject("code", "cosme_delete_success");
-        mav.setViewName("/cosme/msg");
-      } else {
-        mav.addObject("code", "cosme_delete_fail");
-        mav.setViewName("/cosme/msg");
-      }
+
+      mav.setViewName("redirect:/");
       mav.addObject("cnt", cnt); // request.setAttribute("cnt", cnt)
       
       return mav;
     }
+    
+    @RequestMapping(value="/cosme/read_by_cosmeno.do", method=RequestMethod.GET)
+    public ModelAndView read_by_cosmeno(int cosmeno) {
+        ModelAndView mav = new ModelAndView();
+        CosmeVO cosmevo = this.cosmeProc.cosme_read(cosmeno);
+        ArrayList <CosmetypeVO> cosmetype_list = this.cosmetypeproc.cosmetype_by_cosmeno(cosmeno);
+        ArrayList <IngredVO> ingredVO = this.ingredproc.ingred_by_cosmeno(cosmeno);
+        ArrayList <ReviewVO> reviewlist= this.reviewproc.review_by_cosmeno(cosmeno);
+        
+    	for(ReviewVO Reviewvo : reviewlist) {
+    		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    		LocalDate date = LocalDate.parse(Reviewvo.getReviewtime(), formatter);
+    		String dateOnly = date.toString();
+    		MemberVO membervo = this.memberProc.read(Reviewvo.getMemberno());
+    		String name = (membervo.getMname().charAt(0))+"**";
+    		Reviewvo.setReviewtime(dateOnly);
+    		Reviewvo.setMname(name);
+    		
+    	}
+        
+        
+        
+        mav.addObject("cosmevo", cosmevo);
+        mav.addObject("cosmetype_list", cosmetype_list);
+        mav.addObject("ingredVO", ingredVO);
+        mav.addObject("reviewlist", reviewlist);
+        mav.setViewName("/cosme/cosme_read");
+        return mav;
+    }
+    @RequestMapping(value="/cosme/list_by_commend.do", method=RequestMethod.GET)
+    public ModelAndView list_by_commend(HttpSession session, int memberno) {
+        ModelAndView mav = new ModelAndView();
+        int cnt = this.cosmeProc.ck_memberno(memberno);
+        if(cnt ==0) {
+            mav.setViewName("redirect:http://localhost:8000/ais/recommend_form/?memberno="+memberno); 
+            return mav;
+        }
+        
+        ArrayList<String> list = new ArrayList<String>();
+        CosmetypeVO cosmetypevo = this.cosmeProc.recommed_typeno(memberno);
+        list.add(String.valueOf(cosmetypevo.getCosmetypeno()));
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("list", list);
+		paramMap.put("length", 1);
+		
+			
+		ArrayList<CosmeVO> cosme_list = this.cosmeProc.list_by_cosmetype(paramMap);
+		for (CosmeVO cosmevo: cosme_list) {
+        	String reviewgrade = this.reviewproc.avg_grade(cosmevo.getCosmeno());
+        	if(reviewgrade ==null) {
+        		reviewgrade = "0.0";
+        	}
+        	cosmevo.setReviewgrade(reviewgrade);
+        }
+        mav.addObject("cosme_list", cosme_list);
+        mav.addObject("cosmetypename", cosmetypevo.getCosmetypename());
+        mav.setViewName("cosme/list_by_recommend");
+
+        
+        return mav;
+    }
+    
 }

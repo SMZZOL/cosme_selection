@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dev.mvc.cosme_cate.Cosme_cateVO;
+import dev.mvc.cosmetype.CosmetypeVO;
 import dev.mvc.tool.Tool;
 
 @Component("dev.mvc.cosme.CosmeProc")
@@ -138,5 +139,15 @@ public class CosmeProc implements CosmeProcInter {
   public ArrayList<CosmeVO> list_all(){
 	  return this.cosmeDAO.list_all();
   }
-
+  public ArrayList<CosmeVO> list_by_ingred(Map<String, Object> paramMap){
+	  return this.cosmeDAO.list_by_ingred(paramMap);
+  }
+  
+  public int ck_memberno (int memberno) {
+	  return this.cosmeDAO.ck_memberno(memberno);
+  }
+  
+  public CosmetypeVO recommed_typeno(int memberno) {
+	  return this.cosmeDAO.recommed_typeno(memberno);
+  }
 }

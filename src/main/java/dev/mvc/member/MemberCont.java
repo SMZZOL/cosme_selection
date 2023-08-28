@@ -18,15 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.master.MasterProcInter;
+import dev.mvc.admin.AdminProcInter;
 import dev.mvc.notice.NoticeVO;
 
 @Controller
 public class MemberCont {
   
-  @Autowired
-  @Qualifier("dev.mvc.master.MasterProc")
-  private MasterProcInter masterProc;
+	  @Autowired
+	  @Qualifier("dev.mvc.admin.AdminProc") 
+	  private AdminProcInter adminProc = null;
+	  
 	  
   @Autowired
   @Qualifier("dev.mvc.member.MemberProc")
@@ -123,14 +124,14 @@ public class MemberCont {
   public ModelAndView list(HttpSession session) {
     ModelAndView mav = new ModelAndView();
     
-    if (this.masterProc.isMaster(session) == true) {
+    if (this.adminProc.isAdmin(session) == true) {
       ArrayList<MemberVO> list = this.memberProc.list();
       mav.addObject("list", list);
 
       mav.setViewName("/member/list"); // /webapp/WEB-INF/views/member/list.jsp
 
     } else {
-      mav.setViewName("/master/login_need"); // /WEB-INF/views/admin/login_need.jsp
+      mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
     }
      
     return mav;
@@ -147,13 +148,13 @@ public class MemberCont {
     ModelAndView mav = new ModelAndView();
     
     int memberno = 0;
-    if (this.memberProc.isMember(session) || this.masterProc.isMaster(session)) { 
+    if (this.memberProc.isMember(session) || this.adminProc.isAdmin(session)) { 
       // 로그인한 경우
 
       if (this.memberProc.isMember(session)) { // 회원으로 로그인
         memberno = (int)session.getAttribute("memberno"); // 본인의 회원 정보 조회
         
-      } else if (this.masterProc.isMaster(session)) { // 관리자로 로그인
+      } else if (this.adminProc.isAdmin(session)) { // 관리자로 로그인
         memberno = Integer.parseInt(request.getParameter("memberno")); // 관리자는 누구나 조회 가능
         
       }
@@ -180,13 +181,13 @@ public class MemberCont {
   public ModelAndView update(HttpSession session, int memberno) {
     ModelAndView mav = new ModelAndView();
     
-    if (this.masterProc.isMaster(session)) { // 관리자 로그인
+    if (this.adminProc.isAdmin(session)) { // 관리자 로그인
     MemberVO memberVO = this.memberProc.read(memberno);
     mav.addObject("memberVO", memberVO);   
     
     mav.setViewName("/member/passwd_update"); // /WEB-INF/views/notice/update.jsp
     }else { // 정상적인 로그인이 아닌 경우
-      mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+      mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
     }
 
     return mav; // forward
@@ -230,7 +231,7 @@ public class MemberCont {
   public ModelAndView delete(HttpSession session, int memberno){
     ModelAndView mav = new ModelAndView();
     
-    if (this.masterProc.isMaster(session)) { 
+    if (this.adminProc.isAdmin(session)) { 
       MemberVO memberVO = this.memberProc.read(memberno); // 삭제할 레코드를 사용자에게 출력하기위해 읽음.
       mav.addObject("memberVO", memberVO);
       mav.setViewName("/member/delete"); // /member/delete.jsp      

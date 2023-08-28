@@ -15,12 +15,14 @@ public class Cosme{
     public static synchronized String getUploadDir() {
         String path = "";
         if (File.separator.equals("\\")) { // windows, 개발 환경의 파일 업로드 폴더
-            path="C:\\kd\\deploy\\team2_v1sbm3c\\cosme\\";
+            path="C:\\kd\\deploy\\team2_v2sbm3c\\cosme\\";
+            //path="C:\\kd\\ws_java\\team2_v2sbm3c\\src\\main\\resources\\static\\cosme\\images";
+            //path="C:\\kd\\ws_java\\team2_v2sbm3c_backup\\src\\main\\resources\\static\\cosme\\images";
             // System.out.println("Windows 10: " + path);
             
         } else { // Linux, AWS, 서비스용 배치 폴더 
             // System.out.println("Linux");
-            path = "/home/ubuntu/deploy/advice_v1sbm3c/f_board/";
+            path = "/home/ubuntu/deploy/team2_v1sbm3c/cosme/";
         }
         
         return path;

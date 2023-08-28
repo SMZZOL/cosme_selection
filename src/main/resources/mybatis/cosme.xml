@@ -6,12 +6,13 @@
 	<!-- 화장품 등록 -->
 	<insert id="create" parameterType="dev.mvc.cosme.CosmeVO">
 		INSERT INTO cosme(cosmeno,
-		brand, cosmename, rdate, masterno, cosme_cateno,
+		brand, cosmename, rdate, adminno, cosme_cateno,
 		cosme_file,
 		cosme_file_saved, cosme_file_preview, cosme_file_size,
 		cosme_youtube)
 		VALUES(cosme_seq.nextval, #{brand}, #{cosmename}, sysdate,
-		#{masterno}, #{cosme_cateno},
+		#{adminno},
+		#{cosme_cateno},
 		#{cosme_file}, #{cosme_file_saved},
 		#{cosme_file_preview},
 		#{cosme_file_size}, #{cosme_youtube})
@@ -20,24 +21,28 @@
 	<!-- 화장품 글 목록 -->
 	<select id="cosme_all" resultType="dev.mvc.cosme.CosmeVO">
 		SELECT cosmeno, brand,
-		cosmename, rdate, masterno, cosme_cateno, cosme_file,
-		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
+		cosmename, rdate, adminno, cosme_cateno, cosme_file,
+		cosme_file_saved,
+		cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
-		ORDER BY cosmeno DESC
+		ORDER BY
+		cosmeno DESC
 	</select>
 
 	<select id="list_by_cate" resultType="dev.mvc.cosme.CosmeVO">
 		SELECT cosmeno, brand,
-		cosmename, rdate, masterno, cosme_cateno, cosme_file,
-		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
+		cosmename, rdate, adminno, cosme_cateno, cosme_file,
+		cosme_file_saved,
+		cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
-		WHERE cosme_cateno=#{cosme_cateno}
+		WHERE
+		cosme_cateno=#{cosme_cateno}
 	</select>
 
 	<!-- 일반적인 조회 -->
 	<select id="cosme_read" resultType="dev.mvc.cosme.CosmeVO"
 		parameterType="int">
-		SELECT cosmeno, brand, cosmename, rdate, masterno,
+		SELECT cosmeno, brand, cosmename, rdate, adminno,
 		cosme_cateno, cosme_file,
 		cosme_file_saved, cosme_file_preview,
 		cosme_file_size, cosme_youtube
@@ -45,8 +50,10 @@
 		WHERE cosmeno = #{cosmeno}
 	</select>
 	<select id="list_all" resultType="dev.mvc.cosme.CosmeVO">
-		SELECT cosmeno, brand, cosmename, rdate, masterno, cosme_cateno, cosme_file,
-		cosme_file_saved, cosme_file_preview, cosme_file_size, cosme_youtube
+		SELECT cosmeno, brand,
+		cosmename, rdate, adminno, cosme_cateno, cosme_file,
+		cosme_file_saved,
+		cosme_file_preview, cosme_file_size, cosme_youtube
 		FROM cosme
 	</select>
 
@@ -56,7 +63,7 @@
 		UPDATE cosme
 		SET brand=#{brand}, cosmename=#{cosmename},
 		rdate=sysdate,
-		masterno=#{masterno}, cosme_cateno=#{cosme_cateno},
+		adminno=#{adminno}, cosme_cateno=#{cosme_cateno},
 		cosme_file=#{cosme_file}, cosme_file_saved=#{cosme_file_saved},
 		cosme_file_preview=#{cosme_file_preview},
 		cosme_file_size=#{cosme_file_size}, cosme_youtube=#{cosme_youtube}
@@ -68,7 +75,7 @@
 		UPDATE cosme
 		SET
 		brand=#{brand}, cosmename=#{cosmename}, rdate=sysdate,
-		masterno=#{masterno}, cosme_cateno=#{cosme_cateno},
+		adminno=#{adminno}, cosme_cateno=#{cosme_cateno},
 		cosme_youtube=#{cosme_youtube}
 		WHERE cosmeno = #{cosmeno}
 	</update>
@@ -133,7 +140,7 @@
 
 	<select id="list_by_cosmetype"
 		resultType="dev.mvc.cosme.CosmeVO" parameterType="java.util.Map">
-		select cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.masterno,
+		select cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.adminno,
 		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
 		cosme.cosme_file_size, cosme.cosme_youtube
 		from cosme
@@ -145,7 +152,27 @@
 			close=")">
 			#{item}
 		</foreach>
-		group by cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.masterno,
+		group by cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.adminno,
+		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
+		cosme.cosme_file_size, cosme.cosme_youtube
+		having count(cosme.cosmeno)
+		>= #{length}
+	</select>
+	<select id="list_by_ingred" resultType="dev.mvc.cosme.CosmeVO"
+		parameterType="java.util.Map">
+		select cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.adminno,
+		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
+		cosme.cosme_file_size, cosme.cosme_youtube
+		from cosme
+		join
+		cosme_ingred_relate on cosme.cosmeno = cosme_ingred_relate.cosmeno
+		where
+		cosme_ingred_relate.ingredno in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+		group by cosme.cosmeno, cosme.cosmename, cosme.brand, cosme.adminno,
 		cosme.cosme_cateno, cosme.cosme_file_saved, cosme.cosme_file_preview,
 		cosme.cosme_file_size, cosme.cosme_youtube
 		having count(cosme.cosmeno)
@@ -165,4 +192,18 @@
 		ORDER BY
 		cosme_cateno ASC
 	</select>
+
+	<!-- 추천 확인 -->
+    <select id="ck_memberno" resultType="int">
+        SELECT count(*) as cnt
+        FROM recommend
+        WHERE memberno = #{memberno}
+    </select>
+	
+    <select id="recommed_typeno"  resultType="dev.mvc.cosmetype.CosmetypeVO">
+        select cosmetype.cosmetypeno, cosmetype.cosmetypename
+       from cosmetype
+       join recommend on recommend.cosmetypeno =  cosmetype.cosmetypeno
+       where recommend.memberno =#{memberno}
+    </select>
 </mapper>

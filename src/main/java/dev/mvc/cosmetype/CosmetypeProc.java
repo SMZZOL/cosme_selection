@@ -41,5 +41,9 @@ public class CosmetypeProc implements CosmetypeProcInter{
     int cnt = this.cosmetypeDAO.delete(cosmetypeno);
     return cnt;
   }
+  @Override
+  public ArrayList<CosmetypeVO> cosmetype_by_cosmeno(int cosmeno){
+	  return this.cosmetypeDAO.cosmetype_by_cosmeno(cosmeno);
+  }
 
 }

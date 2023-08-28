@@ -11,11 +11,10 @@
 <link rel="shortcut icon" href="/images/star.png" /> <%-- /static 기준 --%>
 <link href="/css/style.css" rel="Stylesheet" type="text/css"> <!-- /static 기준 -->
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    
+   
 </head> 
 <body>
-<c:import url="/menu/top.do" />
+  <c:import url="../menu/header.jsp" />
  
 <DIV class='title_line'>알림</DIV>
 

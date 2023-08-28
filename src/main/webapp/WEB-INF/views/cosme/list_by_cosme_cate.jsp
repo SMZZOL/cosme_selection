@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,7 +16,7 @@
         var value = button.value;
         if (divElement) {
             var buttons = divElement.getElementsByTagName("button"); // div 안의 모든 button 요소 가져오기
-            for (var i = 0; i < buttons.length; i++) {
+            for (var i = 0; i < buttons.length; i++) { 
                 if (buttons[i] == button) {
                     console.log(value);
                     buttons[i].style.color = "black";
@@ -46,6 +45,7 @@
     }
 </script>
 </head>
+<link href="/css/style.css" rel="Stylesheet" type="text/css">
 <style>
 </style>
 <body>
@@ -57,47 +57,16 @@
   <!--라디오 버튼 (인기순 등)-->
 </div>
 
-
-
-<div>
-  <div id="grid" class="product-grid">
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 1 이미지">
-      <h3>상품 1</h3>
-      <p>상품 1 설명</p>
+    <div id="grid" class="product-grid">
+        <c:forEach items="${cosme_list}" var="cosme_list">
+            <div class="product-item" onclick="location.href='/cosme/read_by_cosmeno.do?cosmeno=${cosme_list.cosmeno}'">
+                <img class="img-90" src="/cosme/${cosme_list.cosme_file_preview}" alt="image not found">
+                <h3>${cosme_list.cosmename}</h3>        
+                <p>${cosme_list.brand}</p>
+                <p style="color:red;'">★${cosme_list.reviewgrade}</p>
+                </div>
+        </c:forEach>
     </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 2 이미지">
-      <h3>상품 2</h3>
-      <p>상품 2 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
-      <h3>상품 3</h3>
-      <p>상품 3 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
-      <h3>상품 3</h3>
-      <p>상품 3 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
-      <h3>상품 3</h3>
-      <p>상품 3 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 3 이미지">
-      <h3>상품 3</h3>
-      <p>상품 3 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 4이미지">
-      <h3>상품 4</h3>
-      <p>상품 4 설명</p>
-    </div>
-</div>
-</div>
 <Br>
 <Br>
 <Br>

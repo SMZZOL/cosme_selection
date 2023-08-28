@@ -21,5 +21,8 @@ public class IngredProc implements IngredProcInter {
 		
 		return list;
 	}
+	public ArrayList<IngredVO> ingred_by_cosmeno(int  cosmeno){
+		return this.ingredDAO.ingred_by_cosmeno(cosmeno);
+	}
 
 }

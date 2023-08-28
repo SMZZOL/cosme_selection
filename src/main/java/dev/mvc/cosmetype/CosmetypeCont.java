@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.master.MasterProcInter;
+import dev.mvc.admin.AdminProcInter;
 
 
 @Controller
 public class CosmetypeCont {
-  @Autowired
-  @Qualifier("dev.mvc.master.MasterProc")
-  private MasterProcInter masterProc;
+	  @Autowired
+	  @Qualifier("dev.mvc.admin.AdminProc") 
+	  private AdminProcInter adminProc = null;
     
   @Autowired
   @Qualifier("dev.mvc.cosmetype.CosmetypeProc")
@@ -40,10 +40,10 @@ public ModelAndView create(HttpSession session) {
  
  ModelAndView mav = new ModelAndView();
  
- if (this.masterProc.isMaster(session) == true) {
+ if (this.adminProc.isAdmin(session) == true) {
    mav.setViewName("/cosmetype/create");
  } else {
-     mav.setViewName("/master/login_need");
+     mav.setViewName("/admin/login_need");
    }
 
  
@@ -61,7 +61,7 @@ public ModelAndView create(HttpSession session) {
    
    ModelAndView mav = new ModelAndView();
    
-   if (this.masterProc.isMaster(session) == true) {
+   if (this.adminProc.isAdmin(session) == true) {
      int cnt = this.cosmetypeProc.create(cosmetypeVO);
        if (cnt == 1) {
          mav.setViewName("redirect:/"); 
@@ -72,7 +72,7 @@ public ModelAndView create(HttpSession session) {
        }
        mav.addObject("cnt", cnt);
    } else {
-       mav.setViewName("/master/login_need");
+       mav.setViewName("/admin/login_need");
      }
 
    return mav;
@@ -103,7 +103,7 @@ public ModelAndView create(HttpSession session) {
 public ModelAndView read_update(HttpSession session, int cosmetypeno) {
   ModelAndView mav = new ModelAndView();
   
-  if (this.masterProc.isMaster(session) == true) {
+  if (this.adminProc.isAdmin(session) == true) {
     mav.setViewName("/cosmetype/read_update");
     
     CosmetypeVO cosmetypeVO = this.cosmetypeProc.read(cosmetypeno); // 수정용 데이터
@@ -113,7 +113,7 @@ public ModelAndView read_update(HttpSession session, int cosmetypeno) {
     mav.addObject("list", list);
     
   } else {
-    mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+    mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
     
   }
   
@@ -126,7 +126,7 @@ public ModelAndView update(HttpSession session, CosmetypeVO cosmetypeVO) {
   
   ModelAndView mav = new ModelAndView();
 
-  if (this.masterProc.isMaster(session) == true) {
+  if (this.adminProc.isAdmin(session) == true) {
     int cnt = this.cosmetypeProc.update(cosmetypeVO);
     
     if (cnt == 1) {
@@ -143,7 +143,7 @@ public ModelAndView update(HttpSession session, CosmetypeVO cosmetypeVO) {
     mav.addObject("cnt", cnt);
     
   } else {
-    mav.setViewName("/master/login_need"); 
+    mav.setViewName("/admin/login_need"); 
   }
   
   return mav;
@@ -155,7 +155,7 @@ public ModelAndView update(HttpSession session, CosmetypeVO cosmetypeVO) {
 public ModelAndView read_delete(HttpSession session, int cosmetypeno) {
   ModelAndView mav = new ModelAndView();
   
-  if (this.masterProc.isMaster(session) == true) {
+  if (this.adminProc.isAdmin(session) == true) {
     CosmetypeVO cosmetypeVO = this.cosmetypeProc.read(cosmetypeno); // 수정용 데이터
     mav.addObject("cosmetypeVO", cosmetypeVO);
     
@@ -165,7 +165,7 @@ public ModelAndView read_delete(HttpSession session, int cosmetypeno) {
     mav.setViewName("/cosmetype/read_delete");
     
   } else {
-    mav.setViewName("/master/login_need"); 
+    mav.setViewName("/admin/login_need"); 
   }
   
   return mav;
@@ -175,14 +175,17 @@ public ModelAndView read_delete(HttpSession session, int cosmetypeno) {
 @RequestMapping(value="/cosmetype/delete.do", method=RequestMethod.POST)
 public ModelAndView delete(HttpSession session, int cosmetypeno) { 
 
+System.out.println("여기들어오는지1");
   ModelAndView mav = new ModelAndView();
   
-  if (this.masterProc.isMaster(session) == true) {
+  if (this.adminProc.isAdmin(session) == true) {
     ArrayList<CosmetypeVO> list = this.cosmetypeProc.list_all(); 
           
+    System.out.println("여기들어오는지2");
     int cnt = this.cosmetypeProc.delete(cosmetypeno); // 카테고리 삭제
     
     if (cnt == 1) {
+        System.out.println("여기들어오는지3");
       mav.setViewName("redirect:/cosmetype/list_all.do");       // 자동 주소 이동, Spring 재호출
       
     } else {
@@ -193,7 +196,7 @@ public ModelAndView delete(HttpSession session, int cosmetypeno) {
     mav.addObject("cnt", cnt);
     
   } else {
-    mav.setViewName("/master/login_need"); 
+    mav.setViewName("/admin/login_need"); 
   }
   
   return mav;
@@ -204,13 +207,13 @@ public ModelAndView delete(HttpSession session, int cosmetypeno) {
 public ModelAndView read(HttpSession session, int cosmetypeno) {
   ModelAndView mav = new ModelAndView();
   
-  if (this.masterProc.isMaster(session) == true) {
+  if (this.adminProc.isAdmin(session) == true) {
     mav.setViewName("/cosmetype/read"); 
     
     CosmetypeVO cosmetypeVO = this.cosmetypeProc.read(cosmetypeno);
     mav.addObject("cosmetypeVO", cosmetypeVO);
   } else {
-    mav.setViewName("/master/login_need"); 
+    mav.setViewName("/admin/login_need"); 
   }
   
   return mav;

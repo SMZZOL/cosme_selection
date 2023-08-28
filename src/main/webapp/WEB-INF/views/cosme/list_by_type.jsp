@@ -70,20 +70,17 @@
 
 
 
-  <div id="grid" class="product-grid">
-      <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 1 이미지">
-      <h3>상품 1</h3>
-      <p>상품 1 설명</p>
-    </div>
-    <div class="product-item">
-      <img class="img-90" src="/images/logo2.gif" alt="상품 2 이미지">
-      <h3>상품 2</h3>
-      <p>상품 2 설명</p>
-    </div>
-
-</div>
-<Br>
+	<div id="grid" class="product-grid">
+		<c:forEach items="${cosme_list}" var="cosme_list">
+		   <div class="product-item" onclick="location.href='/cosme/read_by_cosmeno.do?cosmeno=${cosme_list.cosmeno}'">
+                <img class="img-90" src="/cosme/${cosme_list.cosme_file_preview}" alt="image not found">
+				<h3>${cosme_list.cosmename}</h3>
+				<p>${cosme_list.brand}</p>
+				 <p style="color:red;'">★${cosme_list.reviewgrade}</p>
+				</div>
+		</c:forEach>
+	</div>
+	<Br>
 <Br>
 <Br>
   <c:import url="../menu/footer.jsp" />

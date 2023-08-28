@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/cosme/list_all.jsp
-=======
 <%@ page import="dev.mvc.cosme_cate.Cosme_cateVO" %>
 
 
->>>>>>> 5b46a4cd8427fdeed9b35ed64cc0701dae260735:src/main/webapp/WEB-INF/views/cosme_cate/list_by_cate.jsp
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
@@ -68,8 +65,6 @@
 </style>
 <body>
   <c:import url="../menu/header.jsp" />
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/cosme/list_all.jsp
-=======
   <style>
     .btn_type {
       color: lightgray;
@@ -117,7 +112,6 @@ function buttonchange(button) {
 
 </body>
 </html>
->>>>>>> 5b46a4cd8427fdeed9b35ed64cc0701dae260735:src/main/webapp/WEB-INF/views/cosme_cate/list_by_cate.jsp
 <!-- sdf -->
 <div id="grid">
   <div class="product-grid">

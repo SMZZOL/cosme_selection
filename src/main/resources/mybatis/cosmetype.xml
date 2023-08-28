@@ -37,4 +37,17 @@
   DELETE FROM cosmetype 
   WHERE cosmetypeno=#{cosmetypeno}
 </delete>
+
+    <!-- cosmeno 를 통한 type들 추출 -->
+    <select id="cosmetype_by_cosmeno" resultType="dev.mvc.cosmetype.CosmetypeVO">
+    select cosmetype.cosmetypeno, cosmetype.cosmetypename
+    from cosmetype
+    join
+    cosme_type_relate on cosmetype.cosmetypeno =
+    cosme_type_relate.cosmetypeno
+    where cosme_type_relate.cosmeno =
+    #{cosmeno}
+    </select>
+
+
 </mapper> 

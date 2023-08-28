@@ -4,14 +4,24 @@
 
 
 <mapper namespace="dev.mvc.ingred.IngredDAOInter">
-<insert id="insert_ingred"  parameterType="dev.mvc.ingred.IngredVO">
-	 insert into ingred (ingredno, ingredname, ingredeffect)
-    values(ingred_seq.nextval, #{ingredname} , #{ingredeffect})
+	<insert id="insert_ingred"
+		parameterType="dev.mvc.ingred.IngredVO">
+		insert into ingred (ingredno, ingredname, ingredeffect)
+		values(ingred_seq.nextval, #{ingredname} , #{ingredeffect})
 
-</insert>
+	</insert>
 
-<select id="ingred_list" parameterType="dev.mvc.ingred.IngredVO">
-    select ingredno, ingredname, ingredeffect
-    from ingred
-</select>
+	<select id="ingred_list" resultType="dev.mvc.ingred.IngredVO">
+		select ingredno, ingredname, ingredeffect
+		from ingred
+	</select>
+
+	<!-- cosmeno 를 통한 ingred들 추출 -->
+	<select id="ingred_by_cosmeno" resultType="dev.mvc.ingred.IngredVO">
+		select ingred.ingredno, ingred.ingredname
+		from ingred
+		join
+		cosme_ingred_relate on ingred.ingredno = cosme_ingred_relate.ingredno
+		where cosme_ingred_relate.cosmeno = #{cosmeno}
+	</select>
 </mapper>

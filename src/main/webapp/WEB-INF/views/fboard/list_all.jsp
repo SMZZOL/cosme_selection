@@ -10,12 +10,16 @@
 <title>자유게시판</title>
  
 <link href="/css/style.css" rel="Stylesheet" type="text/css">
+
+<script type="text/JavaScript"
+          src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
 </head> 
  
 <body>
 <c:import url="../menu/header.jsp" />
-
 <DIV class='content_body'>
 <DIV class='title_line'>
   자유 게시판
@@ -116,9 +120,8 @@
     </tbody>
   </table>
 </DIV>
+<jsp:include page="../menu/footer.jsp" flush='false' />
 
- 
-<jsp:include page="../menu/footer.jsp" />
 </body>
  
 </html>

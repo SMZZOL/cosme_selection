@@ -16,7 +16,7 @@ public class CosmeVO{
     /** 등록일 */
     private String rdate;
     /** 관리자 번호 */
-    private int masterno;
+    private int adminno;
     /** 화장품 종류 번호 */
     private int cosme_cateno;
     /** 화장품 사진 파일 */
@@ -29,6 +29,16 @@ public class CosmeVO{
     private long cosme_file_size;
     /** 화장품 유튜브 영상 */
     private String cosme_youtube = "";
+    public String getReviewgrade() {
+		return reviewgrade;
+	}
+
+	public void setReviewgrade(String reviewgrade) {
+		this.reviewgrade = reviewgrade;
+	}
+
+	/** 화장품 후기 점수 */
+    private String reviewgrade;
     
     public int getCosmeno() {
       return cosmeno;
@@ -62,15 +72,15 @@ public class CosmeVO{
       this.rdate = rdate;
     }
 
-    public int getMasterno() {
-      return masterno;
-    }
+    public int getAdminno() {
+		return adminno;
+	}
 
-    public void setMasterno(int masterno) {
-      this.masterno = masterno;
-    }
+	public void setAdminno(int adminno) {
+		this.adminno = adminno;
+	}
 
-    public int getCosme_cateno() {
+	public int getCosme_cateno() {
       return cosme_cateno;
     }
 

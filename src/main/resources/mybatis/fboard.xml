@@ -6,20 +6,20 @@
 
 <!-- 등록한 레코드 갯수 1 리턴 -->
   <insert id="create" parameterType="dev.mvc.fboard.FboardVO">
-    INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, passwd, word, file1, file1saved, thumb1, size1, rdate)
-    VALUES(fboard_seq.nextval, #{memberno}, #{ftitle}, #{fcontent}, #{passwd}, #{word}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate)
+    INSERT INTO fboard(fboardno, memberno, ftitle, fcontent, passwd, word, file1, file1saved, thumb1, size1, rdate, youtube)
+    VALUES(fboard_seq.nextval, #{memberno}, #{ftitle}, #{fcontent}, #{passwd}, #{word}, #{file1}, #{file1saved}, #{thumb1}, #{size1}, sysdate, #{youtube})
   </insert>
   
   <!-- 자유게시판에 등록된 모든 글 목록 -->
   <select id="list_all" resultType="dev.mvc.fboard.FboardVO">
-    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1, youtube
+    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1, youtube, views, replycnt
     FROM fboard
     ORDER BY fboardno DESC
   </select> 
   
   <!-- 조회 -->
   <select id="read" resultType="dev.mvc.fboard.FboardVO" parameterType="int">
-    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1, youtube
+    SELECT fboardno, memberno, ftitle, fcontent, rdate, passwd, word, file1, file1saved, thumb1, size1, youtube, views, replycnt
     FROM fboard
     WHERE fboardno = #{fboardno}
   </select> 
@@ -33,7 +33,7 @@
   
   <!-- 카테고리별 검색 목록 -->
   <select id="list_by_search" resultType="dev.mvc.fboard.FboardVO" parameterType="dev.mvc.fboard.FboardVO">
-    SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+    SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, views
     FROM fboard
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우, 모든 레코드 -->
@@ -48,13 +48,13 @@
     ORDER BY fboardno DESC   
   </select>
   
-    <!-- 카테고리별 검색 레코드 갯수 -->
+    <!-- 검색 레코드 갯수 -->
   <select id="search_count" resultType="int" parameterType="dev.mvc.fboard.FboardVO">
     SELECT COUNT(*) as cnt
     FROM fboard
     <choose>
       <when test="word == null or word == ''"> <!-- 검색하지 않는 경우의 레코드 갯수 -->
-        WHERE fboardno=#{fboardno}
+
       </when>
       <otherwise> <!-- 검색하는 경우의 레코드 갯수 -->
         WHERE UPPER(ftitle) LIKE '%' || UPPER(#{word}) || '%' 
@@ -66,15 +66,15 @@
   
     <!-- 검색 + 페이징 목록 -->
   <select id="list_by_search_paging" resultType="dev.mvc.fboard.FboardVO" parameterType="dev.mvc.fboard.FboardVO">
-   SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, r
-   FROM (
-              SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, rownum as r
+   SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, views, r
+      FROM (
+              SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, views, rownum as r
               FROM (
-                        SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube
+                        SELECT fboardno, memberno, ftitle, fcontent, rdate, file1, file1saved, thumb1, size1, youtube, views
                         FROM fboard
                         <choose>
                           <when test="word == null or word == ''"> <!-- 검색하지 않는 경우 -->
-                           
+                          
                           </when>
                           <otherwise>
                             WHERE UPPER(ftitle) LIKE '%' || UPPER(#{word}) || '%' 
@@ -91,5 +91,60 @@
           2 page: WHERE r >= 11 AND r <= 20;
           3 page: WHERE r >= 21 AND r <= 30; -->
   </select>
+  
+  <!-- 패스워드 검사 -->
+  <select id="password_check" resultType="int" parameterType="dev.mvc.fboard.FboardVO">
+    SELECT COUNT(*) as cnt 
+    FROM fboard
+    WHERE fboardno = #{fboardno} AND passwd=#{passwd}
+  </select>
+  
+  <!-- 수정 -->
+  <update id="update" parameterType="dev.mvc.fboard.FboardVO">
+      UPDATE fboard
+      SET ftitle=#{ftitle}, fcontent=#{fcontent}, youtube=#{youtube} 
+      WHERE fboardno = #{fboardno}
+  </update>
+  
+    <!-- 글 수정 -->
+  <update id="update_text" parameterType="dev.mvc.fboard.FboardVO">
+      UPDATE fboard
+      SET ftitle=#{ftitle}, fcontent=#{fcontent}
+      WHERE fboardno = #{fboardno}
+  </update>
+  
+    <!-- 파일 수정 -->
+  <update id="update_file" parameterType="dev.mvc.fboard.FboardVO">
+    UPDATE fboard
+    SET file1=#{file1}, file1saved=#{file1saved}, thumb1=#{thumb1}, size1=#{size1}
+    WHERE fboardno = #{fboardno}
+  </update>
+  
+  <!-- 삭제 -->
+ <delete id="delete" parameterType="int">
+      DELETE FROM fboard
+      WHERE fboardno = #{fboardno}
+ </delete>
+ 
+  <!-- 조회수 증가 -->
+  <update id="views" parameterType="int">
+    UPDATE fboard 
+    SET views = views + 1 
+    WHERE fboardno = #{fboardno}
+  </update>
+  
+     <!-- 댓글 수 증가 -->
+   <update id="increaseReplycnt" parameterType="int">
+     UPDATE fboard
+     SET replycnt = replycnt + 1
+     WHERE fboardno = #{fboardno}
+   </update>
+
+   <!-- 댓글 수 감소 -->
+   <update id="decreaseReplycnt" parameterType="int">
+     UPDATE fboard
+     SET replycnt = replycnt - 1
+     WHERE fboardno = #{fboardno}
+   </update>
   
     </mapper>

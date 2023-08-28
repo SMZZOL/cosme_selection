@@ -362,7 +362,7 @@ public class Upload extends HttpServletRequestWrapper {
         // System.out.println("originalFileName: " + originalFileName);
         
         originalFileName =  Tool.getFname(originalFileName); // 순수 파일명 추출
-        // System.out.println("-> originalFileName: " +  originalFileName);
+        System.out.println("-> originalFileName: " +  originalFileName);
         
         int ext_index = originalFileName.lastIndexOf("."); 
         String only_filename = originalFileName.substring(0,  ext_index); // 순수 파일명 추출, winter
@@ -400,7 +400,7 @@ public class Upload extends HttpServletRequestWrapper {
                 
 //                System.out.println("-> 업로드 전 originalFileName: " + originalFileName);
 //                System.out.println("-> 업로드 전 fileName: " + fileName);
-//                System.out.println("-> 업로드 전 serverFullPath: " + serverFullPath);
+               System.out.println("-> 업로드 전 serverFullPath: " + serverFullPath);
                 
                 outputStream = new FileOutputStream( serverFullPath );
     

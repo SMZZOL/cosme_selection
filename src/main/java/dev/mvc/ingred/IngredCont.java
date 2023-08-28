@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.mvc.master.MasterProcInter;
+import dev.mvc.admin.AdminProcInter;
 
 @Controller
 public class IngredCont {
@@ -17,9 +17,9 @@ public class IngredCont {
 	@Qualifier("dev.mvc.ingred.IngredProc")
 	private IngredProcInter ingredproc;
 	
-  @Autowired
-  @Qualifier("dev.mvc.master.MasterProc")
-  private MasterProcInter masterProc;
+	  @Autowired
+	  @Qualifier("dev.mvc.admin.AdminProc") 
+	  private AdminProcInter adminProc = null;
 
 @RequestMapping(value="/ingred/create.do", method=RequestMethod.POST)
 public ModelAndView create(IngredVO ingredvo) {
@@ -33,10 +33,10 @@ public ModelAndView create(IngredVO ingredvo) {
 public ModelAndView create(HttpSession session) {
 	ModelAndView mav = new ModelAndView();
 	
-	 if (this.masterProc.isMaster(session) == true) {
+	 if (this.adminProc.isAdmin(session) == true) {
 		 mav.setViewName("/ingred/create_ingred");
 	 }else {
-	     mav.setViewName("/master/login_need"); // /WEB-INF/views/master/login_need.jsp
+	     mav.setViewName("/admin/login_need"); // /WEB-INF/views/admin/login_need.jsp
 	   }
 	
 	return mav;

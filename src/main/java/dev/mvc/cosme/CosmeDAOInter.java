@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import dev.mvc.cosme_cate.Cosme_cateVO;
+import dev.mvc.cosmetype.CosmetypeVO;
 
 public interface CosmeDAOInter {
   /**
@@ -97,6 +98,13 @@ public interface CosmeDAOInter {
   public int last_cosmeno();
   
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
+
+  public ArrayList<CosmeVO> list_by_ingred(Map<String, Object> paramMap);
   
   public ArrayList<CosmeVO> list_all();
+  
+  public int ck_memberno (int memberno);
+  
+  public CosmetypeVO recommed_typeno(int memberno);
+ 
 }

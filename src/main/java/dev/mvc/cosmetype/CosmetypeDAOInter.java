@@ -39,4 +39,8 @@ public interface CosmetypeDAOInter {
    * @return 삭제된 레코드 갯수를 리턴
    */
   public int delete(int cosmetypeno);
+  
+  
+  //cosmeno 를 통한 ingred 추출
+  public ArrayList<CosmetypeVO> cosmetype_by_cosmeno(int cosmeno);
 }

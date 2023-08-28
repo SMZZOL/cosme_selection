@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.mvc.review.ReviewDAOInter">
+<select  id="review_by_cosmeno" resultType="dev.mvc.review.ReviewVO">
+    select reviewno,reviewcontent,reviewtime,cosmeno,memberno,reviewgrade
+    from review
+    where cosmeno=#{cosmeno}
+    order by reviewno desc
+</select>
+<insert id="add_review" parameterType="dev.mvc.review.ReviewVO">
+    insert into review(reviewno,reviewcontent,cosmeno,memberno,reviewgrade)
+    values(review_seq.nextval,#{reviewcontent},#{cosmeno},#{memberno},#{reviewgrade})
+</insert>
+
+<select id="check_member" parameterType="dev.mvc.review.ReviewVO">
+    select count(*) as cnt from review where memberno =#{memberno} and cosmeno = #{cosmeno}
+</select>
+
+<select id="avg_grade">
+    select avg(reviewgrade) as avg from review where cosmeno = #{cosmeno}
+</select>
+</mapper>

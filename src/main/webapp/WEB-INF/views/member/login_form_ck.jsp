@@ -22,14 +22,14 @@
     $('#btn_loadDefault').on('click', loadDefault); // 기본 로그인 정보 설정
   });
 
-  // 회원 가입  
+  // 회원 가입   
   function create() {
     location.href="./create.do";
   }
 
   // 테스트용 기본값 로딩
   function loadDefault() {
-    $('#id').val('user1@gmail.com');
+    $('#id').val('qnaadmin');
     $('#passwd').val('1234');
   }
     

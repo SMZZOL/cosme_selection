@@ -29,7 +29,7 @@ CosmetypeVO cosmetypeVO_read = (CosmetypeVO)request.getAttribute("cosmetypeVO");
     <FORM name='frm_delete' id='frm_delete' method='POST' action='./delete.do'>
       <input type="hidden" name="cosmetypeno" value="<%=cosmetypeVO_read.getCosmetypeno() %>"> <%-- 삭제할 카테고리 번호 --%>
       
-
+ 
           <div class="msg_warning">삭제하면 복구 할 수 없습니다.</div>
           <label>화장품 타입 이름</label>: <%=cosmetypeVO_read.getCosmetypename() %>
       

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import dev.mvc.cosme_cate.*;
+import dev.mvc.cosmetype.CosmetypeVO;
 import dev.mvc.cosme.*;
 
 public interface CosmeProcInter {
@@ -101,6 +102,13 @@ public interface CosmeProcInter {
   public int last_cosmeno();
   //타입별 ㄹ리스트
   public ArrayList<CosmeVO> list_by_cosmetype(Map<String, Object> paramMap);
+  // 성분별 리스트
+  public ArrayList<CosmeVO> list_by_ingred(Map<String, Object> paramMap);
   //리스트 전부
   public ArrayList<CosmeVO> list_all();
+  
+  public int ck_memberno (int memberno);
+  
+  public CosmetypeVO recommed_typeno(int memberno);
+  
 }
