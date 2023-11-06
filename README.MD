@@ -15,7 +15,7 @@
  - SpringBoot(Gradle)
 ### 베포
  - AWS EC2 (ubuntu)(비용문제로 일시정지)
-  - [베포과정](https://www.notion.so/Ubuntu-with-Docker-bf4616466883470f939e4c951f730de7)
+   - [베포과정](https://www.notion.so/Ubuntu-with-Docker-bf4616466883470f939e4c951f730de7)
  - Docker
 ### 형상관리
  - git bash, git deskTop
