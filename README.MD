@@ -9,3 +9,15 @@
  ### 3. 역할 및 소요시간
   - 5 명, 팀프로젝트. DA 와 TL 역할
   - 학습 기간 포함 한달.
+
+## 4. 내용
+### 빌드, 패키지 관리
+ - SpringBoot(Gradle)
+### 베포
+ - AWS EC2 (ubuntu)(비용문제로 일시정지)
+  - [베포과정](https://www.notion.so/Ubuntu-with-Docker-bf4616466883470f939e4c951f730de7)
+ - Docker
+### 형상관리
+ - git bash, git deskTop
+### 테스트
+- Postman
